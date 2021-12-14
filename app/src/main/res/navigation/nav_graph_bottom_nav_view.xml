@@ -37,8 +37,24 @@
         app:startDestination="@id/profileFragment">
         <fragment
             android:id="@+id/profileFragment"
-            android:name="ru.fefu.wsr_connect_mobile.ProfileFragment"
+            android:name="ru.fefu.wsr_connect_mobile.profile.ProfileFragment"
             android:label="fragment_profile"
-            tools:layout="@layout/fragment_profile" />
+            tools:layout="@layout/fragment_profile" >
+            <action
+                android:id="@+id/action_profileFragment_to_changePasswordFragment"
+                app:destination="@id/changePasswordFragment" />
+            <action
+                android:id="@+id/action_profileFragment_to_changeAvatarFragment"
+                app:destination="@id/changeAvatarFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/changePasswordFragment"
+            android:name="ru.fefu.wsr_connect_mobile.profile.ChangePasswordFragment"
+            android:label="fragment_change_password"
+            tools:layout="@layout/fragment_change_password" />
+        <fragment
+            android:id="@+id/changeAvatarFragment"
+            android:name="ru.fefu.wsr_connect_mobile.profile.ChangeAvatarFragment"
+            android:label="ChangeAvatarFragment" />
     </navigation>
 </navigation>

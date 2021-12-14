@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:fitsSystemWindows="true"
     tools:context=".start.SplashFragment">
 
@@ -43,9 +44,9 @@
         android:orientation="vertical"
         android:paddingHorizontal="38dp"
         android:paddingTop="130dp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rectangle1"
-        android:visibility="gone">
+        app:layout_constraintTop_toBottomOf="@+id/rectangle1">
 
         <ImageView
             android:layout_width="wrap_content"

@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.12916666666666668" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/background_start.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.20416666666666666" />
+        <entry key="app/src/main/res/drawable/ic_video_calling.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_video_calling_2.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/ic_video_calling_blue.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/ic_wsr_launcher_background.xml" value="0.20416666666666666" />
@@ -14,6 +16,8 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.13677536231884058" />
         <entry key="app/src/main/res/layout/background_layout.xml" value="0.22" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.13677536231884058" />
+        <entry key="app/src/main/res/layout/fragment_change_avatar.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_change_password.xml" value="0.11099726775956284" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.13677536231884058" />
         <entry key="app/src/main/res/layout/fragment_messenger.xml" value="0.16077898550724637" />
         <entry key="app/src/main/res/layout/fragment_nav_bottom.xml" value="0.16077898550724637" />

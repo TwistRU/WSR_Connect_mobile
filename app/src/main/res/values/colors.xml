@@ -16,4 +16,5 @@
     <color name="blue_input">#1565C0</color>
     <color name="blue_status_bar">#0D47A1</color>
     <color name="blue_light">#BBDEFB</color>
+    <color name="red_light">#FF6F6F</color>
 </resources>
