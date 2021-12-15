@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_bottom_nav_view"
-    app:startDestination="@id/profileNested">
+    app:startDestination="@id/settingsNested">
 
     <navigation
         android:id="@+id/settingsNested"
         app:startDestination="@id/settingsFragment">
         <fragment
             android:id="@+id/settingsFragment"
-            android:name="ru.fefu.wsr_connect_mobile.SettingsFragment"
+            android:name="ru.fefu.wsr_connect_mobile.settings.SettingsFragment"
             android:label="fragment_settings"
             tools:layout="@layout/fragment_settings" />
     </navigation>
@@ -39,7 +39,7 @@
             android:id="@+id/profileFragment"
             android:name="ru.fefu.wsr_connect_mobile.profile.ProfileFragment"
             android:label="fragment_profile"
-            tools:layout="@layout/fragment_profile" >
+            tools:layout="@layout/fragment_profile">
             <action
                 android:id="@+id/action_profileFragment_to_changePasswordFragment"
                 app:destination="@id/changePasswordFragment" />
