@@ -20,4 +20,6 @@
     <string name="logout">Logout</string>
     <string name="profile_avatar">Profile Avatar</string>
     <string name="change_avatar">Change Avatar</string>
+    <string name="search_hint">Search for messages and users</string>
+    <string name="empty_frame">So lonely and sad&#8230;\n But lets light up\n this place a bit,\n start a new chat\n with your friend!</string>
 </resources>

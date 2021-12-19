@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/background_start.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.20416666666666666" />
+        <entry key="app/src/main/res/drawable/ic_pin.xml" value="0.12833876221498372" />
         <entry key="app/src/main/res/drawable/ic_video_calling.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_video_calling_2.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/ic_video_calling_blue.xml" value="0.20416666666666666" />
@@ -22,6 +23,7 @@
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.13677536231884058" />
         <entry key="app/src/main/res/layout/fragment_messenger.xml" value="0.16077898550724637" />
         <entry key="app/src/main/res/layout/fragment_nav_bottom.xml" value="0.16077898550724637" />
+        <entry key="app/src/main/res/layout/fragment_new_chat_search.xml" value="0.1194078947368421" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.16077898550724637" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.13677536231884058" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.16077898550724637" />
@@ -33,6 +35,11 @@
         <entry key="app/src/main/res/layout/fragment_silence.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.13677536231884058" />
         <entry key="app/src/main/res/layout/fragment_tasks.xml" value="0.16077898550724637" />
+        <entry key="app/src/main/res/layout/item_messenger_chat_card.xml" value="0.1194078947368421" />
+        <entry key="app/src/main/res/layout/item_messenger_new_chat.xml" value="0.1194078947368421" />
+        <entry key="app/src/main/res/layout/item_messenger_user_card.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/item_user_card.xml" value="0.1194078947368421" />
+        <entry key="app/src/main/res/layout/simple_message.xml" value="0.25" />
         <entry key="app/src/main/res/menu/main_nav_menu.xml" value="0.11875" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.20416666666666666" />
       </map>
