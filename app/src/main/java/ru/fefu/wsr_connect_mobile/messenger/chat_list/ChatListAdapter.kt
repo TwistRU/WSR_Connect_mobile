@@ -21,7 +21,7 @@ class ChatListAdapter(
         private var binding = ItemMessengerNewChatBinding.bind(item)
 
         init {
-            binding.item.setOnClickListener {
+            binding.item.surfaceView.setOnClickListener {
                 val position = adapterPosition
                 if (position in list.indices) {
                     clickListener.invoke(list[position] as ItemNewChat)
@@ -41,7 +41,7 @@ class ChatListAdapter(
         private var binding = ItemMessengerChatBinding.bind(item)
 
         init {
-            binding.item.setOnClickListener {
+            binding.item.surfaceView.setOnClickListener {
                 val position = adapterPosition
                 if (position in list.indices) {
                     clickListener.invoke(list[position] as ItemChat)

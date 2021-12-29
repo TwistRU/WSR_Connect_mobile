@@ -22,6 +22,9 @@
         android:id="@+id/bottomNavView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:backgroundTint="@color/blue_input"
+        app:itemIconTint="@color/blue_light"
+        app:itemTextColor="@color/blue_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/main_nav_menu" />
 

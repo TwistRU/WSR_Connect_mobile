@@ -25,12 +25,26 @@
             <action
                 android:id="@+id/action_messengerFragment_to_newChatSearchFragment"
                 app:destination="@id/newChatSearchFragment" />
+            <action
+                android:id="@+id/action_messengerFragment_to_inChatFragment"
+                app:destination="@id/inChatFragment" />
         </fragment>
         <fragment
             android:id="@+id/newChatSearchFragment"
             android:name="ru.fefu.wsr_connect_mobile.messenger.NewChatSearchFragment"
             android:label="fragment_new_chat_search"
-            tools:layout="@layout/fragment_new_chat_search" />
+            tools:layout="@layout/fragment_new_chat_search" >
+            <action
+                android:id="@+id/action_newChatSearchFragment_to_inChatFragment"
+                app:destination="@id/inChatFragment"
+                app:popUpTo="@id/newChatSearchFragment"
+                app:popUpToInclusive="true"/>
+        </fragment>
+        <fragment
+            android:id="@+id/inChatFragment"
+            android:name="ru.fefu.wsr_connect_mobile.messenger.InChatFragment"
+            android:label="fragment_in_chat"
+            tools:layout="@layout/fragment_in_chat" />
     </navigation>
     <navigation
         android:id="@+id/tasksNested"

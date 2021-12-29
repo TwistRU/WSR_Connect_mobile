@@ -2,6 +2,7 @@ package ru.fefu.wsr_connect_mobile.messenger
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.fefu.wsr_connect_mobile.BaseFragment
 import ru.fefu.wsr_connect_mobile.R
@@ -17,7 +18,10 @@ class NewChatSearchFragment :
 
         binding.apply {
             recycler.layoutManager = LinearLayoutManager(requireActivity())
-            recycler.adapter = ChatListAdapter({}, ItemRepository().getNewChatList())
+            recycler.adapter = ChatListAdapter(
+                { findNavController().navigate(R.id.action_newChatSearchFragment_to_inChatFragment) },
+                ItemRepository().getNewChatList()
+            )
         }
     }
 }

@@ -11,7 +11,7 @@ import ru.fefu.wsr_connect_mobile.messenger.chat_list.ChatListAdapter
 import ru.fefu.wsr_connect_mobile.messenger.chat_list.ItemRepository
 
 
-class MessengerFragment : BaseFragment<FragmentMessengerBinding>(R.layout.fragment_messenger){
+class MessengerFragment : BaseFragment<FragmentMessengerBinding>(R.layout.fragment_messenger) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -22,12 +22,14 @@ class MessengerFragment : BaseFragment<FragmentMessengerBinding>(R.layout.fragme
             }
             val list = ItemRepository().getChatList()
 
-            if (list.isEmpty()){
+            if (list.isEmpty()) {
                 emptyShapeContainer.visibility = View.VISIBLE
-            }
-            else {
+            } else {
                 recycler.layoutManager = LinearLayoutManager(requireActivity())
-                recycler.adapter = ChatListAdapter({}, list)
+                recycler.adapter = ChatListAdapter(
+                    { findNavController().navigate(R.id.action_messengerFragment_to_inChatFragment) },
+                    list
+                )
             }
         }
     }

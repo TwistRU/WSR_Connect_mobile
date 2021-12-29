@@ -17,4 +17,5 @@
     <color name="blue_status_bar">#0D47A1</color>
     <color name="blue_light">#BBDEFB</color>
     <color name="red_light">#FF6F6F</color>
+    <color name="blue_mid">#90CAF9</color>
 </resources>
