@@ -23,4 +23,11 @@
     <string name="search_hint">Search for messages and users</string>
     <string name="empty_frame">So lonely and sad&#8230;\n But lets light up\n this place a bit,\n start a new chat\n with your friend!</string>
     <string name="message">Message</string>
+    <string name="welcome">Welcome</string>
+    <string name="empty_company">It looks like you are not currently  a member of the company, you  can create your own or join an  existing one by accepting the invitation</string>
+    <string name="create">Create</string>
+    <string name="invitations">Invitations</string>
+    <string name="name_of_company">Name of company</string>
+    <string name="creating_company">Creating company</string>
+    <string name="accept">Accept</string>
 </resources>
