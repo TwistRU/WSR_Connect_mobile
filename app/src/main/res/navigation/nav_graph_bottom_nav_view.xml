@@ -48,7 +48,7 @@
     </navigation>
     <navigation
         android:id="@+id/tasksNested"
-        app:startDestination="@id/tasksEmptyFragment">
+        app:startDestination="@id/tasksBoardsListFragment">
         <fragment
             android:id="@+id/tasksFragment"
             android:name="ru.fefu.wsr_connect_mobile.tasks.TasksFragment"

@@ -7,7 +7,10 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/background_start.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/empty_frame.xml" value="0.1319078947368421" />
+        <entry key="app/src/main/res/drawable/ic_add.xml" value="0.1319078947368421" />
         <entry key="app/src/main/res/drawable/ic_attach.xml" value="0.1319078947368421" />
+        <entry key="app/src/main/res/drawable/ic_group.xml" value="0.1319078947368421" />
+        <entry key="app/src/main/res/drawable/ic_groupa.xml" value="0.1319078947368421" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/ic_pin.xml" value="0.12833876221498372" />
         <entry key="app/src/main/res/drawable/ic_send.xml" value="0.1319078947368421" />
@@ -26,7 +29,7 @@
         <entry key="app/src/main/res/layout/fragment_change_password.xml" value="0.11099726775956284" />
         <entry key="app/src/main/res/layout/fragment_create_company.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.13677536231884058" />
-        <entry key="app/src/main/res/layout/fragment_in_chat.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_in_chat.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_invitations.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/fragment_messenger.xml" value="0.16077898550724637" />
         <entry key="app/src/main/res/layout/fragment_nav_bottom.xml" value="0.16077898550724637" />
@@ -42,7 +45,7 @@
         <entry key="app/src/main/res/layout/fragment_silence.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.13677536231884058" />
         <entry key="app/src/main/res/layout/fragment_tasks.xml" value="0.16077898550724637" />
-        <entry key="app/src/main/res/layout/fragment_tasks_boards_list.xml" value="0.12171052631578948" />
+        <entry key="app/src/main/res/layout/fragment_tasks_boards_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_tasks_empty.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_messenger_chat_card.xml" value="0.1194078947368421" />
         <entry key="app/src/main/res/layout/item_messenger_image_message.xml" value="0.25" />
@@ -53,6 +56,7 @@
         <entry key="app/src/main/res/layout/item_messenger_simple_message.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_messenger_simple_message_other.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/item_messenger_user_card.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/item_tasks_board.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_tasks_invitation.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_user_card.xml" value="0.1194078947368421" />
         <entry key="app/src/main/res/layout/simple_message.xml" value="0.25" />
