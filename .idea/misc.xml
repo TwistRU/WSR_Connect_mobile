@@ -46,7 +46,9 @@
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.13677536231884058" />
         <entry key="app/src/main/res/layout/fragment_tasks.xml" value="0.16077898550724637" />
         <entry key="app/src/main/res/layout/fragment_tasks_boards_list.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_tasks_columns_list.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/fragment_tasks_empty.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/item_messenger_chat.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/item_messenger_chat_card.xml" value="0.1194078947368421" />
         <entry key="app/src/main/res/layout/item_messenger_image_message.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_messenger_image_message_other.xml" value="0.12171052631578948" />
@@ -57,6 +59,8 @@
         <entry key="app/src/main/res/layout/item_messenger_simple_message_other.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/item_messenger_user_card.xml" value="0.18" />
         <entry key="app/src/main/res/layout/item_tasks_board.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_tasks_card.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_tasks_column.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/item_tasks_invitation.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_user_card.xml" value="0.1194078947368421" />
         <entry key="app/src/main/res/layout/simple_message.xml" value="0.25" />

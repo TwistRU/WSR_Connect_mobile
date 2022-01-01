@@ -79,7 +79,11 @@
             android:id="@+id/tasksBoardsListFragment"
             android:name="ru.fefu.wsr_connect_mobile.tasks.TasksBoardsListFragment"
             android:label="fragment_tasks_boards_list"
-            tools:layout="@layout/fragment_tasks_boards_list" />
+            tools:layout="@layout/fragment_tasks_boards_list" >
+            <action
+                android:id="@+id/action_tasksBoardsListFragment_to_tasksColumnsListFragment"
+                app:destination="@id/tasksColumnsListFragment" />
+        </fragment>
         <fragment
             android:id="@+id/invitationsFragment"
             android:name="ru.fefu.wsr_connect_mobile.tasks.InvitationsFragment"
@@ -102,6 +106,11 @@
                 app:popUpTo="@id/nav_graph_bottom_nav_view"
                 app:popUpToInclusive="true" />
         </fragment>
+        <fragment
+            android:id="@+id/tasksColumnsListFragment"
+            android:name="ru.fefu.wsr_connect_mobile.tasks.TasksColumnsListFragment"
+            android:label="fragment_tasks_columns_list"
+            tools:layout="@layout/fragment_tasks_columns_list" />
     </navigation>
     <navigation
         android:id="@+id/profileNested"

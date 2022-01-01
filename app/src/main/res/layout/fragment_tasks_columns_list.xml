@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".tasks.TasksColumnsListFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_input"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Board name"
+        app:titleCentered="true"
+        app:titleTextColor="@color/blue_light"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:navigationIconTint="@color/blue_light"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/boardImg"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ava_example2"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
+        app:layout_constraintTop_toTopOf="@id/toolbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/columnAddBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:contentDescription="@string/plug"
+            android:src="@drawable/ic_add"
+            android:visibility="invisible"
+            app:backgroundTint="@color/blue_mid"
+            app:tint="@color/blue_input" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/columnUsersBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:contentDescription="@string/plug"
+            android:src="@drawable/ic_group"
+            android:visibility="invisible"
+            app:backgroundTint="@color/blue_mid"
+            app:tint="@color/blue_input" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/columnEditBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:contentDescription="@string/plug"
+            android:src="@drawable/ic_edit"
+            android:visibility="invisible"
+            app:backgroundTint="@color/blue_mid"
+            app:tint="@color/blue_input" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/columnDeleteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:contentDescription="@string/plug"
+            android:src="@drawable/ic_delete"
+            android:visibility="invisible"
+            app:backgroundTint="@color/blue_mid"
+            app:tint="@color/blue_input" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/columnFabBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="14dp"
+            android:layout_marginBottom="14dp"
+            android:contentDescription="@string/plug"
+            android:rotation="-90"
+            android:src="@drawable/ic_double_arrow"
+            app:tint="@color/blue_light" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

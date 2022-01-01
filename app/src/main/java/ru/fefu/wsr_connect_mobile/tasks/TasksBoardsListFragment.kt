@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.fefu.wsr_connect_mobile.BaseFragment
 import ru.fefu.wsr_connect_mobile.R
@@ -35,7 +36,11 @@ class TasksBoardsListFragment :
         binding.apply {
             recycler.layoutManager = LinearLayoutManager(requireActivity())
             recycler.adapter = BoardListAdapter(
-                { },
+                {
+                    if (it.available) {
+                        findNavController().navigate(R.id.action_tasksBoardsListFragment_to_tasksColumnsListFragment)
+                    }
+                },
                 BoardsRepository().getBoardsList()
             )
             boardAddBtn.setOnClickListener { }
