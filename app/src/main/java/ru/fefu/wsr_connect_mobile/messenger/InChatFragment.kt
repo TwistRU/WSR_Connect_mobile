@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ru.fefu.wsr_connect_mobile.BaseFragment
 import ru.fefu.wsr_connect_mobile.R
 import ru.fefu.wsr_connect_mobile.databinding.FragmentInChatBinding
-import ru.fefu.wsr_connect_mobile.messenger.messages_list.MessagesListAdapter
+import ru.fefu.wsr_connect_mobile.adapters.MessagesListAdapter
 import ru.fefu.wsr_connect_mobile.messenger.messages_list.MessagesRepository
 
 

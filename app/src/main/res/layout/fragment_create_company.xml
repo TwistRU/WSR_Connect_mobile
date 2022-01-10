@@ -19,16 +19,17 @@
         app:titleTextColor="@color/blue_light" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/companyNameInput"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="57dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="45dp"
         android:layout_marginTop="13dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/companyNameInput"
+            android:id="@+id/etCompanyName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/name_of_company" />
@@ -50,4 +51,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="@color/blue_input" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/loader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="2dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

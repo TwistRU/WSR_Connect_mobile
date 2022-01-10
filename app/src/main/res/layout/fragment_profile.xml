@@ -80,11 +80,13 @@
                 android:id="@+id/firstNameInput"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="57dp"
+                android:layout_height="wrap_content"
                 app:endIconDrawable="@drawable/ic_edit"
+                app:endIconMode="custom"
                 app:endIconTint="@color/blue_input">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etFirstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/first_name"
@@ -96,12 +98,14 @@
                 android:id="@+id/lastNameInput"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="57dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 app:endIconDrawable="@drawable/ic_edit"
+                app:endIconMode="custom"
                 app:endIconTint="@color/blue_input">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/last_name"
@@ -113,12 +117,14 @@
                 android:id="@+id/emailInput"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="57dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 app:endIconDrawable="@drawable/ic_edit"
+                app:endIconMode="custom"
                 app:endIconTint="@color/blue_input">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
@@ -133,9 +139,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 app:endIconDrawable="@drawable/ic_edit"
+                app:endIconMode="custom"
                 app:endIconTint="@color/blue_input">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAboutMe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/about_me"
@@ -166,4 +174,15 @@
                 app:strokeColor="@color/blue_input" />
         </LinearLayout>
     </ScrollView>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/loader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="2dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

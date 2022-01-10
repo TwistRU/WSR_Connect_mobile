@@ -50,20 +50,6 @@
         android:id="@+id/tasksNested"
         app:startDestination="@id/tasksBoardsListFragment">
         <fragment
-            android:id="@+id/tasksFragment"
-            android:name="ru.fefu.wsr_connect_mobile.tasks.TasksFragment"
-            android:label="fragment_tasks"
-            tools:layout="@layout/fragment_tasks">
-            <action
-                android:id="@+id/action_tasksFragment_to_tasksEmptyFragment"
-                app:destination="@id/tasksEmptyFragment" />
-            <action
-                android:id="@+id/action_tasksFragment_to_tasksBoardsListFragment"
-                app:destination="@id/tasksBoardsListFragment"
-                app:popUpTo="@id/nav_graph_bottom_nav_view"
-                app:popUpToInclusive="true" />
-        </fragment>
-        <fragment
             android:id="@+id/tasksEmptyFragment"
             android:name="ru.fefu.wsr_connect_mobile.tasks.TasksEmptyFragment"
             android:label="fragment_tasks_empty"
@@ -83,6 +69,18 @@
             <action
                 android:id="@+id/action_tasksBoardsListFragment_to_tasksColumnsListFragment"
                 app:destination="@id/tasksColumnsListFragment" />
+            <action
+                android:id="@+id/action_tasksBoardsListFragment_to_createBoardFragment"
+                app:destination="@id/createBoardFragment" />
+            <action
+                android:id="@+id/action_tasksBoardsListFragment_to_editBoardFragment"
+                app:destination="@id/editBoardFragment" />
+            <action
+                android:id="@+id/action_tasksBoardsListFragment_to_deleteBoardFragment"
+                app:destination="@id/deleteBoardFragment" />
+            <action
+                android:id="@+id/action_tasksBoardsListFragment_to_companyUsersListFragment"
+                app:destination="@id/companyUsersListFragment" />
         </fragment>
         <fragment
             android:id="@+id/invitationsFragment"
@@ -110,7 +108,83 @@
             android:id="@+id/tasksColumnsListFragment"
             android:name="ru.fefu.wsr_connect_mobile.tasks.TasksColumnsListFragment"
             android:label="fragment_tasks_columns_list"
-            tools:layout="@layout/fragment_tasks_columns_list" />
+            tools:layout="@layout/fragment_tasks_columns_list" >
+            <action
+                android:id="@+id/action_tasksColumnsListFragment_to_createColumnFragment"
+                app:destination="@id/createColumnFragment" />
+            <action
+                android:id="@+id/action_tasksColumnsListFragment_to_editCardFragment"
+                app:destination="@id/editCardFragment" />
+            <action
+                android:id="@+id/action_tasksColumnsListFragment_to_deleteColumnFragment"
+                app:destination="@id/deleteColumnFragment" />
+            <action
+                android:id="@+id/action_tasksColumnsListFragment_to_editColumnFragment"
+                app:destination="@id/editColumnFragment" />
+            <action
+                android:id="@+id/action_tasksColumnsListFragment_to_deleteCardFragment"
+                app:destination="@id/deleteCardFragment" />
+            <action
+                android:id="@+id/action_tasksColumnsListFragment_to_companyUsersListFragment"
+                app:destination="@id/companyUsersListFragment" />
+        </fragment>
+        <dialog
+            android:id="@+id/createBoardFragment"
+            android:name="ru.fefu.wsr_connect_mobile.tasks.CreateBoardFragment"
+            android:label="fragment_create_board"
+            tools:layout="@layout/fragment_create_board" />
+        <dialog
+            android:id="@+id/createColumnFragment"
+            android:name="ru.fefu.wsr_connect_mobile.tasks.CreateColumnFragment"
+            android:label="fragment_create_column"
+            tools:layout="@layout/fragment_create_column" />
+        <dialog
+            android:id="@+id/editBoardFragment"
+            android:name="ru.fefu.wsr_connect_mobile.tasks.EditBoardFragment"
+            android:label="fragment_edit_board"
+            tools:layout="@layout/fragment_edit_board" />
+        <dialog
+            android:id="@+id/editCardFragment"
+            android:name="ru.fefu.wsr_connect_mobile.tasks.EditCardFragment"
+            android:label="fragment_edit_card"
+            tools:layout="@layout/fragment_edit_card" />
+        <dialog
+            android:id="@+id/deleteColumnFragment"
+            android:name="ru.fefu.wsr_connect_mobile.tasks.DeleteColumnFragment"
+            android:label="fragment_delete_column"
+            tools:layout="@layout/fragment_delete_alert" />
+        <dialog
+            android:id="@+id/editColumnFragment"
+            android:name="ru.fefu.wsr_connect_mobile.tasks.EditColumnFragment"
+            android:label="fragment_edit_column"
+            tools:layout="@layout/fragment_edit_column" />
+        <dialog
+            android:id="@+id/deleteBoardFragment"
+            android:name="ru.fefu.wsr_connect_mobile.tasks.DeleteBoardFragment"
+            android:label="DeleteBoardFragment" />
+        <dialog
+            android:id="@+id/deleteCardFragment"
+            android:name="ru.fefu.wsr_connect_mobile.tasks.DeleteCardFragment"
+            android:label="DeleteCardFragment" />
+        <fragment
+            android:id="@+id/companyUsersListFragment"
+            android:name="ru.fefu.wsr_connect_mobile.tasks.CompanyUsersListFragment"
+            android:label="CompanyUsersListFragment" >
+            <action
+                android:id="@+id/action_companyUsersListFragment_to_sendInvitationFragment"
+                app:destination="@id/sendInvitationFragment" />
+            <action
+                android:id="@+id/action_companyUsersListFragment_to_deleteUserFragment"
+                app:destination="@id/deleteUserFragment" />
+        </fragment>
+        <dialog
+            android:id="@+id/sendInvitationFragment"
+            android:name="ru.fefu.wsr_connect_mobile.tasks.SendInvitationFragment"
+            android:label="SendInvitationFragment" />
+        <dialog
+            android:id="@+id/deleteUserFragment"
+            android:name="ru.fefu.wsr_connect_mobile.tasks.DeleteUserFragment"
+            android:label="DeleteUserFragment" />
     </navigation>
     <navigation
         android:id="@+id/profileNested"
@@ -127,7 +201,7 @@
                 android:id="@+id/action_profileFragment_to_changeAvatarFragment"
                 app:destination="@id/changeAvatarFragment" />
         </fragment>
-        <fragment
+        <dialog
             android:id="@+id/changePasswordFragment"
             android:name="ru.fefu.wsr_connect_mobile.profile.ChangePasswordFragment"
             android:label="fragment_change_password"

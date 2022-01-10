@@ -19,15 +19,17 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailInput"
+            android:id="@+id/usernameInput"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="57dp">
+            android:layout_height="wrap_content"
+            android:background="@null">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email"
+                android:hint="@string/username"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -36,12 +38,13 @@
             android:id="@+id/passwordInput"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="57dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/blue_input">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
@@ -81,4 +84,15 @@
             app:cornerRadius="7dp"
             app:strokeColor="@color/white" />
     </LinearLayout>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

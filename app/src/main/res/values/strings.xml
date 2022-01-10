@@ -8,7 +8,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="nickname">Nickname</string>
+    <string name="username">Username</string>
     <string name="messenger">Messenger</string>
     <string name="tasks">Tasks</string>
     <string name="profile">Profile</string>
@@ -30,4 +30,23 @@
     <string name="name_of_company">Name of company</string>
     <string name="creating_company">Creating company</string>
     <string name="accept">Accept</string>
+    <string name="new_password">New Password</string>
+    <string name="current_password">Current Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="name_of_board">Name of Board</string>
+    <string name="name_of_column">Name of Column</string>
+    <string name="edit_board">Edit Board</string>
+    <string name="delete_board">Delete Board</string>
+    <string name="edit">Edit</string>
+    <string name="edit_card">Edit Card</string>
+    <string name="delete_card">Delete Card</string>
+    <string name="long_desc">Long Description</string>
+    <string name="short_desc">Short Description</string>
+    <string name="column_title">Column Title</string>
+    <string name="delete">Delete</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="invite">Invite</string>
+    <string name="user_nickname">User nickname</string>
+    <string name="send">Send</string>
+    <string name="text_of_invitation">Text of invitation</string>
 </resources>

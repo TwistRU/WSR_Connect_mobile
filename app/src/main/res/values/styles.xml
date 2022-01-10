@@ -1,2 +1,14 @@
 <resources>
+    <style name="DialogTheme" parent="Theme.MaterialComponents.Light.Dialog.MinWidth">
+        <item name="android:buttonStyle">@style/Widget.AppCompat.Button</item>
+        <item name="android:textColorHint">@color/blue_input</item>
+        <item name="colorPrimary">@color/blue_input</item>
+        <item name="colorPrimaryVariant">@color/blue_input</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/blue_input</item>
+        <item name="colorSecondaryVariant">@color/blue_input</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="dialogCornerRadius">10dp</item>
+        <item name="android:backgroundTint">@color/blue_light</item>
+    </style>
 </resources>

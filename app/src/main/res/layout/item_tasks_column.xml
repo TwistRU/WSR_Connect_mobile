@@ -18,6 +18,32 @@
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/deleteColumnBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/columnTitle"
+        app:layout_constraintBottom_toBottomOf="@id/columnTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/plug"
+        android:src="@drawable/ic_delete"
+        android:background="@null"
+        app:tint="@color/blue_input"
+        android:paddingHorizontal="5dp"/>
+
+    <ImageButton
+        android:id="@+id/editColumnBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/columnTitle"
+        app:layout_constraintBottom_toBottomOf="@id/columnTitle"
+        app:layout_constraintEnd_toStartOf="@id/deleteColumnBtn"
+        android:contentDescription="@string/plug"
+        android:src="@drawable/ic_edit"
+        android:background="@null"
+        app:tint="@color/blue_input"
+        android:paddingHorizontal="5dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"

@@ -54,4 +54,20 @@ dependencies {
     implementation("com.tbuonomo:dotsindicator:4.2")
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.daimajia.swipelayout:library:1.2.0@aar")
+
+    def okHttp_version = "4.9.3"
+    def retrofit_version = "2.9.0"
+    implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
+    implementation("com.squareup.okhttp3:okhttp:$okHttp_version")
+    implementation("com.squareup.okhttp3:logging-interceptor:$okHttp_version")
+
+    def lifecycle_version = "2.4.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+
+    def kotlinx_coroutines = "1.5.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines"
 }

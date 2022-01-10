@@ -64,28 +64,6 @@
             app:tint="@color/blue_input" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/boardEditBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
-            android:contentDescription="@string/plug"
-            android:src="@drawable/ic_edit"
-            android:visibility="invisible"
-            app:backgroundTint="@color/blue_mid"
-            app:tint="@color/blue_input" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/boardDeleteBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
-            android:contentDescription="@string/plug"
-            android:src="@drawable/ic_delete"
-            android:visibility="invisible"
-            app:backgroundTint="@color/blue_mid"
-            app:tint="@color/blue_input" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/boardFabBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -96,4 +74,15 @@
             android:src="@drawable/ic_double_arrow"
             app:tint="@color/blue_light" />
     </LinearLayout>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/loader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="2dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
