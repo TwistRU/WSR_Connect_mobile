@@ -21,5 +21,7 @@
         <item name="android:alertDialogTheme">@style/DialogTheme</item>
         <item name="dialogTheme">@style/DialogTheme</item>
         <item name="android:dialogTheme">@style/DialogTheme</item>
+
+        <item name="bottomNavigationStyle">@style/Widget.MaterialComponents.BottomNavigationView.Colored</item>
     </style>
 </resources>

@@ -8,32 +8,34 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.fefu.wsr_connect_mobile.R
-import ru.fefu.wsr_connect_mobile.databinding.*
+import ru.fefu.wsr_connect_mobile.databinding.ItemTasksColumnBinding
+import ru.fefu.wsr_connect_mobile.remote.models.Card
 import ru.fefu.wsr_connect_mobile.remote.models.Column
 
 
 class ColumnListAdapter(
-    private val deleteOnClick: (Column) -> Unit,
-    private val editOnClick: (Column) -> Unit,
-    private val optionsMenuClickListener: CardListAdapter.OptionsMenuClickListener,
-    private val list: List<Column>
+    private val clickListenerCardCreator: (Card) -> Unit,
+    private val clickListenerCardDetail: (Card) -> Unit,
+    private val clickListenerColumn: (Column) -> Unit,
+    private val columnActionsMenuClickListener: OptionsMenuClickListener,
 ) : ListAdapter<Column, RecyclerView.ViewHolder>(ItemCallback()) {
 
+    interface OptionsMenuClickListener {
+        fun onOptionsMenuClicked(
+            columnId: Int,
+            columnTitle: String,
+            view: View
+        )
+    }
 
     inner class ColumnListHolder(item: View) : RecyclerView.ViewHolder(item) {
         private var binding = ItemTasksColumnBinding.bind(item)
 
         init {
-            binding.editColumnBtn.setOnClickListener {
+            binding.addCardBtn.setOnClickListener {
                 val position = adapterPosition
-                if (position in list.indices) {
-                    editOnClick.invoke(list[position])
-                }
-            }
-            binding.deleteColumnBtn.setOnClickListener {
-                val position = adapterPosition
-                if (position in list.indices) {
-                    deleteOnClick.invoke(list[position])
+                if (position in currentList.indices) {
+                    clickListenerColumn.invoke(currentList[position])
                 }
             }
         }
@@ -42,23 +44,26 @@ class ColumnListAdapter(
             binding.apply {
                 columnTitle.text = item.columnTitle
 
+                columnActionsBtn.setOnClickListener {
+                    columnActionsMenuClickListener.onOptionsMenuClicked(
+                        item.columnId, item.columnTitle, it)
+
+                }
+
+                val adapter = CardListAdapter(clickListenerCardCreator,clickListenerCardDetail)
                 recycler.layoutManager = LinearLayoutManager(itemView.context)
-                recycler.adapter = CardListAdapter(
-                    { },
-                    optionsMenuClickListener,
-                    item.columnId,
-                    item.cards
-                )
+                recycler.adapter = adapter
+                adapter.submitList(item.cards)
             }
         }
     }
 
     private class ItemCallback : DiffUtil.ItemCallback<Column>() {
         override fun areItemsTheSame(oldItem: Column, newItem: Column): Boolean =
-            true
+            oldItem.columnId == newItem.columnId
 
         override fun areContentsTheSame(oldItem: Column, newItem: Column): Boolean =
-            true
+            oldItem == newItem
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -70,11 +75,9 @@ class ColumnListAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is ColumnListHolder -> {
-                val item = list[position]
+                val item = currentList[position]
                 holder.bind(item)
             }
         }
     }
-
-    override fun getItemCount(): Int = list.size
 }

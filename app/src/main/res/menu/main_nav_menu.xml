@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/messengerNested"
-        android:icon="@drawable/ic_messenger"
-        android:title="@string/messenger" />
-    <item
-        android:id="@+id/tasksNested"
-        android:icon="@drawable/ic_tasks"
-        android:title="@string/tasks" />
-    <item
-        android:id="@+id/profileNested"
+        android:id="@+id/nav_graph_profile"
         android:icon="@drawable/ic_profile"
         android:title="@string/profile" />
     <item
-        android:id="@+id/settingsNested"
-        android:icon="@drawable/ic_settings"
-        android:title="@string/settings" />
+        android:id="@+id/nav_graph_messenger"
+        android:icon="@drawable/ic_messenger"
+        android:title="@string/messenger" />
+    <item
+        android:id="@+id/nav_graph_tasks"
+        android:icon="@drawable/ic_tasks"
+        android:title="@string/tasks" />
 </menu>

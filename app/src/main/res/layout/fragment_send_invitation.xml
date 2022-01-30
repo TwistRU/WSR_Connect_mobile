@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".tasks.CreateBoardFragment">
+    tools:context=".dialogs.CreateBoardFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,17 +17,20 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/userNicknameInput"
+            android:id="@+id/usernameInput"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etUserNickname"
+                android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/user_nickname" />
+                android:clickable="false"
+                android:focusable="false"
+                android:hint="@string/username"
+                android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

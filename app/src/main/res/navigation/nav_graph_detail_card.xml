@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_detail_card"
+    app:startDestination="@id/detailCardFragment">
+
+    <fragment
+        android:id="@+id/detailCardFragment"
+        android:name="ru.fefu.wsr_connect_mobile.tasks.DetailCardFragment"
+        android:label="fragment_detail_card"
+        tools:layout="@layout/fragment_detail_card" >
+        <action
+            android:id="@+id/action_detailCardFragment_to_deleteCardFragment"
+            app:destination="@id/deleteCardFragment" />
+        <action
+            android:id="@+id/action_detailCardFragment_to_companyUserFragment2"
+            app:destination="@id/companyUserFragment2" />
+    </fragment>
+    <dialog
+        android:id="@+id/deleteCardFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.DeleteCardFragment"
+        android:label="DeleteCardFragment" />
+    <dialog
+        android:id="@+id/companyUserFragment2"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.CompanyUserFragment"
+        android:label="fragment_company_user"
+        tools:layout="@layout/fragment_company_user" />
+</navigation>

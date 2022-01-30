@@ -13,22 +13,39 @@ class SignUpViewModel : ViewModel() {
     private val apiService = ApiService()
 
     private val _showUsernameError = MutableSharedFlow<String>(replay = 0)
+    private val _showFirstNameError = MutableSharedFlow<String>(replay = 0)
+    private val _showLastNameError = MutableSharedFlow<String>(replay = 0)
     private val _showEmailError = MutableSharedFlow<String>(replay = 0)
     private val _showPasswordError = MutableSharedFlow<String>(replay = 0)
     private val _showPasswordConfirmError = MutableSharedFlow<String>(replay = 0)
     private val _showLoading = MutableStateFlow(false)
-    private val _result = MutableStateFlow("")
+    private val _result = MutableSharedFlow<Boolean>(replay = 0)
 
     val showUsernameError get() = _showUsernameError
+    val showFirstNameError get() = _showFirstNameError
+    val showLastNameError get() = _showLastNameError
     val showEmailError get() = _showEmailError
     val showPasswordError get() = _showPasswordError
     val showPasswordConfirmError get() = _showPasswordConfirmError
     val showLoading get() = _showLoading
+    val result get() = _result
 
-    fun signUpClicked(username: String, email: String, password: String, passwordConfirm: String) {
+    fun signUpClicked(
+        username: String, firstName: String,
+        lastName: String, email: String,
+        password: String, passwordConfirm: String
+    ) {
         viewModelScope.launch {
             if (username.isBlank()) {
                 _showUsernameError.emit("username is blank")
+                return@launch
+            }
+            if (firstName.isBlank()) {
+                _showFirstNameError.emit("first name is blank")
+                return@launch
+            }
+            if (lastName.isBlank()) {
+                _showLastNameError.emit("last name is blank")
                 return@launch
             }
             if (email.isBlank()) {
@@ -43,13 +60,15 @@ class SignUpViewModel : ViewModel() {
                 _showPasswordConfirmError.emit("password is not the same")
                 return@launch
             }
-            apiService.registration(username, email, password)
+            apiService.registration(username, firstName, lastName, email, password)
                 .onStart { _showLoading.value = true }
                 .onCompletion { _showLoading.value = false }
                 .collect {
                     when (it) {
                         is Result.Success -> {
+                            _result.emit(true)
                             App.sharedPreferences.edit().putString("token", it.result.token).apply()
+                            App.sharedPreferences.edit().putBoolean("need_info", true).apply()
                         }
                         is Result.Error -> {}
                     }

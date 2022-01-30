@@ -36,9 +36,9 @@ class InvitationsViewModel : ViewModel() {
         }
     }
 
-    fun acceptInvitation(companyId: Int) {
+    fun acceptInvitation(inviteId: Int) {
         viewModelScope.launch {
-            apiService.acceptInvitation(companyId)
+            apiService.acceptInvitation(inviteId)
                 .onStart { _showLoading.value = true }
                 .onCompletion { _showLoading.value = false }
                 .collect {

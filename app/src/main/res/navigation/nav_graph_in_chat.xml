@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_in_chat"
+    app:startDestination="@id/inChatFragment">
+
+    <fragment
+        android:id="@+id/inChatFragment"
+        android:name="ru.fefu.wsr_connect_mobile.messenger.InChatFragment"
+        android:label="fragment_in_chat"
+        tools:layout="@layout/fragment_in_chat">
+        <action
+            android:id="@+id/action_inChatFragment_to_deleteMessageFragment"
+            app:destination="@id/deleteMessageFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/deleteMessageFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.DeleteMessageFragment"
+        android:label="DeleteMessageFragment" />
+</navigation>

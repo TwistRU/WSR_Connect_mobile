@@ -1,115 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="14dp"
-    android:orientation="horizontal">
+    android:layout_marginTop="12dp"
+    android:clipChildren="true"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="2dp"
-        app:cardUseCompatPadding="true"
-        app:layout_constraintTop_toTopOf="parent">
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.4"
+            android:background="@color/blue_mid"
+            android:foregroundTintMode="add">
+
+            <ImageView
+                android:id="@+id/boardImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/plug"
+                android:scaleType="centerCrop" />
 
             <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.4"
-                android:background="@color/blue_mid"
-                android:foregroundTintMode="add">
-
+                android:id="@+id/boardLockContainer"
+                android:layout_marginTop="9dp"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_board_image_shape">
                 <ImageView
                     android:id="@+id/boardLock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="9dp"
-                    android:layout_marginTop="5dp"
-                    android:alpha="0.6"
+                    android:alpha="0.8"
+                    android:layout_marginStart="5dp"
                     android:contentDescription="@string/plug"
-                    android:src="@drawable/ic_lock" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/boardImg"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/ava_example1"
-                    app:civ_border_color="@color/blue_input"
-                    app:civ_border_width="1dp" />
+                    android:src="@drawable/ic_lock"
+                    app:tint="@color/blue_light" />
             </RelativeLayout>
+        </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:layout_marginStart="25dp"
+            android:layout_weight="0.6"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:layout_marginStart="25dp"
-                android:layout_weight="0.6"
-                android:orientation="vertical">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/blue_mid"
-                    app:cardCornerRadius="4dp">
-
-                    <TextView
-                        android:id="@+id/boardName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="4dp"
-                        android:layout_marginVertical="2dp"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="italic" />
-                </androidx.cardview.widget.CardView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/boardCreateDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="6dp"
-                        android:textSize="14sp"
-                        android:textStyle="italic"
-                        app:drawableStartCompat="@drawable/ic_date" />
-
-                    <TextView
-                        android:id="@+id/boardUserCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
-                        android:drawablePadding="6dp"
-                        android:textSize="14sp"
-                        android:textStyle="italic"
-                        app:drawableStartCompat="@drawable/ic_group_alpha" />
-                </LinearLayout>
+                app:cardBackgroundColor="@color/blue_mid"
+                app:cardCornerRadius="4dp">
 
                 <TextView
-                    android:id="@+id/boardCreator"
+                    android:id="@+id/boardName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="2dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/boardCreateDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:drawablePadding="6dp"
                     android:textSize="14sp"
                     android:textStyle="italic"
-                    app:drawableStartCompat="@drawable/ic_creator" />
+                    app:drawableStartCompat="@drawable/ic_date" />
+
+                <TextView
+                    android:id="@+id/boardUserCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:drawablePadding="6dp"
+                    android:textSize="14sp"
+                    android:textStyle="italic"
+                    app:drawableStartCompat="@drawable/ic_group_alpha" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/boardCreator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:drawablePadding="6dp"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                app:drawableStartCompat="@drawable/ic_creator" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

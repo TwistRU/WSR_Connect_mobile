@@ -6,15 +6,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import ru.fefu.wsr_connect_mobile.BASE_URL
 import ru.fefu.wsr_connect_mobile.R
 import ru.fefu.wsr_connect_mobile.databinding.*
 import ru.fefu.wsr_connect_mobile.remote.models.Board
+import ru.fefu.wsr_connect_mobile.extensions.formatTo
+import ru.fefu.wsr_connect_mobile.extensions.toDate
 
 
 class BoardListAdapter(
+    private val clickListenerUser: (Board) -> Unit,
     private val clickListener: (Board) -> Unit,
     private val optionsMenuClickListener: OptionsMenuClickListener,
-    private val list: List<Board>
 ) : ListAdapter<Board, RecyclerView.ViewHolder>(ItemCallback()) {
 
     interface OptionsMenuClickListener {
@@ -25,10 +29,17 @@ class BoardListAdapter(
         private var binding = ItemTasksBoardBinding.bind(item)
 
         init {
-            binding.card.setOnClickListener {
+            binding.item.setOnClickListener {
                 val position = adapterPosition
-                if (position in list.indices) {
-                    clickListener.invoke(list[position])
+                if (position in currentList.indices) {
+                    clickListener.invoke(currentList[position])
+                }
+            }
+
+            binding.boardCreator.setOnClickListener {
+                val position = adapterPosition
+                if (position in currentList.indices) {
+                    clickListenerUser.invoke(currentList[position])
                 }
             }
         }
@@ -36,13 +47,23 @@ class BoardListAdapter(
         fun bind(item: Board) {
             binding.apply {
                 boardName.text = item.boardName
-                boardCreateDate.text = item.boardCreateDate
+                boardCreateDate.text = item.boardCreateDate.toDate().formatTo("dd MMM yyyy")
                 boardUserCount.text = item.boardUserCount
                 boardCreator.text = item.boardCreator
                 if (item.isAvailable) {
                     boardLock.visibility = View.GONE
                 }
-                card.setOnLongClickListener {
+                val url = "$BASE_URL${item.imgUrl}"
+                val imgView = binding.boardImg
+
+                if (item.imgUrl == null) {
+                    imgView.minimumHeight = 300
+                    imgView.minimumWidth = 300
+                }
+                Glide.with(itemView).load(url).error(R.drawable.ic_image_not_supported)
+                    .into(imgView)
+
+                binding.item.setOnLongClickListener {
                     optionsMenuClickListener.onOptionsMenuClicked(
                         item.boardId,
                         item.boardName,
@@ -56,10 +77,10 @@ class BoardListAdapter(
 
     private class ItemCallback : DiffUtil.ItemCallback<Board>() {
         override fun areItemsTheSame(oldItem: Board, newItem: Board): Boolean =
-            true
+            oldItem.boardId == newItem.boardId
 
         override fun areContentsTheSame(oldItem: Board, newItem: Board): Boolean =
-            true
+            oldItem == newItem
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -71,11 +92,9 @@ class BoardListAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is BoardListHolder -> {
-                val item = list[position]
+                val item = currentList[position]
                 holder.bind(item)
             }
         }
     }
-
-    override fun getItemCount(): Int = list.size
 }

@@ -6,14 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import ru.fefu.wsr_connect_mobile.BASE_URL
 import ru.fefu.wsr_connect_mobile.R
 import ru.fefu.wsr_connect_mobile.databinding.*
 import ru.fefu.wsr_connect_mobile.remote.models.Invitation
 
 
-class InvitationListAdapter(
-    private val list: List<Invitation>
-) : ListAdapter<Invitation, RecyclerView.ViewHolder>(ItemCallback()) {
+class InvitationListAdapter : ListAdapter<Invitation, RecyclerView.ViewHolder>(ItemCallback()) {
 
     var selectedItemPos = -1
     var lastItemSelectedPos = -1
@@ -33,11 +33,11 @@ class InvitationListAdapter(
         init {
             binding.radioBtn.setOnClickListener {
                 selectedItemPos = adapterPosition
-                if (lastItemSelectedPos == -1)
-                    lastItemSelectedPos = selectedItemPos
+                lastItemSelectedPos = if (lastItemSelectedPos == -1)
+                    selectedItemPos
                 else {
                     notifyItemChanged(lastItemSelectedPos)
-                    lastItemSelectedPos = selectedItemPos
+                    selectedItemPos
                 }
                 notifyItemChanged(selectedItemPos)
             }
@@ -47,16 +47,20 @@ class InvitationListAdapter(
             binding.apply {
                 companyName.text = item.companyName
                 invitationBody.text = item.inviteBody
+
+                val url = "$BASE_URL${item.imgUrl}"
+                val imgView = binding.companyImg
+                Glide.with(itemView).load(url).error(R.drawable.ic_delete2).into(imgView)
             }
         }
     }
 
     private class ItemCallback : DiffUtil.ItemCallback<Invitation>() {
         override fun areItemsTheSame(oldItem: Invitation, newItem: Invitation): Boolean =
-            true
+            oldItem.inviteId == newItem.inviteId
 
         override fun areContentsTheSame(oldItem: Invitation, newItem: Invitation): Boolean =
-            true
+            oldItem == newItem
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -71,10 +75,8 @@ class InvitationListAdapter(
                 if (position == selectedItemPos) {
                     holder.selected()
                 } else holder.default()
-                holder.bind(list[position])
+                holder.bind(currentList[position])
             }
         }
     }
-
-    override fun getItemCount(): Int = list.size
 }

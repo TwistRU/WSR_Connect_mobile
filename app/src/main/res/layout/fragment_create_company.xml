@@ -2,55 +2,60 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".tasks.CreateCompanyFragment">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".dialogs.CreateCompanyFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/blue_input"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navigationIcon="@drawable/ic_arrow_back"
-        app:navigationIconTint="@color/blue_light"
-        app:title="@string/creating_company"
-        app:titleCentered="true"
-        app:titleTextColor="@color/blue_light" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/companyNameInput"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="45dp"
-        android:layout_marginTop="13dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etCompanyName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/name_of_company" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/createCompanyBtn"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
-        android:layout_marginBottom="15dp"
-        android:paddingVertical="12dp"
-        android:text="@string/create"
-        android:textColor="@color/blue_input"
-        android:textSize="22sp"
-        app:cornerRadius="7dp"
+        android:orientation="vertical"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/blue_input" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/companyImg"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_delete2"
+            app:civ_border_color="@color/blue_input"
+            app:civ_border_width="1dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/companyNameInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCompanyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name_of_company"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/createCompanyBtn"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="35dp"
+            android:paddingVertical="12dp"
+            android:text="@string/create"
+            android:textColor="@color/blue_input"
+            android:textSize="22sp"
+            app:cornerRadius="7dp"
+            app:strokeColor="@color/blue_input" />
+    </LinearLayout>
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/loader"
@@ -58,8 +63,7 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="2dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

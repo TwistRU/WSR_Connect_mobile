@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_messenger"
+    app:startDestination="@id/messengerFragment">
+
+    <fragment
+        android:id="@+id/messengerFragment"
+        android:name="ru.fefu.wsr_connect_mobile.messenger.MessengerFragment"
+        android:label="fragment_messenger"
+        tools:layout="@layout/fragment_messenger">
+        <action
+            android:id="@+id/action_messengerFragment_to_newChatSearchFragment"
+            app:destination="@id/newChatSearchFragment" />
+        <action
+            android:id="@+id/action_messengerFragment_to_quitChatFragment"
+            app:destination="@id/quitChatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newChatSearchFragment"
+        android:name="ru.fefu.wsr_connect_mobile.messenger.NewChatSearchFragment"
+        android:label="fragment_new_chat_search"
+        tools:layout="@layout/fragment_search_user"/>
+    <dialog
+        android:id="@+id/quitChatFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.QuitChatFragment"
+        android:label="QuitChatFragment" />
+</navigation>

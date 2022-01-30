@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 import ru.fefu.wsr_connect_mobile.App
 import ru.fefu.wsr_connect_mobile.remote.ApiService
 import ru.fefu.wsr_connect_mobile.remote.Result
+import ru.fefu.wsr_connect_mobile.remote.models.User
 
 class SignInViewModel : ViewModel() {
 
@@ -15,12 +16,15 @@ class SignInViewModel : ViewModel() {
     private val _showUsernameError = MutableSharedFlow<String>(replay = 0)
     private val _showPasswordError = MutableSharedFlow<String>(replay = 0)
     private val _showLoading = MutableStateFlow(false)
-    private val _result = MutableStateFlow("")
+    private val _result = MutableSharedFlow<Boolean>(replay = 0)
+    private val _info = MutableSharedFlow<User>(replay = 0)
 
     val showUsernameError get() = _showUsernameError
     val showPasswordError get() = _showPasswordError
     val showLoading get() = _showLoading
     val result get() = _result
+    val info get() = _info
+
 
     fun signInClicked(username: String, password: String) {
         viewModelScope.launch {
@@ -38,7 +42,24 @@ class SignInViewModel : ViewModel() {
                 .collect {
                     when (it) {
                         is Result.Success -> {
+                            _result.emit(true)
                             App.sharedPreferences.edit().putString("token", it.result.token).apply()
+                        }
+                        is Result.Error -> {}
+                    }
+                }
+        }
+    }
+
+    fun getUserInfo() {
+        viewModelScope.launch {
+            apiService.getUserInfo()
+                .onStart { _showLoading.value = true }
+                .onCompletion { _showLoading.value = false }
+                .collect {
+                    when (it) {
+                        is Result.Success -> {
+                            _info.emit(it.result)
                         }
                         is Result.Error -> {}
                     }

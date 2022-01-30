@@ -4,6 +4,49 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.12916666666666668" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/gradient_board_image_shape.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/gradient_user_image.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_card_date.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_creator.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_date.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_done_outline.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_group.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_group_alpha.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_image_not_supported.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_long_text.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_short_text.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_board_users_list.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_change_avatar.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_company_user.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_detail_card.xml" value="0.22" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_in_chat.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_messenger.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_nav_bottom.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_new_chat_search.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_profile.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_search_user.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_send_invitation.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_sign_in.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_sign_up.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_splash.xml" value="0.12" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_tasks_boards_list.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_tasks_columns_list.xml" value="0.25" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_tasks_company_users_list.xml" value="0.129304286718201" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_image_message.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_reply_message.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_reply_message_other.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_simple_message.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_simple_message_other.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_user_search.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_tasks_board.xml" value="0.33" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_tasks_card.xml" value="0.18" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_tasks_column.xml" value="0.22" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_tasks_invitation.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_tasks_user.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/menu/boards_list_menu.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/menu/cards_list_menu.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/menu/columns_list_menu.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/menu/detail_card_menu.xml" value="0.12105263157894737" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/background_start.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/empty_frame.xml" value="0.1319078947368421" />
@@ -22,12 +65,15 @@
         <entry key="app/src/main/res/drawable/reply_message_shape.xml" value="0.1319078947368421" />
         <entry key="app/src/main/res/drawable/settings_background.xml" value="0.1" />
         <entry key="app/src/main/res/font/nunito.xml" value="0.1140625" />
+        <entry key="app/src/main/res/layout/_dep.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.13677536231884058" />
+        <entry key="app/src/main/res/layout/activity_root.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/background_layout.xml" value="0.22" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.13677536231884058" />
         <entry key="app/src/main/res/layout/fragment_change_avatar.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_change_password.xml" value="0.11099726775956284" />
         <entry key="app/src/main/res/layout/fragment_create_board.xml" value="0.12171052631578948" />
+        <entry key="app/src/main/res/layout/fragment_create_card.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/fragment_create_column.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/fragment_create_company.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_delete_board.xml" value="0.12171052631578948" />
@@ -36,12 +82,14 @@
         <entry key="app/src/main/res/layout/fragment_edit_card.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/fragment_edit_column.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.13677536231884058" />
-        <entry key="app/src/main/res/layout/fragment_in_chat.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_in_chat.xml" value="0.31556503198294245" />
         <entry key="app/src/main/res/layout/fragment_invitations.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/fragment_messenger.xml" value="0.16077898550724637" />
         <entry key="app/src/main/res/layout/fragment_nav_bottom.xml" value="0.16077898550724637" />
         <entry key="app/src/main/res/layout/fragment_new_chat_search.xml" value="0.1194078947368421" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.16077898550724637" />
+        <entry key="app/src/main/res/layout/fragment_put_user_info.xml" value="0.12171052631578948" />
+        <entry key="app/src/main/res/layout/fragment_quit_alert.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.13677536231884058" />
         <entry key="app/src/main/res/layout/fragment_send_invitation.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.16077898550724637" />
@@ -60,14 +108,18 @@
         <entry key="app/src/main/res/layout/fragment_users_list.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/item_messenger_chat.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/item_messenger_chat_card.xml" value="0.1194078947368421" />
+        <entry key="app/src/main/res/layout/item_messenger_chats_user.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/item_messenger_image_message.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_messenger_image_message_other.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/item_messenger_new_chat.xml" value="0.1194078947368421" />
         <entry key="app/src/main/res/layout/item_messenger_reply_message.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_messenger_reply_message_other.xml" value="0.12171052631578948" />
+        <entry key="app/src/main/res/layout/item_messenger_search_user.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/item_messenger_simple_message.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_messenger_simple_message_other.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/item_messenger_user_card.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/item_messenger_user_chats.xml" value="0.12171052631578948" />
+        <entry key="app/src/main/res/layout/item_messenger_user_search.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/layout/item_tasks_board.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_tasks_card.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_tasks_column.xml" value="0.12171052631578948" />
@@ -80,6 +132,7 @@
         <entry key="app/src/main/res/menu/in_chat_toolbsr_menu.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/menu/invitation_list_menu.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/menu/main_nav_menu.xml" value="0.11875" />
+        <entry key="app/src/main/res/menu/messages_list_menu.xml" value="0.12171052631578948" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.20416666666666666" />
       </map>
     </option>

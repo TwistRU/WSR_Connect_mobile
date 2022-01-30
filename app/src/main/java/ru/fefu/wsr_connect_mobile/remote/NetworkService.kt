@@ -5,6 +5,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.fefu.wsr_connect_mobile.App
+import ru.fefu.wsr_connect_mobile.BASE_URL
 import ru.fefu.wsr_connect_mobile.remote.interceptors.AuthInterceptor
 import java.util.concurrent.TimeUnit
 
@@ -25,8 +26,7 @@ class NetworkService {
 
     val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://wsr-connect-api.herokuapp.com")
-//            .baseUrl("https://f383-5-143-9-247.ngrok.io")
+            .baseUrl(BASE_URL)
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

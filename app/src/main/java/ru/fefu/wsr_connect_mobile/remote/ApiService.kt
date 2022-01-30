@@ -1,13 +1,12 @@
 package ru.fefu.wsr_connect_mobile.remote
 
-import com.google.gson.annotations.SerializedName
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import ru.fefu.wsr_connect_mobile.remote.models.request.*
-import ru.fefu.wsr_connect_mobile.remote.models.response.*
+import okhttp3.MultipartBody
+import ru.fefu.wsr_connect_mobile.remote.models.*
 
 
 class ApiService {
@@ -15,13 +14,23 @@ class ApiService {
 
     suspend fun registration(
         username: String,
+        firstName: String,
+        lastName: String,
         email: String,
         password: String,
     ): Flow<Result<RegistrationResponseModel>> =
         flow<Result<RegistrationResponseModel>> {
             emit(
                 Result.Success(
-                    api.registration(RegistrationRequestModel(username, email, password))
+                    api.registration(
+                        RegistrationRequestModel(
+                            username,
+                            firstName,
+                            lastName,
+                            email,
+                            password
+                        )
+                    )
                 )
             )
         }
@@ -40,9 +49,32 @@ class ApiService {
             .flowOn(Dispatchers.IO)
 
 
-    suspend fun getUserInfo(): Flow<Result<UserResponseModel>> =
-        flow<Result<UserResponseModel>> {
+    suspend fun logout(): Flow<Result<Unit>> =
+        flow<Result<Unit>> {
+            emit(Result.Success(api.logout()))
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+
+    suspend fun searchUserApp(search: String): Flow<Result<UsersResponseModel>> =
+        flow<Result<UsersResponseModel>> {
+            emit(Result.Success(api.searchUserApp(search)))
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+
+    suspend fun getUserInfo(): Flow<Result<User>> =
+        flow<Result<User>> {
             emit(Result.Success(api.getUserInfo()))
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+    suspend fun getCompanyUserInfo(userId: Int): Flow<Result<User>> =
+        flow<Result<User>> {
+            emit(Result.Success(api.getCompanyUserInfo(userId)))
         }
             .catch { emit(Result.Error(it)) }
             .flowOn(Dispatchers.IO)
@@ -79,8 +111,8 @@ class ApiService {
         flow<Result<Unit>> {
             emit(
                 Result.Success(
-                    api.changePassword(
-                        ChangePasswordRequestModel(
+                    api.changeUserPassword(
+                        ChangeUserPasswordRequestModel(
                             oldPassword, newPassword
                         )
                     )
@@ -91,39 +123,53 @@ class ApiService {
             .flowOn(Dispatchers.IO)
 
 
-    suspend fun changeUserAvatar(
-        avatar: String?,
-    ): Flow<Result<Unit>> =
-        flow<Result<Unit>> {
-            emit(Result.Success(api.changeUserAvatar(ChangeUserAvatarRequestModel(avatar))))
+    suspend fun sendProfileImage(body: MultipartBody.Part): Flow<Result<ImageResponseModel>> =
+        flow<Result<ImageResponseModel>> {
+            emit(Result.Success(api.sendProfileImage(body)))
         }
             .catch { emit(Result.Error(it)) }
             .flowOn(Dispatchers.IO)
 
 
-    suspend fun getChats(): Flow<Result<ChatsResponseModel>> =
+    suspend fun getChats(search: String?): Flow<Result<ChatsResponseModel>> =
         flow<Result<ChatsResponseModel>> {
-            emit(Result.Success(api.getChats()))
+            emit(Result.Success(api.getChats(search)))
         }
             .catch { emit(Result.Error(it)) }
             .flowOn(Dispatchers.IO)
 
 
     suspend fun createCompany(
+        body: MultipartBody.Part?,
         companyName: String
     ): Flow<Result<Unit>> =
         flow<Result<Unit>> {
-            emit(Result.Success(api.createCompany(CreateCompanyRequestModel(companyName))))
+            if (body !== null)
+                emit(Result.Success(api.createCompanyWithImage(body, companyName)))
+            else
+                emit(Result.Success(api.createCompany(companyName)))
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+
+    suspend fun getCompanyInfo(): Flow<Result<CompanyInfoResponseModel>> =
+        flow<Result<CompanyInfoResponseModel>> {
+            emit(Result.Success(api.getCompanyInfo()))
         }
             .catch { emit(Result.Error(it)) }
             .flowOn(Dispatchers.IO)
 
 
     suspend fun createBoard(
+        body: MultipartBody.Part?,
         boardName: String
     ): Flow<Result<Unit>> =
         flow<Result<Unit>> {
-            emit(Result.Success(api.createBoard(CreateBoardRequestModel(boardName))))
+            if (body != null)
+                emit(Result.Success(api.createBoardWithImage(body, boardName)))
+            else
+                emit(Result.Success(api.createBoard(boardName)))
         }
             .catch { emit(Result.Error(it)) }
             .flowOn(Dispatchers.IO)
@@ -162,33 +208,21 @@ class ApiService {
 
 
     suspend fun editColumn(
-        boardId: Int,
         columnId: Int,
-        columnName: String
+        columnTitle: String
     ): Flow<Result<Unit>> =
         flow<Result<Unit>> {
-            emit(
-                Result.Success(
-                    api.editColumn(
-                        EditColumnRequestModel(
-                            boardId,
-                            columnId,
-                            columnName
-                        )
-                    )
-                )
-            )
+            emit(Result.Success(api.editColumn(EditColumnRequestModel(columnId, columnTitle))))
         }
             .catch { emit(Result.Error(it)) }
             .flowOn(Dispatchers.IO)
 
 
     suspend fun deleteColumn(
-        boardId: Int,
         columnId: Int
     ): Flow<Result<Unit>> =
         flow<Result<Unit>> {
-            emit(Result.Success(api.deleteColumn(boardId, columnId)))
+            emit(Result.Success(api.deleteColumn(columnId)))
         }
             .catch { emit(Result.Error(it)) }
             .flowOn(Dispatchers.IO)
@@ -197,7 +231,10 @@ class ApiService {
     suspend fun createCard(
         boardId: Int,
         columnId: Int,
-        cardTitle: String
+        cardTitle: String,
+        cardShortDesc: String,
+        cardLongDesc: String?,
+        deadline: String?
     ): Flow<Result<Unit>> =
         flow<Result<Unit>> {
             emit(
@@ -206,35 +243,44 @@ class ApiService {
                         CreateCardRequestModel(
                             boardId,
                             columnId,
-                            cardTitle
+                            cardTitle,
+                            cardShortDesc,
+                            cardLongDesc,
+                            deadline
                         )
                     )
                 )
             )
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+
+    suspend fun getDetailCard(cardId: Int): Flow<Result<DetailCard>> =
+        flow<Result<DetailCard>> {
+            emit(Result.Success(api.getDetailCard(cardId)))
         }
             .catch { emit(Result.Error(it)) }
             .flowOn(Dispatchers.IO)
 
 
     suspend fun editCard(
-        boardId: Int,
-        columnId: Int,
         cardId: Int,
         cardTitle: String,
+        deadline: String?,
         cardShortDesc: String,
-        cardLongDesc: String,
+        cardLongDesc: String?
     ): Flow<Result<Unit>> =
         flow<Result<Unit>> {
             emit(
                 Result.Success(
                     api.editCard(
                         EditCardRequestModel(
-                            boardId,
-                            columnId,
                             cardId,
                             cardTitle,
+                            deadline,
                             cardShortDesc,
-                            cardLongDesc
+                            cardLongDesc,
                         )
                     )
                 )
@@ -244,13 +290,9 @@ class ApiService {
             .flowOn(Dispatchers.IO)
 
 
-    suspend fun deleteCard(
-        boardId: Int,
-        columnId: Int,
-        cardId: Int
-    ): Flow<Result<Unit>> =
+    suspend fun deleteCard(cardId: Int): Flow<Result<Unit>> =
         flow<Result<Unit>> {
-            emit(Result.Success(api.deleteCard(boardId, columnId, cardId)))
+            emit(Result.Success(api.deleteCard(cardId)))
         }
             .catch { emit(Result.Error(it)) }
             .flowOn(Dispatchers.IO)
@@ -264,9 +306,17 @@ class ApiService {
             .flowOn(Dispatchers.IO)
 
 
-    suspend fun acceptInvitation(companyId: Int): Flow<Result<Unit>> =
+    suspend fun acceptInvitation(inviteId: Int): Flow<Result<Unit>> =
         flow<Result<Unit>> {
-            emit(Result.Success(api.acceptInvitation(AcceptInvitationRequestModel(companyId))))
+            emit(
+                Result.Success(
+                    api.acceptInvitation(
+                        AcceptInvitationRequestModel(
+                            inviteId,
+                        )
+                    )
+                )
+            )
         }
             .catch { emit(Result.Error(it)) }
             .flowOn(Dispatchers.IO)
@@ -288,31 +338,29 @@ class ApiService {
             .flowOn(Dispatchers.IO)
 
 
-    suspend fun getCompanyUsers(
-        context: String,
-        companyId: Int?,
-        boardId: Int?,
-    ): Flow<Result<CompanyUsersResponseModel>> =
-        flow<Result<CompanyUsersResponseModel>> {
-            emit(Result.Success(api.getCompanyUsers(context, companyId, boardId)))
+    suspend fun searchUserCompany(search: String?): Flow<Result<UsersResponseModel>> =
+        flow<Result<UsersResponseModel>> {
+            emit(Result.Success(api.searchUserCompany(search)))
         }
             .catch { emit(Result.Error(it)) }
             .flowOn(Dispatchers.IO)
 
-    suspend fun sendInvite(
-        context: String,
-        boardId: Int?,
-        userNickname: String,
-        inviteText: String
-    ): Flow<Result<Unit>> =
+
+    suspend fun searchUserBoard(boardId: Int, search: String?): Flow<Result<UsersResponseModel>> =
+        flow<Result<UsersResponseModel>> {
+            emit(Result.Success(api.searchUserBoard(boardId, search)))
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+
+    suspend fun sendCompanyInvite(userId: Int, inviteText: String): Flow<Result<Unit>> =
         flow<Result<Unit>> {
             emit(
                 Result.Success(
-                    api.sendInvite(
-                        SendInviteRequestModel(
-                            context,
-                            boardId,
-                            userNickname,
+                    api.sendCompanyInvite(
+                        SendCompanyInviteRequestModel(
+                            userId,
                             inviteText
                         )
                     )
@@ -322,9 +370,128 @@ class ApiService {
             .catch { emit(Result.Error(it)) }
             .flowOn(Dispatchers.IO)
 
-    suspend fun deleteUser(context: String, boardId: Int?, userId: Int): Flow<Result<Unit>> =
+
+    suspend fun deleteUserCompany(userId: Int): Flow<Result<Unit>> =
         flow<Result<Unit>> {
-            emit(Result.Success(api.deleteUser(context, boardId, userId)))
+            emit(Result.Success(api.deleteUserCompany(userId)))
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+
+    suspend fun deleteUserBoard(boardId: Int, userId: Int): Flow<Result<Unit>> =
+        flow<Result<Unit>> {
+            emit(Result.Success(api.deleteUserBoard(boardId, userId)))
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+
+    suspend fun muteChat(chatId: Int, status: Boolean): Flow<Result<Unit>> =
+        flow<Result<Unit>> {
+            emit(Result.Success(api.muteChat(MuteChatRequestModel(chatId, status))))
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+
+    suspend fun pinChat(chatId: Int, status: Boolean): Flow<Result<Unit>> =
+        flow<Result<Unit>> {
+            emit(Result.Success(api.pinChat(PinChatRequestModel(chatId, status))))
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+
+    suspend fun quitChat(chatId: Int): Flow<Result<Unit>> =
+        flow<Result<Unit>> {
+            emit(Result.Success(api.quitChat(chatId)))
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+
+    suspend fun sendMessage(
+        chatId: Int,
+        repliedMessageId: Int?,
+        messageBody: String
+    ): Flow<Result<Unit>> =
+        flow<Result<Unit>> {
+            emit(
+                Result.Success(
+                    api.sendMessage(
+                        MessageRequestModel(
+                            chatId,
+                            null,
+                            repliedMessageId,
+                            messageBody
+                        )
+                    )
+                )
+            )
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+
+    suspend fun editMessage(
+        chatId: Int,
+        messageId: Int,
+        messageBody: String
+    ): Flow<Result<Unit>> =
+        flow<Result<Unit>> {
+            emit(
+                Result.Success(
+                    api.editMessage(
+                        MessageRequestModel(
+                            chatId,
+                            messageId,
+                            null,
+                            messageBody
+                        )
+                    )
+                )
+            )
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+
+    suspend fun deleteMessage(messageId: Int): Flow<Result<Unit>> =
+        flow<Result<Unit>> {
+            emit(Result.Success(api.deleteMessage(messageId)))
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+
+    suspend fun sendImageMessage(body: MultipartBody.Part, chatId: Int): Flow<Result<Unit>> =
+        flow<Result<Unit>> {
+            emit(Result.Success(api.sendImageMessage(body, chatId)))
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+
+    suspend fun getMessages(chatId: Int): Flow<Result<MessagesResponseModel>> =
+        flow<Result<MessagesResponseModel>> {
+            emit(Result.Success(api.getMessages(chatId)))
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+
+    suspend fun getChatInfo(chatId: Int): Flow<Result<ChatInfoResponseModel>> =
+        flow<Result<ChatInfoResponseModel>> {
+            emit(Result.Success(api.getChatInfo(chatId)))
+        }
+            .catch { emit(Result.Error(it)) }
+            .flowOn(Dispatchers.IO)
+
+
+    suspend fun getChatId(userId: Int): Flow<Result<Int>> =
+        flow<Result<Int>> {
+            emit(Result.Success(api.startChat(userId)))
         }
             .catch { emit(Result.Error(it)) }
             .flowOn(Dispatchers.IO)

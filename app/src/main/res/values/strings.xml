@@ -21,6 +21,7 @@
     <string name="profile_avatar">Profile Avatar</string>
     <string name="change_avatar">Change Avatar</string>
     <string name="search_hint">Search for messages and users</string>
+    <string name="new_search_hint">Search for users</string>
     <string name="empty_frame">So lonely and sad&#8230;\n But lets light up\n this place a bit,\n start a new chat\n with your friend!</string>
     <string name="message">Message</string>
     <string name="welcome">Welcome</string>
@@ -46,7 +47,23 @@
     <string name="delete">Delete</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="invite">Invite</string>
-    <string name="user_nickname">User nickname</string>
     <string name="send">Send</string>
     <string name="text_of_invitation">Text of invitation</string>
+    <string name="quit">Quit</string>
+    <string name="ask_for_permission">Please give permission</string>
+    <string name="reply">Reply</string>
+    <string name="copy">Copy</string>
+    <string name="create_card">Create Card</string>
+    <string name="card_title">Card Title</string>
+    <string name="edit_column">Edit Column</string>
+    <string name="delete_column">Delete Column</string>
+    <string name="go">Go</string>
+    <string name="to_write">To write</string>
+    <string name="user_avatar">User Avatar</string>
+    <string name="deadline">Deadline</string>
+    <string name="add_deadline">Add deadline</string>
+    <string name="removeDeadline">Remove deadline</string>
+    <string name="participants">Participants</string>
+    <string name="add">Add</string>
+    <string name="company_users">Company Users</string>
 </resources>

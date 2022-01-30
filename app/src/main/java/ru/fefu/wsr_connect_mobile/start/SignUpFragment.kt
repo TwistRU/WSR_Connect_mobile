@@ -3,14 +3,16 @@ package ru.fefu.wsr_connect_mobile.start
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.onEach
+import ru.fefu.wsr_connect_mobile.App
 import ru.fefu.wsr_connect_mobile.BaseFragment
 import ru.fefu.wsr_connect_mobile.R
 import ru.fefu.wsr_connect_mobile.databinding.FragmentSignUpBinding
-import ru.fefu.wsr_connect_mobile.launchWhenStarted
+import ru.fefu.wsr_connect_mobile.extensions.launchWhenStarted
 import ru.fefu.wsr_connect_mobile.start.view_models.SignUpViewModel
 
 
@@ -20,29 +22,75 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(R.layout.fragment_sig
         ViewModelProvider(this)[SignUpViewModel::class.java]
     }
 
+    private fun offErrors() {
+        binding.apply {
+            usernameInput.isErrorEnabled = false
+            firstNameInput.isErrorEnabled = false
+            lastNameInput.isErrorEnabled = false
+            emailInput.isErrorEnabled = false
+            passwordInput.isErrorEnabled = false
+            passwordInput.isErrorEnabled = false
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //TODO ишабки при изменении поля
 
         viewModel.showLoading
             .onEach { binding.loader.isVisible = it }
             .launchWhenStarted(lifecycleScope)
 
+        viewModel.result
+            .onEach {
+                if (it) {
+                    App.sharedPreferences.edit().putBoolean("have_company", false).apply()
+                    val result = findNavController().popBackStack(R.id.nav_graph_auth, true)
+                    if (result.not())
+                        findNavController().navigate(R.id.navBottomFragment)
+                }
+            }
+            .launchWhenStarted(lifecycleScope)
+
         viewModel.showUsernameError
-            .onEach { binding.etUsername.error = it }
+            .onEach {
+                offErrors()
+                binding.usernameInput.error = it
+            }
+            .launchWhenStarted(lifecycleScope)
+
+        viewModel.showFirstNameError
+            .onEach {
+                offErrors()
+                binding.firstNameInput.error = it
+            }
+            .launchWhenStarted(lifecycleScope)
+
+        viewModel.showLastNameError
+            .onEach {
+                offErrors()
+                binding.lastNameInput.error = it
+            }
             .launchWhenStarted(lifecycleScope)
 
         viewModel.showEmailError
-            .onEach { binding.etEmail.error = it }
+            .onEach {
+                offErrors()
+                binding.emailInput.error = it
+            }
             .launchWhenStarted(lifecycleScope)
 
         viewModel.showPasswordError
-            .onEach { binding.etPassword.error = it }
+            .onEach {
+                offErrors()
+                binding.passwordInput.error = it
+            }
             .launchWhenStarted(lifecycleScope)
 
         viewModel.showPasswordConfirmError
-            .onEach { binding.etPasswordConfirm.error = it }
+            .onEach {
+                offErrors()
+                binding.confirmPasswordInput.error = it
+            }
             .launchWhenStarted(lifecycleScope)
 
         binding.apply {
@@ -52,12 +100,19 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(R.layout.fragment_sig
             signUpBtn.setOnClickListener {
                 viewModel.signUpClicked(
                     etUsername.text.toString(),
+                    etFirstName.text.toString(),
+                    etLastName.text.toString(),
                     etEmail.text.toString(),
                     etPassword.text.toString(),
                     etPasswordConfirm.text.toString()
                 )
-//                findNavController().navigate(R.id.action_signUpFragment_to_navBottomFragment)
             }
+            etUsername.addTextChangedListener { usernameInput.isErrorEnabled = false }
+            etFirstName.addTextChangedListener { firstNameInput.isErrorEnabled = false }
+            etLastName.addTextChangedListener { lastNameInput.isErrorEnabled = false }
+            etEmail.addTextChangedListener { emailInput.isErrorEnabled = false }
+            etPassword.addTextChangedListener { passwordInput.isErrorEnabled = false }
+            etPasswordConfirm.addTextChangedListener { passwordInput.isErrorEnabled = false }
         }
     }
 }

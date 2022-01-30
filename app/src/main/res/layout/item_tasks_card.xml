@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="14dp"
     android:layout_marginTop="12dp"
+    android:layout_marginBottom="12dp"
     android:clipChildren="true"
     app:cardCornerRadius="6dp"
     app:cardElevation="2dp"
@@ -42,6 +43,7 @@
                 android:id="@+id/cardCreator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:drawablePadding="5dp"
                 android:textSize="14sp"
                 app:drawableStartCompat="@drawable/ic_card_creator" />
@@ -53,22 +55,17 @@
                 android:layout_marginStart="8dp"
                 android:drawablePadding="5dp"
                 android:textSize="14sp"
-                app:drawableStartCompat="@drawable/ic_card_create_date" />
+                app:drawableStartCompat="@drawable/ic_card_date"
+                app:drawableTint="@color/blue_input" />
+
+            <TextView
+                android:id="@+id/cardDeadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:drawablePadding="5dp"
+                android:textSize="14sp"
+                app:drawableStartCompat="@drawable/ic_card_date" />
         </LinearLayout>
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/cardLongDescContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:padding="10dp"
-        android:visibility="invisible">
-
-        <TextView
-            android:id="@+id/cardLongDesc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
-    </RelativeLayout>
 </androidx.cardview.widget.CardView>

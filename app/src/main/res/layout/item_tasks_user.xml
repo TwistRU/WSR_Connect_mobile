@@ -17,6 +17,7 @@
         android:padding="8dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userImg"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
@@ -46,15 +47,5 @@
                 android:layout_height="wrap_content"
                 android:textSize="14sp" />
         </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/deleteUserBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:contentDescription="@string/plug"
-            android:src="@drawable/ic_delete2"
-            app:tint="@color/blue_input"
-            android:paddingHorizontal="14dp"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

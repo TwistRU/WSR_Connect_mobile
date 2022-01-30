@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue_light"
     tools:context=".messenger.InChatFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -16,7 +15,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_arrow_back"
         app:navigationIconTint="@color/blue_light"
-        app:title="Chat Name"
         app:titleCentered="true"
         app:titleTextColor="@color/blue_light" />
 
@@ -25,7 +23,6 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/ava_example1"
         app:civ_border_color="@color/blue_light"
         app:civ_border_width="1dp"
         app:layout_constraintBottom_toBottomOf="@id/toolbar"
@@ -38,6 +35,69 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/inputMessageContainer"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/replyMessageContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_mid"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/inputMessageContainer">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="2dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/reply_message_shape" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/replyCreatorName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:textColor="@color/blue_input" />
+
+                <TextView
+                    android:id="@+id/replyMessageBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:maxWidth="300dp"
+                    android:maxLines="1"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/cancelReplyBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/plug"
+            android:paddingHorizontal="14dp"
+            android:src="@drawable/ic_delete2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/blue_input" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/inputMessageContainer"
@@ -55,9 +115,22 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="5dp"
             android:layout_weight="0.1"
-            android:background="@null"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/plug"
             android:src="@drawable/ic_attach" />
+
+        <ImageButton
+            android:id="@+id/cancelEditBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="0.1"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/plug"
+            android:src="@drawable/ic_delete2"
+            android:visibility="gone"
+            app:tint="@color/blue_light" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/inputContainer"
@@ -73,7 +146,8 @@
                 android:layout_marginHorizontal="14dp"
                 android:layout_marginVertical="8dp"
                 android:background="@null"
-                android:hint="@string/message" />
+                android:hint="@string/message"
+                android:maxLines="4" />
         </androidx.cardview.widget.CardView>
 
         <ImageButton
@@ -83,8 +157,30 @@
             android:layout_gravity="bottom"
             android:layout_marginBottom="8dp"
             android:layout_weight="0.1"
-            android:background="@null"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/plug"
             android:src="@drawable/ic_send" />
+
+        <ImageButton
+            android:id="@+id/editBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="0.1"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/plug"
+            android:src="@drawable/ic_edit"
+            android:visibility="gone"
+            app:tint="@color/blue_light" />
     </LinearLayout>
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/loader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/inputMessageContainer" />
 </androidx.constraintlayout.widget.ConstraintLayout>

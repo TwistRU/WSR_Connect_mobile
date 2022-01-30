@@ -11,4 +11,13 @@
         <item name="dialogCornerRadius">10dp</item>
         <item name="android:backgroundTint">@color/blue_light</item>
     </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorPrimary">@color/blue_input</item>
+        <item name="colorOnPrimary">@color/blue_light</item>
+    </style>
 </resources>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_tasks"
+    app:startDestination="@id/tasksEmptyFragment">
+
+    <fragment
+        android:id="@+id/companyFragment"
+        android:name="ru.fefu.wsr_connect_mobile.tasks.CompanyFragment"
+        android:label="fragment_tasks_boards_"
+        tools:layout="@layout/fragment_company">
+        <action
+            android:id="@+id/action_companyFragment_to_boardFragment"
+            app:destination="@id/boardFragment" />
+        <action
+            android:id="@+id/action_companyFragment_to_createBoardFragment"
+            app:destination="@id/createBoardFragment" />
+        <action
+            android:id="@+id/action_companyFragment_to_editBoardFragment"
+            app:destination="@id/editBoardFragment" />
+        <action
+            android:id="@+id/action_companyFragment_to_deleteBoardFragment"
+            app:destination="@id/deleteBoardFragment" />
+        <action
+            android:id="@+id/action_companyFragment_to_companyUsersFragment"
+            app:destination="@id/companyUsersFragment" />
+        <action
+            android:id="@+id/action_companyFragment_to_companyUserFragment"
+            app:destination="@id/companyUserFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/boardFragment"
+        android:name="ru.fefu.wsr_connect_mobile.tasks.BoardFragment"
+        android:label="fragment_tasks_columns_"
+        tools:layout="@layout/fragment_board">
+        <action
+            android:id="@+id/action_boardFragment_to_createColumnFragment"
+            app:destination="@id/createColumnFragment" />
+        <action
+            android:id="@+id/action_boardFragment_to_deleteColumnFragment"
+            app:destination="@id/deleteColumnFragment" />
+        <action
+            android:id="@+id/action_boardFragment_to_editColumnFragment"
+            app:destination="@id/editColumnFragment" />
+        <action
+            android:id="@+id/action_boardFragment_to_createCardFragment"
+            app:destination="@id/createCardFragment" />
+        <action
+            android:id="@+id/action_boardFragment_to_companyUserFragment"
+            app:destination="@id/companyUserFragment" />
+        <action
+            android:id="@+id/action_boardFragment_to_boardUsersFragment"
+            app:destination="@id/boardUsersFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/createBoardFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.createBoardFragment"
+        android:label="fragment_create_board"
+        tools:layout="@layout/fragment_create_board" />
+    <dialog
+        android:id="@+id/createColumnFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.CreateColumnFragment"
+        android:label="fragment_create_column"
+        tools:layout="@layout/fragment_create_column" />
+    <dialog
+        android:id="@+id/editBoardFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.editBoardFragment"
+        android:label="fragment_edit_board"
+        tools:layout="@layout/fragment_edit_board" />
+    <dialog
+        android:id="@+id/deleteColumnFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.DeleteColumnFragment"
+        android:label="fragment_delete_column"
+        tools:layout="@layout/fragment_delete_alert" />
+    <dialog
+        android:id="@+id/editColumnFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.EditColumnFragment"
+        android:label="fragment_edit_column"
+        tools:layout="@layout/fragment_edit_column" />
+    <dialog
+        android:id="@+id/deleteBoardFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.deleteBoardFragment"
+        android:label="deleteBoardFragment" />
+    <fragment
+        android:id="@+id/companyUsersFragment"
+        android:name="ru.fefu.wsr_connect_mobile.tasks.CompanyUsersFragment"
+        android:label="CompanyUsersFragment">
+        <action
+            android:id="@+id/action_companyUsersFragment_to_deleteUserFragment"
+            app:destination="@id/deleteUserFragment" />
+        <action
+            android:id="@+id/action_companyUsersFragment_to_searchUserAppFragment"
+            app:destination="@id/searchUserAppFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/sendInvitationFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.SendInvitationFragment"
+        android:label="SendInvitationFragment"/>
+    <dialog
+        android:id="@+id/deleteUserFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.DeleteUserFragment"
+        android:label="DeleteUserFragment" />
+    <dialog
+        android:id="@+id/createCardFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.CreateCardFragment"
+        android:label="fragment_create_card"
+        tools:layout="@layout/fragment_create_card" />
+    <fragment
+        android:id="@+id/tasksEmptyFragment"
+        android:name="ru.fefu.wsr_connect_mobile.tasks.EmptyFragment"
+        android:label="TasksEmptyFragment" >
+        <action
+            android:id="@+id/action_tasksEmptyFragment_to_invitationsFragment"
+            app:destination="@id/invitationsFragment" />
+        <action
+            android:id="@+id/action_tasksEmptyFragment_to_companyFragment"
+            app:destination="@id/companyFragment"
+            app:popUpTo="@id/nav_graph_tasks"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_tasksEmptyFragment_to_createCompanyFragment"
+            app:destination="@id/createCompanyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/invitationsFragment"
+        android:name="ru.fefu.wsr_connect_mobile.tasks.InvitationsFragment"
+        android:label="fragment_invitations"
+        tools:layout="@layout/fragment_invitations" >
+        <action
+            android:id="@+id/action_invitationsFragment_to_companyFragment"
+            app:destination="@id/companyFragment"
+            app:popUpTo="@id/nav_graph_tasks"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <dialog
+        android:id="@+id/createCompanyFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.createCompanyFragment"
+        android:label="fragment_create_company"
+        tools:layout="@layout/fragment_create_company" >
+        <action
+            android:id="@+id/action_createCompanyFragment_to_companyFragment"
+            app:destination="@id/companyFragment"
+            app:popUpTo="@id/nav_graph_tasks"
+            app:popUpToInclusive="true" />
+    </dialog>
+    <dialog
+        android:id="@+id/companyUserFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.CompanyUserFragment"
+        android:label="fragment_company_user"
+        tools:layout="@layout/fragment_company_user" />
+    <fragment
+        android:id="@+id/searchUserAppFragment"
+        android:name="ru.fefu.wsr_connect_mobile.tasks.SearchUserAppFragment"
+        android:label="SearchUserAppFragment" >
+        <action
+            android:id="@+id/action_searchUserAppFragment_to_sendInvitationFragment"
+            app:destination="@id/sendInvitationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/boardUsersFragment"
+        android:name="ru.fefu.wsr_connect_mobile.tasks.BoardUsersFragment"
+        android:label="BoardUsersFragment" >
+        <action
+            android:id="@+id/action_boardUsersFragment_to_searchUserCompanyFragment"
+            app:destination="@id/searchUserCompanyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchUserCompanyFragment"
+        android:name="ru.fefu.wsr_connect_mobile.tasks.SearchUserCompanyFragment"
+        android:label="SearchUserCompanyFragment" />
+</navigation>
