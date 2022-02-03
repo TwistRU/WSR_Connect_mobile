@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import ru.fefu.wsr_connect_mobile.BASE_URL
+import ru.fefu.wsr_connect_mobile.common.BASE_URL
 import ru.fefu.wsr_connect_mobile.R
 import ru.fefu.wsr_connect_mobile.databinding.*
 import ru.fefu.wsr_connect_mobile.remote.models.Invitation
@@ -50,7 +50,7 @@ class InvitationListAdapter : ListAdapter<Invitation, RecyclerView.ViewHolder>(I
 
                 val url = "$BASE_URL${item.imgUrl}"
                 val imgView = binding.companyImg
-                Glide.with(itemView).load(url).error(R.drawable.ic_delete2).into(imgView)
+                Glide.with(itemView).load(url).error(R.drawable.ic_no_image).into(imgView)
             }
         }
     }

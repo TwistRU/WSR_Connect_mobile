@@ -11,7 +11,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import ru.fefu.wsr_connect_mobile.remote.ApiService
 import ru.fefu.wsr_connect_mobile.remote.Result
 import ru.fefu.wsr_connect_mobile.remote.models.ChatInfoResponseModel
-import ru.fefu.wsr_connect_mobile.remote.models.MessagesResponseModel
+import ru.fefu.wsr_connect_mobile.remote.models.Message
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -20,12 +20,14 @@ class InChatViewModel : ViewModel() {
     private val apiService = ApiService()
 
     private val _showLoading = MutableStateFlow(false)
-    private val _messages = MutableSharedFlow<MessagesResponseModel>(replay = 0)
+    private val _messages = MutableSharedFlow<List<Message>>(replay = 0)
     private val _chatInfo = MutableSharedFlow<ChatInfoResponseModel>(replay = 0)
-    private val _success = MutableStateFlow(false)
+    private val _successSend = MutableSharedFlow<Boolean>(replay = 0)
+    private val _successEdit = MutableSharedFlow<Boolean>(replay = 0)
 
     val showLoading get() = _showLoading
-    val success get() = _success
+    val successSend get() = _successSend
+    val successEdit get() = _successEdit
     val messages get() = _messages
     val chatInfo get() = _chatInfo
 
@@ -38,10 +40,10 @@ class InChatViewModel : ViewModel() {
                 .collect {
                     when (it) {
                         is Result.Success -> {
-                            _success.emit(true)
+                            _successSend.emit(true)
                         }
                         is Result.Error -> {
-                            _success.emit(false)
+                            _successSend.emit(false)
                         }
                     }
                 }
@@ -57,10 +59,10 @@ class InChatViewModel : ViewModel() {
                 .collect {
                     when (it) {
                         is Result.Success -> {
-                            _success.emit(true)
+                            _successSend.emit(true)
                         }
                         is Result.Error -> {
-                            _success.emit(false)
+                            _successSend.emit(false)
                         }
                     }
                 }
@@ -76,10 +78,10 @@ class InChatViewModel : ViewModel() {
                 .collect {
                     when (it) {
                         is Result.Success -> {
-                            _success.emit(true)
+                            _successEdit.emit(true)
                         }
                         is Result.Error -> {
-                            _success.emit(false)
+                            _successEdit.emit(false)
                         }
                     }
                 }
@@ -101,10 +103,10 @@ class InChatViewModel : ViewModel() {
                 .collect {
                     when (it) {
                         is Result.Success -> {
-                            _success.emit(true)
+                            _successSend.emit(true)
                         }
                         is Result.Error -> {
-                            _success.emit(false)
+                            _successSend.emit(false)
                         }
                     }
                 }
@@ -120,7 +122,7 @@ class InChatViewModel : ViewModel() {
                 .collect {
                     when (it) {
                         is Result.Success -> {
-                            _messages.emit(it.result)
+                            _messages.emit(it.result.messages)
                         }
                         is Result.Error -> {}
                     }

@@ -1,11 +1,17 @@
 package ru.fefu.wsr_connect_mobile.dialogs.view_models
 
+import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import ru.fefu.wsr_connect_mobile.remote.ApiService
 import ru.fefu.wsr_connect_mobile.remote.Result
+import java.io.ByteArrayOutputStream
+import java.util.*
 
 class EditBoardViewModel : ViewModel() {
 
@@ -19,13 +25,24 @@ class EditBoardViewModel : ViewModel() {
     val showLoading get() = _showLoading
     val success get() = _success
 
-    fun editBoard(boardId: Int, boardName: String) {
+    fun editBoard(image: Bitmap?,boardId: Int, boardName: String, deleteImg: Boolean?) {
+        var body: MultipartBody.Part? = null
+        if (image != null) {
+            val stream = ByteArrayOutputStream()
+            image.compress(Bitmap.CompressFormat.JPEG, 80, stream)
+            val byteArray = stream.toByteArray()
+            body = MultipartBody.Part.createFormData(
+                "file", "${Calendar.getInstance().time}",
+                byteArray.toRequestBody("image/*".toMediaTypeOrNull(), 0, byteArray.size)
+            )
+        }
+
         viewModelScope.launch {
             if (boardName.isBlank()) {
                 _showFieldError.emit("field is blank")
                 return@launch
             }
-            apiService.editBoard(boardId, boardName)
+            apiService.editBoard(body, boardId, boardName, deleteImg)
                 .onStart { _showLoading.value = true }
                 .onCompletion { _showLoading.value = false }
                 .collect {

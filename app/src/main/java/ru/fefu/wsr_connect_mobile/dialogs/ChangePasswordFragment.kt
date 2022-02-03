@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -46,7 +48,12 @@ class ChangePasswordFragment : DialogFragment(R.layout.fragment_change_password)
             .launchWhenStarted(lifecycleScope)
 
         viewModel.success
-            .onEach { if (it) findNavController().popBackStack() }
+            .onEach {
+                if (it) {
+                    setFragmentResult("resultDialog", bundleOf("successfulDialog" to true))
+                    findNavController().popBackStack()
+                }
+            }
             .launchWhenStarted(lifecycleScope)
 
         binding.apply {

@@ -8,7 +8,7 @@ import ru.fefu.wsr_connect_mobile.remote.models.*
 interface Api {
 
 
-    //////////////////////////////////__AUTH__////////////////////////////////////////////
+    ////////////////////////////////////////__AUTH__///////////////////////////////////////////////
 
 
     @POST("/auth/registration")
@@ -21,28 +21,31 @@ interface Api {
     suspend fun logout()
 
 
-    //////////////////////////////////__USER__////////////////////////////////////////////
+    //////////////////////////////////////__PROFILE__//////////////////////////////////////////////
 
 
-    @GET("/user/info")
-    suspend fun getUserInfo(): User
+    @GET("/profile/info")
+    suspend fun getProfileInfo(): User
 
-    @PUT("/user/info")
-    suspend fun changeUserInfo(@Body request: ChangeUserInfoRequestModel)
+    @PUT("/profile/info")
+    suspend fun changeProfileInfo(@Body request: ChangeProfileInfoRequestModel)
 
-    @PUT("/user/password")
-    suspend fun changeUserPassword(@Body request: ChangeUserPasswordRequestModel)
+    @PUT("/profile/password")
+    suspend fun changePassword(@Body request: ChangePasswordRequestModel)
 
-    @PUT("/user/info/image")
+    @PUT("/profile/info/image")
     @Multipart
     suspend fun sendProfileImage(@Part body: MultipartBody.Part): ImageResponseModel
 
+    @DELETE("/profile/info/image")
+    suspend fun deleteProfileImage()
 
-    //////////////////////////////////__TASKS__COMPANY__////////////////////////////////////////////
+
+    //////////////////////////////////__TASKS__COMPANY__///////////////////////////////////////////
 
 
     @GET("/users")
-    suspend fun searchUserApp(@Query("search") search: String) : UsersResponseModel
+    suspend fun searchUserApp(@Query("search") search: String): UsersResponseModel
 
     @GET("/company")
     suspend fun getCompanyInfo(): CompanyInfoResponseModel
@@ -58,17 +61,20 @@ interface Api {
     )
 
     @PUT("/company")
-    suspend fun editCompanyInfo(@Query("company_name") companyName: String)
+    suspend fun editCompany(
+        @Query("company_name") companyName: String,
+        @Query("delete_img") deleteImg: Boolean?
+    )
 
     @Multipart
     @PUT("/company")
-    suspend fun editCompanyInfoWithImage(
+    suspend fun editCompanyWithImage(
         @Part body: MultipartBody.Part,
         @Query("company_name") companyName: String
     )
 
     @GET("/company/users")
-    suspend fun searchUserCompany(@Query("search") search: String?) : UsersResponseModel
+    suspend fun searchUserCompany(@Query("search") search: String?): UsersResponseModel
 
     @DELETE("/company/users")
     suspend fun deleteUserCompany(@Query("user_id") userId: Int)
@@ -76,11 +82,20 @@ interface Api {
     @POST("/company/users/invite")
     suspend fun sendCompanyInvite(@Body request: SendCompanyInviteRequestModel)
 
+    @GET("/invitations")
+    suspend fun getInvitations(): InvitationsResponseModel
+
+    @PUT("/invitations")
+    suspend fun acceptInvitation(@Body request: AcceptInvitationRequestModel)
+
     @GET("/company/user")
     suspend fun getCompanyUserInfo(@Query("user_id") userId: Int): User
 
+    @DELETE("/company/users/quit")
+    suspend fun quitCompany()
 
-    //////////////////////////////////__TASKS__BOARD__////////////////////////////////////////////
+
+    //////////////////////////////////__TASKS__BOARD__/////////////////////////////////////////////
 
 
     @GET("/company/board")
@@ -91,22 +106,49 @@ interface Api {
 
     @Multipart
     @POST("/company/board")
-    suspend fun createBoardWithImage(@Part body: MultipartBody.Part, @Query("board_name") boardName: String)
+    suspend fun createBoardWithImage(
+        @Part body: MultipartBody.Part,
+        @Query("board_name") boardName: String
+    )
 
     @PUT("/company/board")
-    suspend fun editBoard(@Body request: EditBoardRequestModel)
+    suspend fun editBoard(
+        @Query("board_id") boardId: Int,
+        @Query("board_name") boardName: String,
+        @Query("delete_img") deleteImg: Boolean?
+    )
+
+    @Multipart
+    @PUT("/company/board")
+    suspend fun editBoardWithImage(
+        @Part body: MultipartBody.Part,
+        @Query("board_id") boardId: Int,
+        @Query("board_name") boardName: String
+    )
 
     @DELETE("/company/board")
     suspend fun deleteBoard(@Query("board_id") boardId: Int)
 
     @GET("/company/board/users")
-    suspend fun searchUserBoard(@Query("board_id") boardId: Int, @Query("search") search: String?): UsersResponseModel
+    suspend fun searchUserBoard(
+        @Query("board_id") boardId: Int,
+        @Query("search") search: String?
+    ): UsersResponseModel
 
     @POST("/company/board/users")
-    suspend fun addUserBoard(@Query("board_id") boardId: Int, @Query("user_id") userId: Int)
+    suspend fun addUsersToBoard(
+        @Body request: MultipleAddUsersRequestModel,
+        @Query("board_id") boardId: Int
+    )
 
     @DELETE("/company/board/users")
-    suspend fun deleteUserBoard(@Query("board_id") boardId: Int, @Query("user_id") userId: Int)
+    suspend fun deleteUserFromBoard(
+        @Query("board_id") boardId: Int,
+        @Query("user_id") userId: Int
+    )
+
+    @DELETE("/company/board/users/quit")
+    suspend fun quitBoard(@Query("board_id") boardId: Int)
 
 
     //////////////////////////////////__TASKS__COLUMN__////////////////////////////////////////////
@@ -125,11 +167,8 @@ interface Api {
     suspend fun deleteColumn(@Query("column_id") columnId: Int)
 
 
-    //////////////////////////////////__TASKS__CARD__////////////////////////////////////////////
+    //////////////////////////////////__TASKS__CARD__//////////////////////////////////////////////
 
-
-    @GET("/company/board/column/card/detail")
-    suspend fun getDetailCard(@Query("card_id") cardId: Int): DetailCard
 
     @POST("/company/board/column/card")
     suspend fun createCard(@Body request: CreateCardRequestModel)
@@ -140,50 +179,89 @@ interface Api {
     @DELETE("/company/board/column/card")
     suspend fun deleteCard(@Query("card_id") cardId: Int)
 
+    @GET("/company/board/column/card/detail")
+    suspend fun getDetailCard(@Query("card_id") cardId: Int): DetailCard
+
     @POST("/company/board/column/card/users")
-    suspend fun addUserCard(@Query("card_id") cardId: Int, @Query("user_id") userId: Int)
+    suspend fun addUsersToCard(
+        @Body request: MultipleAddUsersRequestModel,
+        @Query("card_id") cardId: Int
+    )
 
     @DELETE("/company/board/column/card/users")
-    suspend fun deleteUserCard(@Query("card_id") cardId: Int, @Query("user_id") userId: Int)
+    suspend fun deleteUserFromCard(
+        @Query("card_id") cardId: Int,
+        @Query("user_id") userId: Int
+    )
+
+    @DELETE("/company/board/column/card/users/quit")
+    suspend fun quitCard(@Query("card_id") cardId: Int)
 
 
-    @GET("/invitations")
-    suspend fun getInvitations(): InvitationsResponseModel
-
-    @PUT("/invitations")
-    suspend fun acceptInvitation(@Body request: AcceptInvitationRequestModel)
-
-
-    //////////////////////////////////__CHATS__////////////////////////////////////////////
+    //////////////////////////////////////__CHATS__////////////////////////////////////////////////
 
 
     @GET("/chats")
     suspend fun getChats(@Query("search") search: String?): ChatsResponseModel
 
     @GET("/chat/new")
-    suspend fun startChat(@Query("user_id") userId: Int): Int
+    suspend fun startPrivateChat(@Query("user_id") userId: Int): Int
+
+    @POST("/chat/group")
+    suspend fun createGroupChat(@Query("chat_name") chatName: String)
+
+    @Multipart
+    @POST("/chat/group")
+    suspend fun createGroupChatWithImage(
+        @Part body: MultipartBody.Part,
+        @Query("chat_name") chatName: String,
+    )
+
+    @PUT("/chat/group")
+    suspend fun editGroupChat(
+        @Query("chat_id") chatId: Int,
+        @Query("chat_name") chatName: String,
+        @Query("delete_img") deleteImg: Boolean?
+    )
+
+    @Multipart
+    @PUT("/chat/group")
+    suspend fun editGroupChatWithImage(
+        @Part body: MultipartBody.Part,
+        @Query("chat_id") chatId: Int,
+        @Query("chat_name") chatName: String,
+    )
+
+    @DELETE("/chat/group")
+    suspend fun deleteGroupChat(@Query("chat_id") chatId: Int)
+
+    @POST("/chat/group/users")
+    suspend fun addUsersToGroupChat(
+        @Body request: MultipleAddUsersRequestModel,
+        @Query("chat_id") chatId: Int
+    )
+
+    @DELETE("/chat/group/users")
+    suspend fun deleteUserFromGroupChat(
+        @Query("chat_id") chatId: Int,
+        @Query("user_id") userId: Int
+    )
 
     @PUT("/chat/mute")
-    suspend fun muteChat(@Body request: MuteChatRequestModel)
+    suspend fun muteChat(@Body request: StatusChatRequestModel)
 
     @PUT("/chat/pin")
-    suspend fun pinChat(@Body request: PinChatRequestModel)
+    suspend fun pinChat(@Body request: StatusChatRequestModel)
 
     @DELETE("/chat/quit")
     suspend fun quitChat(@Query("chat_id") chatId: Int)
 
 
-    //////////////////////////////////__IN_CHAT__////////////////////////////////////////////
+    /////////////////////////////////////__IN_CHAT__///////////////////////////////////////////////
 
 
     @GET("/chat/info")
     suspend fun getChatInfo(@Query("chat_id") chatId: Int): ChatInfoResponseModel
-
-    @POST("/chat/users")
-    suspend fun addUserChat(@Query("chat_id") chatId: Int, @Query("user_id") userId: Int)
-
-    @DELETE("/chat/users")
-    suspend fun deleteUserChat(@Query("chat_id") chatId: Int, @Query("user_id") userId: Int)
 
     @GET("/chat/messages")
     suspend fun getMessages(@Query("chat_id") chatId: Int): MessagesResponseModel
@@ -193,7 +271,10 @@ interface Api {
 
     @POST("/chat/message/image")
     @Multipart
-    suspend fun sendImageMessage(@Part body: MultipartBody.Part, @Query("chat_id") chatId: Int)
+    suspend fun sendImageMessage(
+        @Part body: MultipartBody.Part,
+        @Query("chat_id") chatId: Int
+    )
 
     @PUT("/chat/message")
     suspend fun editMessage(@Body request: MessageRequestModel)

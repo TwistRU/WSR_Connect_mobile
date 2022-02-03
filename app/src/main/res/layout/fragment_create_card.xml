@@ -64,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
-            app:endIconDrawable="@drawable/ic_delete2"
+            app:endIconDrawable="@drawable/ic_close"
             app:endIconMode="custom"
             app:endIconTint="@color/blue_input">
 

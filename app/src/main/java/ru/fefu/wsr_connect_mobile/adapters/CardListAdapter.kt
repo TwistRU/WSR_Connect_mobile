@@ -40,11 +40,24 @@ class CardListAdapter(
         fun bind(item: Card) {
             binding.apply {
                 cardTitle.text = item.cardTitle
-                cardCreator.text = item.cardCreator
+
+                cardCreator.text = if (item.cardCreator.length > 5) {
+                    item.cardCreator.substring(0, 4) + "..."
+                } else {
+                    item.cardCreator
+                }
+
                 cardCreateDate.text = item.createDate.toDate().formatTo("dd MMM yyyy")
                 cardShortDesc.text = item.cardShortDesc
-                cardDeadline.text =
-                    item.deadline?.let { s: String -> s.toDate().formatTo("dd MMM yyyy") }
+
+                if (!item.available) {
+                    boardLockContainer.visibility = View.VISIBLE
+                    cardShortDesc.text = ""
+                }
+
+                if (item.deadline != null) {
+                    cardDeadline.text = item.deadline!!.toDate().formatTo("dd MMM yyyy")
+                } else cardDeadline.visibility = View.GONE
             }
         }
     }

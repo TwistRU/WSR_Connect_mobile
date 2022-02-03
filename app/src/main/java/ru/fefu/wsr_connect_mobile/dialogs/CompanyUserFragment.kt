@@ -2,6 +2,7 @@ package ru.fefu.wsr_connect_mobile.dialogs
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
@@ -9,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.flow.onEach
-import ru.fefu.wsr_connect_mobile.BASE_URL
+import ru.fefu.wsr_connect_mobile.common.BASE_URL
 import ru.fefu.wsr_connect_mobile.R
 import ru.fefu.wsr_connect_mobile.databinding.FragmentCompanyUserBinding
 import ru.fefu.wsr_connect_mobile.extensions.launchWhenStarted
@@ -47,7 +48,7 @@ class CompanyUserFragment : DialogFragment(R.layout.fragment_company_user) {
 
                     val url = "$BASE_URL${it.imgUrl}"
                     val imgView = binding.userImg
-                    Glide.with(requireContext()).load(url).error(R.drawable.ic_delete2)
+                    Glide.with(requireContext()).load(url).error(R.drawable.ic_profile)
                         .into(imgView)
                 }
             }
@@ -55,15 +56,16 @@ class CompanyUserFragment : DialogFragment(R.layout.fragment_company_user) {
 
         viewModel.chat
             .onEach {
-                val bundle = Bundle()
-                bundle.putInt("chat_id", it)
                 Navigation.findNavController(requireActivity(), R.id.rootActivityContainer)
-                    .navigate(R.id.action_navBottomFragment_to_nav_graph_in_chat, bundle)
+                    .navigate(
+                        R.id.action_navBottomFragment_to_nav_graph_in_chat,
+                        bundleOf("chat_id" to it)
+                    )
             }
             .launchWhenStarted(lifecycleScope)
 
         viewModel.getCompanyUserInfo(userId)
 
-        binding.toWriteBtn.setOnClickListener { viewModel.startChat(userId)}
+        binding.messageBtn.setOnClickListener { viewModel.startPrivateChat(userId) }
     }
 }

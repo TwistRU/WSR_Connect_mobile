@@ -44,16 +44,27 @@ class ColumnListAdapter(
             binding.apply {
                 columnTitle.text = item.columnTitle
 
-                columnActionsBtn.setOnClickListener {
-                    columnActionsMenuClickListener.onOptionsMenuClicked(
-                        item.columnId, item.columnTitle, it)
-
+                if (item.mine) {
+                    columnActionsBtn.visibility = View.VISIBLE
+                    columnActionsBtn.setOnClickListener {
+                        columnActionsMenuClickListener.onOptionsMenuClicked(
+                            item.columnId, item.columnTitle, it
+                        )
+                    }
                 }
 
-                val adapter = CardListAdapter(clickListenerCardCreator,clickListenerCardDetail)
+                val adapter = CardListAdapter(clickListenerCardCreator, clickListenerCardDetail)
                 recycler.layoutManager = LinearLayoutManager(itemView.context)
                 recycler.adapter = adapter
                 adapter.submitList(item.cards)
+
+                if (item.cards.count() > 1) {
+                    recycler.setPadding(0, 30, 0, 30)
+                }
+
+                if (item.cards.count() > 4) {
+                    recycler.setPadding(0, 30, 0, 140)
+                }
             }
         }
     }

@@ -3,15 +3,16 @@ package ru.fefu.wsr_connect_mobile.messenger
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.flow.onEach
-import ru.fefu.wsr_connect_mobile.BaseFragment
 import ru.fefu.wsr_connect_mobile.R
 import ru.fefu.wsr_connect_mobile.adapters.UsersListAdapter
+import ru.fefu.wsr_connect_mobile.common.BaseFragment
 import ru.fefu.wsr_connect_mobile.databinding.FragmentSearchUserBinding
 import ru.fefu.wsr_connect_mobile.extensions.launchWhenStarted
 import ru.fefu.wsr_connect_mobile.messenger.view_models.NewChatSearchViewModel
@@ -29,11 +30,18 @@ class NewChatSearchFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = UsersListAdapter { viewModel.getChatId(it.userId) }
+        adapter = UsersListAdapter {
+            findNavController().navigate(
+                R.id.action_newChatSearchFragment_to_companyUserFragment3,
+                bundleOf("user_id" to it.userId)
+            )
+        }
 
         binding.apply {
             recycler.layoutManager = LinearLayoutManager(requireActivity())
             recycler.adapter = adapter
+
+            binding.searchUserView.queryHint = getString(R.string.search_for_company_users)
 
             searchUserView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
                 androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -43,8 +51,7 @@ class NewChatSearchFragment :
                 }
 
                 override fun onQueryTextChange(newText: String): Boolean {
-//                    if (newText.isNotEmpty()) viewModel.getUsers(newText)
-//                    else adapter.submitList(emptyList())
+                    if (newText.isEmpty()) viewModel.searchUserCompany(null)
                     return false
                 }
             })
@@ -54,17 +61,10 @@ class NewChatSearchFragment :
             .onEach { binding.loader.isVisible = it }
             .launchWhenStarted(lifecycleScope)
 
-        viewModel.chatId
-            .onEach {
-                val bundle = Bundle()
-                bundle.putInt("chat_id", it)
-                Navigation.findNavController(requireActivity(), R.id.rootActivityContainer)
-                    .navigate(R.id.action_navBottomFragment_to_nav_graph_in_chat, bundle)
-            }
-            .launchWhenStarted(lifecycleScope)
-
         viewModel.users
             .onEach { adapter.submitList(it) }
             .launchWhenStarted(lifecycleScope)
+
+        viewModel.searchUserCompany(null)
     }
 }

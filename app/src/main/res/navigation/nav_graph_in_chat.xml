@@ -13,9 +13,46 @@
         <action
             android:id="@+id/action_inChatFragment_to_deleteMessageFragment"
             app:destination="@id/deleteMessageFragment" />
+        <action
+            android:id="@+id/action_inChatFragment_to_chatUsersFragment"
+            app:destination="@id/chatUsersFragment" />
     </fragment>
     <dialog
         android:id="@+id/deleteMessageFragment"
         android:name="ru.fefu.wsr_connect_mobile.dialogs.DeleteMessageFragment"
         android:label="DeleteMessageFragment" />
+    <fragment
+        android:id="@+id/chatUsersFragment"
+        android:name="ru.fefu.wsr_connect_mobile.messenger.ChatUsersFragment"
+        android:label="ChatUsersFragment" >
+        <action
+            android:id="@+id/action_chatUsersFragment_to_deleteUserChatFragment"
+            app:destination="@id/deleteUserChatFragment" />
+        <action
+            android:id="@+id/action_chatUsersFragment_to_companyUserFragment4"
+            app:destination="@id/companyUserFragment4" />
+        <action
+            android:id="@+id/action_chatUsersFragment_to_searchUserForGroupChatFragment"
+            app:destination="@id/searchUserForGroupChatFragment" />
+        <action
+            android:id="@+id/action_chatUsersFragment_to_quitChatFragment2"
+            app:destination="@id/quitChatFragment2" />
+    </fragment>
+    <dialog
+        android:id="@+id/deleteUserChatFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.DeleteUserChatFragment"
+        android:label="DeleteUserChatFragment" />
+    <dialog
+        android:id="@+id/companyUserFragment4"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.CompanyUserFragment"
+        android:label="fragment_company_user"
+        tools:layout="@layout/fragment_company_user" />
+    <fragment
+        android:id="@+id/searchUserForGroupChatFragment"
+        android:name="ru.fefu.wsr_connect_mobile.tasks.SearchUserForGroupChatFragment"
+        android:label="SearchUserForGroupChatFragment" />
+    <dialog
+        android:id="@+id/quitChatFragment2"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.QuitChatFragment"
+        android:label="QuitChatFragment" />
 </navigation>

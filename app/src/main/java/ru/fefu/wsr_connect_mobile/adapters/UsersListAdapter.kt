@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import ru.fefu.wsr_connect_mobile.BASE_URL
+import ru.fefu.wsr_connect_mobile.common.BASE_URL
 import ru.fefu.wsr_connect_mobile.R
 import ru.fefu.wsr_connect_mobile.databinding.ItemTasksUserBinding
 import ru.fefu.wsr_connect_mobile.remote.models.User
@@ -32,12 +32,13 @@ class UsersListAdapter(
 
         fun bind(item: User) {
             binding.apply {
-                val name = "${item.firstName} ${item.lastName}"
-                userFirstAndLastName.text = name
-                userEmail.text = item.email
+                val initials = "${item.firstName} ${item.lastName}"
+                val contacts = "${item.email} @${item.username}"
+                userFirstAndLastName.text = initials
+                userEmailAndUsername.text = contacts
                 val url = "$BASE_URL${item.imgUrl}"
                 val imgView = binding.userImg
-                Glide.with(itemView).load(url).error(R.drawable.ic_image_not_supported).into(imgView)
+                Glide.with(itemView).load(url).error(R.drawable.ic_profile).into(imgView)
             }
         }
     }

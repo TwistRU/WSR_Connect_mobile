@@ -7,11 +7,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import kotlinx.coroutines.flow.onEach
-import ru.fefu.wsr_connect_mobile.App
-import ru.fefu.wsr_connect_mobile.BaseFragment
+import ru.fefu.wsr_connect_mobile.common.App
+import ru.fefu.wsr_connect_mobile.common.BaseFragment
 import ru.fefu.wsr_connect_mobile.R
 import ru.fefu.wsr_connect_mobile.databinding.FragmentSplashBinding
 import ru.fefu.wsr_connect_mobile.extensions.launchWhenStarted
+import ru.fefu.wsr_connect_mobile.remote.SocketHandler
 import ru.fefu.wsr_connect_mobile.start.view_models.SplashViewModel
 
 
@@ -34,9 +35,12 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_spl
         mainGraph.setStartDestination(R.id.nav_graph_auth)
 
         if (App.sharedPreferences.contains("token")) {
-            viewModel.getUserInfo()
-        }
-        else {
+            SocketHandler.setSocket()
+            SocketHandler.establishConnection()
+            SocketHandler.mSocket.emit("authorization", App.sharedPreferences.getString("token", ""))
+
+            viewModel.getProfileInfo()
+        } else {
             navController.graph = mainGraph
         }
 

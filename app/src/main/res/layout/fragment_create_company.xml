@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,25 +21,33 @@
             android:id="@+id/companyImg"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_gravity="center_horizontal"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_delete2"
             app:civ_border_color="@color/blue_input"
             app:civ_border_width="1dp" />
+
+        <TextView
+            android:id="@+id/deleteImgBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/delete_img"
+            android:textColor="@color/blue_input"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/companyNameInput"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp">
+            android:layout_marginTop="13dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etCompanyName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/name_of_company"
-                android:gravity="center_horizontal"
                 android:layout_gravity="center_horizontal"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -47,7 +56,6 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginTop="35dp"
             android:paddingVertical="12dp"
             android:text="@string/create"

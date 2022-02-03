@@ -18,9 +18,9 @@ class SplashViewModel : ViewModel() {
     val showLoading get() = _showLoading
     val info get() = _info
 
-    fun getUserInfo() {
+    fun getProfileInfo() {
         viewModelScope.launch {
-            apiService.getUserInfo()
+            apiService.getProfileInfo()
                 .onStart { _showLoading.value = true }
                 .onCompletion { _showLoading.value = false }
                 .collect {

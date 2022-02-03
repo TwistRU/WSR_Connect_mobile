@@ -39,9 +39,9 @@ class CompanyUserViewModel : ViewModel() {
         }
     }
 
-    fun startChat(userId: Int) {
+    fun startPrivateChat(userId: Int) {
         viewModelScope.launch {
-            apiService.getChatId(userId)
+            apiService.startPrivateChat(userId)
                 .onStart { _showLoading.value = true }
                 .onCompletion { _showLoading.value = false }
                 .collect {

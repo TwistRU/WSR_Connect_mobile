@@ -16,14 +16,46 @@
         <action
             android:id="@+id/action_messengerFragment_to_quitChatFragment"
             app:destination="@id/quitChatFragment" />
+        <action
+            android:id="@+id/action_messengerFragment_to_createGroupChatFragment"
+            app:destination="@id/createGroupChatFragment" />
+        <action
+            android:id="@+id/action_messengerFragment_to_deleteGroupChatFragment"
+            app:destination="@id/deleteGroupChatFragment" />
+        <action
+            android:id="@+id/action_messengerFragment_to_editChatFragment"
+            app:destination="@id/editChatFragment" />
     </fragment>
     <fragment
         android:id="@+id/newChatSearchFragment"
         android:name="ru.fefu.wsr_connect_mobile.messenger.NewChatSearchFragment"
         android:label="fragment_new_chat_search"
-        tools:layout="@layout/fragment_search_user"/>
+        tools:layout="@layout/fragment_search_user">
+        <action
+            android:id="@+id/action_newChatSearchFragment_to_companyUserFragment3"
+            app:destination="@id/companyUserFragment3" />
+    </fragment>
     <dialog
         android:id="@+id/quitChatFragment"
         android:name="ru.fefu.wsr_connect_mobile.dialogs.QuitChatFragment"
         android:label="QuitChatFragment" />
+    <dialog
+        android:id="@+id/createGroupChatFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.CreateGroupChatFragment"
+        android:label="fragment_create_group_chat"
+        tools:layout="@layout/fragment_create_group_chat" />
+    <dialog
+        android:id="@+id/deleteGroupChatFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.DeleteGroupChatFragment"
+        android:label="DeleteGroupChatFragment" />
+    <dialog
+        android:id="@+id/companyUserFragment3"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.CompanyUserFragment"
+        android:label="fragment_company_user"
+        tools:layout="@layout/fragment_company_user" />
+    <dialog
+        android:id="@+id/editChatFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.EditChatFragment"
+        android:label="fragment_edit_chat"
+        tools:layout="@layout/fragment_edit_chat" />
 </navigation>

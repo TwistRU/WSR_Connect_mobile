@@ -3,9 +3,11 @@
     <item
         android:id="@+id/editBoard"
         android:icon="@drawable/ic_edit"
+        android:iconTint="@color/blue_input"
         android:title="@string/edit_board" />
     <item
         android:id="@+id/deleteBoard"
-        android:icon="@drawable/ic_delete"
+        android:icon="@drawable/ic_trash"
+        android:iconTint="@color/blue_input"
         android:title="@string/delete_board" />
 </menu>

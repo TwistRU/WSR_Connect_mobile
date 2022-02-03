@@ -4,11 +4,10 @@
     android:id="@+id/item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="14dp"
-    android:layout_marginTop="12dp"
+    android:layout_marginHorizontal="12dp"
     android:clipChildren="true"
     app:cardCornerRadius="6dp"
-    app:cardElevation="2dp"
+    app:cardElevation="5dp"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -34,19 +33,20 @@
 
             <RelativeLayout
                 android:id="@+id/boardLockContainer"
-                android:layout_marginTop="9dp"
-                android:padding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/gradient_board_image_shape">
+                android:layout_marginTop="9dp"
+                android:background="@drawable/gradient_board_image_shape"
+                android:padding="5dp">
+
                 <ImageView
                     android:id="@+id/boardLock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:alpha="0.8"
                     android:layout_marginStart="5dp"
+                    android:alpha="0.8"
                     android:contentDescription="@string/plug"
-                    android:src="@drawable/ic_lock"
+                    android:src="@drawable/ic_lock_24"
                     app:tint="@color/blue_light" />
             </RelativeLayout>
         </RelativeLayout>
@@ -89,7 +89,8 @@
                     android:drawablePadding="6dp"
                     android:textSize="14sp"
                     android:textStyle="italic"
-                    app:drawableStartCompat="@drawable/ic_date" />
+                    app:drawableStartCompat="@drawable/ic_date_24"
+                    app:drawableTint="@color/blue_input" />
 
                 <TextView
                     android:id="@+id/boardUserCount"
@@ -99,7 +100,8 @@
                     android:drawablePadding="6dp"
                     android:textSize="14sp"
                     android:textStyle="italic"
-                    app:drawableStartCompat="@drawable/ic_group_alpha" />
+                    app:drawableStartCompat="@drawable/ic_users"
+                    app:drawableTint="@color/blue_input" />
             </LinearLayout>
 
             <TextView
@@ -111,7 +113,8 @@
                 android:drawablePadding="6dp"
                 android:textSize="14sp"
                 android:textStyle="italic"
-                app:drawableStartCompat="@drawable/ic_creator" />
+                app:drawableStartCompat="@drawable/ic_user"
+                app:drawableTint="@color/blue_input" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

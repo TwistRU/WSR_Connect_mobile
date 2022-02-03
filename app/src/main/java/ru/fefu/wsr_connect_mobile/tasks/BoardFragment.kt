@@ -19,10 +19,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.flow.onEach
-import ru.fefu.wsr_connect_mobile.BASE_URL
-import ru.fefu.wsr_connect_mobile.BaseFragment
 import ru.fefu.wsr_connect_mobile.R
 import ru.fefu.wsr_connect_mobile.adapters.ColumnListAdapter
+import ru.fefu.wsr_connect_mobile.common.BASE_URL
+import ru.fefu.wsr_connect_mobile.common.BaseFragment
 import ru.fefu.wsr_connect_mobile.databinding.FragmentBoardBinding
 import ru.fefu.wsr_connect_mobile.extensions.launchWhenStarted
 import ru.fefu.wsr_connect_mobile.tasks.view_models.BoardViewModel
@@ -49,14 +49,21 @@ class BoardFragment :
     private val toBottom: Animation by lazy {
         AnimationUtils.loadAnimation(this.context, R.anim.to_bottom_anim)
     }
+    private val fromRight: Animation by lazy {
+        AnimationUtils.loadAnimation(this.context, R.anim.from_right_anim)
+    }
+    private val toRight: Animation by lazy {
+        AnimationUtils.loadAnimation(this.context, R.anim.to_right_anim)
+    }
     private var fabClicked = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val boardId = requireArguments().getInt("board_id", -1)
+        val boardId = requireArguments().getInt("board_id")
         val boardName = requireArguments().getString("board_name")
         val boardImgUrl = requireArguments().getString("board_img_url")
+        val mine = requireArguments().getBoolean("mine")
 
         setFragmentResultListener("resultDialog") { requestKey, bundle ->
             if (bundle.getBoolean("successfulDialog")) viewModel.getColumns(boardId)
@@ -67,26 +74,35 @@ class BoardFragment :
             val imgView = binding.boardImg
             if (boardImgUrl != null) {
                 val url = BASE_URL + boardImgUrl
-                Glide.with(requireContext()).load(url).error(R.drawable.ic_image_not_supported)
+                Glide.with(requireContext()).load(url).error(R.drawable.ic_no_image)
                     .into(imgView)
             } else imgView.visibility = View.GONE
 
             toolbar.setNavigationOnClickListener {
                 findNavController().popBackStack()
             }
+
+            fabBtn.setOnClickListener { onFabButtonClicked() }
+
             columnAddBtn.setOnClickListener {
+                onFabButtonClicked()
                 findNavController().navigate(
                     R.id.action_boardFragment_to_createColumnFragment,
                     bundleOf("board_id" to boardId)
                 )
             }
+
             boardUsersBtn.setOnClickListener {
+                onFabButtonClicked()
                 findNavController().navigate(
                     R.id.action_boardFragment_to_boardUsersFragment,
-                    bundleOf("board_id" to boardId)
+                    bundleOf(
+                        "board_id" to boardId,
+                        "board_name" to boardName,
+                        "mine" to mine,
+                    )
                 )
             }
-            fabBtn.setOnClickListener { onFabButtonClicked() }
 
             adapter = ColumnListAdapter(
                 {
@@ -96,11 +112,18 @@ class BoardFragment :
                     )
                 },
                 {
-                    Navigation.findNavController(requireActivity(), R.id.rootActivityContainer)
-                        .navigate(
-                            R.id.action_navBottomFragment_to_nav_graph_detail_card,
-                            bundleOf("card_id" to it.cardId, "user_id" to it.cardCreatorId)
-                        )
+                    if (it.available) {
+                        Navigation.findNavController(requireActivity(), R.id.rootActivityContainer)
+                            .navigate(
+                                R.id.action_navBottomFragment_to_nav_graph_detail_card,
+                                bundleOf(
+                                    "board_id" to boardId,
+                                    "card_id" to it.cardId,
+                                    "user_id" to it.cardCreatorId,
+                                    "mine" to it.mine
+                                )
+                            )
+                    }
                 },
                 {
                     findNavController().navigate(
@@ -185,10 +208,14 @@ class BoardFragment :
         binding.apply {
             if (!fabClicked) {
                 columnAddBtn.visibility = View.VISIBLE
+                columnAddText.visibility = View.VISIBLE
                 boardUsersBtn.visibility = View.VISIBLE
+                boardUsersText.visibility = View.VISIBLE
             } else {
                 columnAddBtn.visibility = View.INVISIBLE
+                columnAddText.visibility = View.INVISIBLE
                 boardUsersBtn.visibility = View.INVISIBLE
+                boardUsersText.visibility = View.INVISIBLE
             }
         }
     }
@@ -198,10 +225,14 @@ class BoardFragment :
             if (!fabClicked) {
                 columnAddBtn.startAnimation(fromBottom)
                 boardUsersBtn.startAnimation(fromBottom)
+                columnAddText.startAnimation(fromRight)
+                boardUsersText.startAnimation(fromRight)
                 fabBtn.startAnimation(rotateOpen)
             } else {
                 columnAddBtn.startAnimation(toBottom)
                 boardUsersBtn.startAnimation(toBottom)
+                columnAddText.startAnimation(toRight)
+                boardUsersText.startAnimation(toRight)
                 fabBtn.startAnimation(rotateClose)
             }
         }

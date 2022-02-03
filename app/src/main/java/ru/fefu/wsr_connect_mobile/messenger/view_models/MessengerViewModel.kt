@@ -13,12 +13,33 @@ class MessengerViewModel : ViewModel() {
     private val apiService = ApiService()
 
     private val _chats = MutableSharedFlow<List<Chat>>(replay = 0)
+    private val _searchResult = MutableSharedFlow<List<Chat>>(replay = 0)
+    private val _success = MutableSharedFlow<Boolean>(replay = 0)
     private val _showLoading = MutableStateFlow(false)
 
     val showLoading get() = _showLoading
     val chats get() = _chats
+    val searchResult get() = _searchResult
+    val success get() = _success
 
-    fun getChats(search: String?) {
+    fun getChats() {
+        viewModelScope.launch {
+
+            apiService.getChats(null)
+                .onStart { _showLoading.value = true }
+                .onCompletion { _showLoading.value = false }
+                .collect {
+                    when (it) {
+                        is Result.Success -> {
+                            _chats.emit(it.result.chats)
+                        }
+                        is Result.Error -> {}
+                    }
+                }
+        }
+    }
+
+    fun searchChat(search: String) {
         viewModelScope.launch {
 
             apiService.getChats(search)
@@ -27,7 +48,7 @@ class MessengerViewModel : ViewModel() {
                 .collect {
                     when (it) {
                         is Result.Success -> {
-                            _chats.emit(it.result.chats)
+                            _searchResult.emit(it.result.chats)
                         }
                         is Result.Error -> {}
                     }
@@ -43,7 +64,9 @@ class MessengerViewModel : ViewModel() {
                 .onCompletion { _showLoading.value = false }
                 .collect {
                     when (it) {
-                        is Result.Success -> {}
+                        is Result.Success -> {
+                            _success.emit(true)
+                        }
                         is Result.Error -> {}
                     }
                 }
@@ -58,7 +81,9 @@ class MessengerViewModel : ViewModel() {
                 .onCompletion { _showLoading.value = false }
                 .collect {
                     when (it) {
-                        is Result.Success -> {}
+                        is Result.Success -> {
+                            _success.emit(true)
+                        }
                         is Result.Error -> {}
                     }
                 }

@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_companyFragment_to_companyUserFragment"
             app:destination="@id/companyUserFragment" />
+        <action
+            android:id="@+id/action_companyFragment_to_editCompanyFragment"
+            app:destination="@id/editCompanyFragment" />
     </fragment>
 
     <fragment
@@ -52,11 +55,12 @@
             app:destination="@id/companyUserFragment" />
         <action
             android:id="@+id/action_boardFragment_to_boardUsersFragment"
-            app:destination="@id/boardUsersFragment" />
+            app:destination="@id/boardUsersFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <dialog
         android:id="@+id/createBoardFragment"
-        android:name="ru.fefu.wsr_connect_mobile.dialogs.createBoardFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.CreateBoardFragment"
         android:label="fragment_create_board"
         tools:layout="@layout/fragment_create_board" />
     <dialog
@@ -66,7 +70,7 @@
         tools:layout="@layout/fragment_create_column" />
     <dialog
         android:id="@+id/editBoardFragment"
-        android:name="ru.fefu.wsr_connect_mobile.dialogs.editBoardFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.EditBoardFragment"
         android:label="fragment_edit_board"
         tools:layout="@layout/fragment_edit_board" />
     <dialog
@@ -81,27 +85,29 @@
         tools:layout="@layout/fragment_edit_column" />
     <dialog
         android:id="@+id/deleteBoardFragment"
-        android:name="ru.fefu.wsr_connect_mobile.dialogs.deleteBoardFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.DeleteBoardFragment"
         android:label="deleteBoardFragment" />
     <fragment
         android:id="@+id/companyUsersFragment"
         android:name="ru.fefu.wsr_connect_mobile.tasks.CompanyUsersFragment"
         android:label="CompanyUsersFragment">
         <action
-            android:id="@+id/action_companyUsersFragment_to_deleteUserFragment"
-            app:destination="@id/deleteUserFragment" />
-        <action
             android:id="@+id/action_companyUsersFragment_to_searchUserAppFragment"
             app:destination="@id/searchUserAppFragment" />
+        <action
+            android:id="@+id/action_companyUsersFragment_to_companyUserFragment"
+            app:destination="@id/companyUserFragment" />
+        <action
+            android:id="@+id/action_companyUsersFragment_to_deleteUserCompanyFragment"
+            app:destination="@id/deleteUserCompanyFragment" />
+        <action
+            android:id="@+id/action_companyUsersFragment_to_quitCompanyFragment"
+            app:destination="@id/quitCompanyFragment" />
     </fragment>
     <dialog
         android:id="@+id/sendInvitationFragment"
         android:name="ru.fefu.wsr_connect_mobile.dialogs.SendInvitationFragment"
         android:label="SendInvitationFragment"/>
-    <dialog
-        android:id="@+id/deleteUserFragment"
-        android:name="ru.fefu.wsr_connect_mobile.dialogs.DeleteUserFragment"
-        android:label="DeleteUserFragment" />
     <dialog
         android:id="@+id/createCardFragment"
         android:name="ru.fefu.wsr_connect_mobile.dialogs.CreateCardFragment"
@@ -136,7 +142,7 @@
     </fragment>
     <dialog
         android:id="@+id/createCompanyFragment"
-        android:name="ru.fefu.wsr_connect_mobile.dialogs.createCompanyFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.CreateCompanyFragment"
         android:label="fragment_create_company"
         tools:layout="@layout/fragment_create_company" >
         <action
@@ -165,9 +171,55 @@
         <action
             android:id="@+id/action_boardUsersFragment_to_searchUserCompanyFragment"
             app:destination="@id/searchUserCompanyFragment" />
+        <action
+            android:id="@+id/action_boardUsersFragment_to_companyUserFragment"
+            app:destination="@id/companyUserFragment" />
+        <action
+            android:id="@+id/action_boardUsersFragment_to_deleteUserBoardFragment"
+            app:destination="@id/deleteUserBoardFragment" />
+        <action
+            android:id="@+id/action_boardUsersFragment_to_quitBoardFragment"
+            app:destination="@id/quitBoardFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/searchUserCompanyFragment"
         android:name="ru.fefu.wsr_connect_mobile.tasks.SearchUserCompanyFragment"
-        android:label="SearchUserCompanyFragment" />
+        android:label="SearchUserCompanyFragment" >
+        <action
+            android:id="@+id/action_searchUserCompanyFragment_to_companyUserFragment"
+            app:destination="@id/companyUserFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/editCompanyFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.EditCompanyFragment"
+        android:label="EditCompanyFragment" />
+    <dialog
+        android:id="@+id/deleteUserBoardFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.DeleteUserBoardFragment"
+        android:label="DeleteUserBoardFragment" />
+    <dialog
+        android:id="@+id/deleteUserCompanyFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.DeleteUserCompanyFragment"
+        android:label="DeleteUserCompanyFragment" />
+    <dialog
+        android:id="@+id/quitBoardFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.QuitBoardFragment"
+        android:label="QuitBoardFragment" >
+        <action
+            android:id="@+id/action_quitBoardFragment_to_companyFragment"
+            app:destination="@id/companyFragment"
+            app:popUpTo="@id/companyFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
+    <dialog
+        android:id="@+id/quitCompanyFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.QuitCompanyFragment"
+        android:label="QuitCompanyFragment" >
+        <action
+            android:id="@+id/action_quitCompanyFragment_to_tasksEmptyFragment"
+            app:destination="@id/tasksEmptyFragment"
+            app:popUpTo="@id/tasksEmptyFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
 </navigation>

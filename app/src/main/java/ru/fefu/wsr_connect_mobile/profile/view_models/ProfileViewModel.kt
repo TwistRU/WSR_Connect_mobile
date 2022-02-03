@@ -20,6 +20,7 @@ class ProfileViewModel : ViewModel() {
 
     private val _showLoading = MutableStateFlow(false)
     private val _userInfo = MutableSharedFlow<User>(replay = 0)
+    private val _successDeleteAvatar = MutableSharedFlow<Boolean>(replay = 0)
     private val _showFirstNameResult = MutableSharedFlow<String>(replay = 0)
     private val _profileImage = MutableSharedFlow<String>(replay = 0)
     private val _showLastNameResult = MutableSharedFlow<String>(replay = 0)
@@ -33,10 +34,11 @@ class ProfileViewModel : ViewModel() {
     val showLastNameResult get() = _showLastNameResult
     val showEmailResult get() = _showEmailResult
     val showAboutMeResult get() = _showAboutMeResult
+    val successDeleteAvatar get() = _successDeleteAvatar
 
-    fun getInfo() {
+    fun getProfileInfo() {
         viewModelScope.launch {
-            apiService.getUserInfo()
+            apiService.getProfileInfo()
                 .onStart { _showLoading.value = true }
                 .onCompletion { _showLoading.value = false }
                 .collect {
@@ -56,7 +58,7 @@ class ProfileViewModel : ViewModel() {
                 _showFirstNameResult.emit("first name is blank")
                 return@launch
             }
-            apiService.changeUserInfo(firstName, null, null, null)
+            apiService.changeProfileInfo(firstName, null, null, null)
                 .onStart { _showLoading.value = true }
                 .onCompletion { _showLoading.value = false }
                 .collect {
@@ -76,7 +78,7 @@ class ProfileViewModel : ViewModel() {
                 _showLastNameResult.emit("last name is blank")
                 return@launch
             }
-            apiService.changeUserInfo(null, lastName, null, null)
+            apiService.changeProfileInfo(null, lastName, null, null)
                 .onStart { _showLoading.value = true }
                 .onCompletion { _showLoading.value = false }
                 .collect {
@@ -96,7 +98,7 @@ class ProfileViewModel : ViewModel() {
                 _showEmailResult.emit("email is blank")
                 return@launch
             }
-            apiService.changeUserInfo(null, null, email, null)
+            apiService.changeProfileInfo(null, null, email, null)
                 .onStart { _showLoading.value = true }
                 .onCompletion { _showLoading.value = false }
                 .collect {
@@ -112,7 +114,7 @@ class ProfileViewModel : ViewModel() {
 
     fun changeAboutMe(aboutMe: String?) {
         viewModelScope.launch {
-            apiService.changeUserInfo(null, null, null, aboutMe)
+            apiService.changeProfileInfo(null, null, null, aboutMe)
                 .onStart { _showLoading.value = true }
                 .onCompletion { _showLoading.value = false }
                 .collect {
@@ -142,7 +144,22 @@ class ProfileViewModel : ViewModel() {
                     when (it) {
                         is Result.Success -> {
                             _profileImage.emit(it.result.url)
-                            it.result
+                        }
+                        is Result.Error -> {}
+                    }
+                }
+        }
+    }
+
+    fun deleteProfileImage() {
+        viewModelScope.launch {
+            apiService.deleteProfileImage()
+                .onStart { _showLoading.value = true }
+                .onCompletion { _showLoading.value = false }
+                .collect {
+                    when (it) {
+                        is Result.Success -> {
+                            _successDeleteAvatar.emit(true)
                         }
                         is Result.Error -> {}
                     }

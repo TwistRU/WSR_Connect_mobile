@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -13,18 +12,27 @@ import ru.fefu.wsr_connect_mobile.databinding.FragmentProfileBinding
 import ru.fefu.wsr_connect_mobile.profile.view_models.ProfileViewModel
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.bumptech.glide.Glide
 import ru.fefu.wsr_connect_mobile.*
 import ru.fefu.wsr_connect_mobile.extensions.createBitmapFromResult
 import ru.fefu.wsr_connect_mobile.extensions.launchWhenStarted
 import androidx.navigation.Navigation
+import ru.fefu.wsr_connect_mobile.common.App
+import ru.fefu.wsr_connect_mobile.common.BASE_URL
+import ru.fefu.wsr_connect_mobile.common.BaseFragment
+import androidx.navigation.NavOptions
+import ru.fefu.wsr_connect_mobile.remote.SocketHandler
 
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
+
+    lateinit var imgView: ImageView
 
     private val viewModel by lazy {
         ViewModelProvider(this)[ProfileViewModel::class.java]
@@ -54,15 +62,20 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        imgView = binding.profileImg
+
         viewModel.showLoading
             .onEach { binding.loader.isVisible = it }
             .launchWhenStarted(lifecycleScope)
 
         viewModel.profileImage
             .onEach {
-                val url = "${BASE_URL}$it"
-                val imgView = binding.profileImg
-                Glide.with(this).load(url).error(R.drawable.ic_image_not_supported).into(imgView)
+                val url = "$BASE_URL$it"
+                Glide.with(this)
+                    .load(url)
+                    .dontTransform()
+                    .error(R.drawable.ic_no_image)
+                    .into(imgView)
             }
             .launchWhenStarted(lifecycleScope)
 
@@ -123,13 +136,37 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
                     etLastName.setText(it.lastName)
                     etAboutMe.setText(it.aboutMe)
                     etEmail.setText(it.email)
+                    if (it.imgUrl != null) {
+                        val url = "$BASE_URL${it.imgUrl}"
+                        Glide.with(this@ProfileFragment)
+                            .load(url)
+                            .dontTransform()
+                            .error(R.drawable.ic_no_image)
+                            .into(imgView)
+                    } else {
+                        Glide.with(this@ProfileFragment)
+                            .load(R.drawable.ic_add_image)
+                            .dontTransform()
+                            .error(R.drawable.ic_no_image)
+                            .into(imgView)
 
-                    val url = "${BASE_URL}${it.imgUrl}"
-                    val imgView = binding.profileImg
-                    Glide.with(requireContext()).load(url).error(R.drawable.ic_image_not_supported)
-                        .into(imgView)
-
+                    }
+                    userInfoContainer.visibility = View.VISIBLE
                     userInfo.gotNewInfo()
+                }
+            }
+            .launchWhenStarted(lifecycleScope)
+
+        viewModel.successDeleteAvatar
+            .onEach {
+                binding.apply {
+                    if (it) {
+                        Glide.with(requireContext())
+                            .load(R.drawable.ic_add_image)
+                            .dontTransform()
+                            .error(R.drawable.ic_no_image)
+                            .into(imgView)
+                    }
                 }
             }
             .launchWhenStarted(lifecycleScope)
@@ -144,7 +181,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
             }
             changeProfileImgBtn.setOnClickListener { loadFileFromDevice() }
 
-            logoutBtn.setOnClickListener { viewModel.logout() }
+            deleteProfileImgBtn.setOnClickListener { viewModel.deleteProfileImage() }
 
             firstNameInput.setEndIconOnClickListener {
                 viewModel.changeFirstName(etFirstName.text.toString())
@@ -177,12 +214,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
             }
 
             logoutBtn.setOnClickListener {
+                viewModel.logout()
                 App.sharedPreferences.edit().clear().apply()
                 Navigation.findNavController(requireActivity(), R.id.rootActivityContainer)
                     .navigate(R.id.action_navBottomFragment_to_nav_graph_auth)
+                SocketHandler.closeConnection()
             }
         }
-        viewModel.getInfo()
+        viewModel.getProfileInfo()
     }
 
     private val requestPermissionLauncher =
@@ -217,7 +256,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
 
     private fun addPhotoFromIntent() {
         val galleryIntent = Intent(Intent.ACTION_PICK).apply { this.type = "image/*" }
-
         val intentChooser = Intent(Intent.ACTION_CHOOSER).apply {
             this.putExtra(Intent.EXTRA_INTENT, galleryIntent)
         }

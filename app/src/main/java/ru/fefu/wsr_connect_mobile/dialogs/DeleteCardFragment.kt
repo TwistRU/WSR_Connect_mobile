@@ -34,7 +34,7 @@ class DeleteCardFragment : DialogFragment(R.layout.fragment_delete_alert) {
         viewModel.success
             .onEach {
                 if (it) {
-                    setFragmentResult("resultDialog", bundleOf("successfulDialog" to true))
+                    setFragmentResult("resultDialog", bundleOf("successfulDialogDeleteCard" to true))
                     findNavController().popBackStack()
                 }
             }

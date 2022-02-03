@@ -3,16 +3,21 @@ package ru.fefu.wsr_connect_mobile.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import ru.fefu.wsr_connect_mobile.BASE_URL
 import ru.fefu.wsr_connect_mobile.R
+import ru.fefu.wsr_connect_mobile.common.BASE_URL
 import ru.fefu.wsr_connect_mobile.databinding.*
-import ru.fefu.wsr_connect_mobile.remote.models.Board
 import ru.fefu.wsr_connect_mobile.extensions.formatTo
 import ru.fefu.wsr_connect_mobile.extensions.toDate
+import ru.fefu.wsr_connect_mobile.remote.models.Board
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import android.graphics.drawable.Drawable
 
 
 class BoardListAdapter(
@@ -22,7 +27,7 @@ class BoardListAdapter(
 ) : ListAdapter<Board, RecyclerView.ViewHolder>(ItemCallback()) {
 
     interface OptionsMenuClickListener {
-        fun onOptionsMenuClicked(boardId: Int, boardName: String, view: View)
+        fun onOptionsMenuClicked(boardId: Int, boardName: String, imgUrl: String?, view: View)
     }
 
     inner class BoardListHolder(item: View) : RecyclerView.ViewHolder(item) {
@@ -50,26 +55,27 @@ class BoardListAdapter(
                 boardCreateDate.text = item.boardCreateDate.toDate().formatTo("dd MMM yyyy")
                 boardUserCount.text = item.boardUserCount
                 boardCreator.text = item.boardCreator
-                if (item.isAvailable) {
-                    boardLock.visibility = View.GONE
+                if (item.available) {
+                    boardLockContainer.visibility = View.GONE
                 }
                 val url = "$BASE_URL${item.imgUrl}"
                 val imgView = binding.boardImg
 
-                if (item.imgUrl == null) {
-                    imgView.minimumHeight = 300
-                    imgView.minimumWidth = 300
-                }
-                Glide.with(itemView).load(url).error(R.drawable.ic_image_not_supported)
+                Glide.with(itemView).load(url)
+                    .error(R.drawable.ic_no_image_board)
                     .into(imgView)
 
-                binding.item.setOnLongClickListener {
-                    optionsMenuClickListener.onOptionsMenuClicked(
-                        item.boardId,
-                        item.boardName,
-                        it
-                    )
-                    return@setOnLongClickListener true
+
+                if (item.available && item.mine) {
+                    binding.item.setOnLongClickListener {
+                        optionsMenuClickListener.onOptionsMenuClicked(
+                            item.boardId,
+                            item.boardName,
+                            item.imgUrl,
+                            it
+                        )
+                        return@setOnLongClickListener true
+                    }
                 }
             }
         }

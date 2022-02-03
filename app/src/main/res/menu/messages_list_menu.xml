@@ -3,17 +3,21 @@
     <item
         android:id="@+id/replyMessage"
         android:icon="@drawable/ic_reply"
-        android:title="@string/reply" />
+        android:title="@string/reply"
+        android:iconTint="@color/blue_input"/>
     <item
         android:id="@+id/editMessage"
         android:icon="@drawable/ic_edit"
-        android:title="@string/edit" />
+        android:title="@string/edit"
+        android:iconTint="@color/blue_input"/>
     <item
         android:id="@+id/deleteMessage"
-        android:icon="@drawable/ic_delete"
-        android:title="@string/delete" />
+        android:icon="@drawable/ic_trash"
+        android:title="@string/delete"
+        android:iconTint="@color/blue_input"/>
     <item
         android:id="@+id/copyMessage"
         android:icon="@drawable/ic_copy"
-        android:title="@string/copy" />
+        android:title="@string/copy"
+        android:iconTint="@color/blue_input"/>
 </menu>

@@ -15,11 +15,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.flow.onEach
-import ru.fefu.wsr_connect_mobile.BASE_URL
-import ru.fefu.wsr_connect_mobile.BaseFragment
 import ru.fefu.wsr_connect_mobile.R
-import ru.fefu.wsr_connect_mobile.databinding.FragmentCompanyBinding
 import ru.fefu.wsr_connect_mobile.adapters.BoardListAdapter
+import ru.fefu.wsr_connect_mobile.common.BASE_URL
+import ru.fefu.wsr_connect_mobile.common.BaseFragment
+import ru.fefu.wsr_connect_mobile.databinding.FragmentCompanyBinding
 import ru.fefu.wsr_connect_mobile.extensions.launchWhenStarted
 import ru.fefu.wsr_connect_mobile.tasks.view_models.CompanyViewModel
 
@@ -45,26 +45,56 @@ class CompanyFragment :
     private val toBottom: Animation by lazy {
         AnimationUtils.loadAnimation(this.context, R.anim.to_bottom_anim)
     }
+    private val fromRight: Animation by lazy {
+        AnimationUtils.loadAnimation(this.context, R.anim.from_right_anim)
+    }
+    private val toRight: Animation by lazy {
+        AnimationUtils.loadAnimation(this.context, R.anim.to_right_anim)
+    }
     private var fabClicked = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var mine = false
+
         setFragmentResultListener("resultDialog") { requestKey, bundle ->
-            if (bundle.getBoolean("successfulDialog")) viewModel.getBoards()
+            if (bundle.getBoolean("successfulDialog")) {
+                viewModel.getBoards()
+                viewModel.getCompanyInfo()
+            }
         }
 
+        var companyName = ""
+        var imgUrl: String? = null
+
         binding.apply {
+            fabBtn.setOnClickListener { onFabButtonClicked() }
+
             boardAddBtn.setOnClickListener {
+                onFabButtonClicked()
                 findNavController().navigate(R.id.action_companyFragment_to_createBoardFragment)
             }
             companyUsersBtn.setOnClickListener {
+                onFabButtonClicked()
                 findNavController().navigate(
                     R.id.action_companyFragment_to_companyUsersFragment,
-                    bundleOf("company_name" to binding.toolbar.title)
+                    bundleOf(
+                        "company_name" to binding.toolbar.title,
+                        "mine" to mine
+                    )
                 )
             }
-            fabBtn.setOnClickListener { onFabButtonClicked() }
+
+            editCompanyInfoBtn.setOnClickListener {
+                findNavController().navigate(
+                    R.id.action_companyFragment_to_editCompanyFragment,
+                    bundleOf(
+                        "company_name" to companyName,
+                        "img_url" to imgUrl
+                    )
+                )
+            }
 
             swipeRefreshLayout.setOnRefreshListener {
                 viewModel.getBoards()
@@ -78,13 +108,14 @@ class CompanyFragment :
                     )
                 },
                 {
-                    if (it.isAvailable) {
+                    if (it.available) {
                         findNavController().navigate(
                             R.id.action_companyFragment_to_boardFragment,
                             bundleOf(
                                 "board_id" to it.boardId,
                                 "board_name" to it.boardName,
-                                "board_img_url" to it.imgUrl
+                                "board_img_url" to it.imgUrl,
+                                "mine" to it.mine
                             )
                         )
                     }
@@ -93,9 +124,10 @@ class CompanyFragment :
                     override fun onOptionsMenuClicked(
                         boardId: Int,
                         boardName: String,
+                        imgUrl: String?,
                         view: View
                     ) {
-                        performOptionsMenuClick(boardId, boardName, view)
+                        performOptionsMenuClick(boardId, boardName, imgUrl, view)
                     }
                 },
             )
@@ -112,15 +144,17 @@ class CompanyFragment :
             .onEach {
                 binding.apply {
                     toolbar.title = it.companyName
-                    val imgUrl = it.imgUrl
+                    mine = it.mine
+                    companyName = it.companyName
+                    imgUrl = it.imgUrl
                     val imgView = binding.companyImg
                     if (imgUrl != null) {
                         val url = BASE_URL + imgUrl
                         Glide.with(requireContext()).load(url)
-                            .error(R.drawable.ic_image_not_supported).into(imgView)
-                    } else imgView.visibility = View.GONE
+                            .error(R.drawable.ic_no_image).into(imgView)
+                    }
+                    if (mine) editCompanyInfoBtn.visibility = View.VISIBLE
                 }
-
             }
             .launchWhenStarted(lifecycleScope)
 
@@ -134,8 +168,12 @@ class CompanyFragment :
         viewModel.getBoards()
     }
 
-
-    private fun performOptionsMenuClick(boardId: Int, boardName: String, view: View) {
+    private fun performOptionsMenuClick(
+        boardId: Int,
+        boardName: String,
+        imgUrl: String?,
+        view: View
+    ) {
         val popupMenu =
             PopupMenu(binding.recycler.context, view)
         popupMenu.inflate(R.menu.boards_list_menu)
@@ -146,7 +184,11 @@ class CompanyFragment :
                     R.id.editBoard -> {
                         findNavController().navigate(
                             R.id.action_companyFragment_to_editBoardFragment,
-                            bundleOf("board_id" to boardId, "board_name" to boardName)
+                            bundleOf(
+                                "board_id" to boardId,
+                                "board_name" to boardName,
+                                "img_url" to imgUrl
+                            )
                         )
                         return true
                     }
@@ -175,10 +217,14 @@ class CompanyFragment :
         binding.apply {
             if (!fabClicked) {
                 boardAddBtn.visibility = View.VISIBLE
+                boardAddText.visibility = View.VISIBLE
                 companyUsersBtn.visibility = View.VISIBLE
+                companyUsersText.visibility = View.VISIBLE
             } else {
                 boardAddBtn.visibility = View.INVISIBLE
+                boardAddText.visibility = View.INVISIBLE
                 companyUsersBtn.visibility = View.INVISIBLE
+                companyUsersText.visibility = View.INVISIBLE
             }
         }
     }
@@ -188,10 +234,14 @@ class CompanyFragment :
             if (!fabClicked) {
                 boardAddBtn.startAnimation(fromBottom)
                 companyUsersBtn.startAnimation(fromBottom)
+                boardAddText.startAnimation(fromRight)
+                companyUsersText.startAnimation(fromRight)
                 fabBtn.startAnimation(rotateOpen)
             } else {
                 boardAddBtn.startAnimation(toBottom)
                 companyUsersBtn.startAnimation(toBottom)
+                boardAddText.startAnimation(toRight)
+                companyUsersText.startAnimation(toRight)
                 fabBtn.startAnimation(rotateClose)
             }
         }

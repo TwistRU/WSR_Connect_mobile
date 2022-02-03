@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import ru.fefu.wsr_connect_mobile.BASE_URL
+import ru.fefu.wsr_connect_mobile.common.BASE_URL
 import ru.fefu.wsr_connect_mobile.R
 import ru.fefu.wsr_connect_mobile.databinding.*
+import ru.fefu.wsr_connect_mobile.extensions.formatTo
+import ru.fefu.wsr_connect_mobile.extensions.toDate
 import ru.fefu.wsr_connect_mobile.remote.models.Message
 
 
@@ -28,7 +30,7 @@ class MessagesListAdapter(
         fun bind(item: Message) {
             binding.apply {
                 messageBody.text = item.messageBody
-                messageTime.text = item.createdAt
+                messageTime.text = item.createdAt.toDate().formatTo("HH:mm")
                 if (item.read) read.visibility = View.VISIBLE
                 card.setOnLongClickListener {
                     optionsMenuClickListener.onOptionsMenuClicked(item, it)
@@ -43,7 +45,7 @@ class MessagesListAdapter(
 
         fun bind(item: Message) {
             binding.apply {
-                messageTime.text = item.createdAt
+                messageTime.text = item.createdAt.toDate().formatTo("HH:mm")
                 if (item.read) read.visibility = View.VISIBLE
                 card.setOnLongClickListener {
                     optionsMenuClickListener.onOptionsMenuClicked(item, it)
@@ -51,7 +53,7 @@ class MessagesListAdapter(
                 }
                 val url = "$BASE_URL${item.imgUrl}"
                 val imgView = binding.image
-                Glide.with(itemView).load(url).error(R.drawable.ic_delete2).into(imgView)
+                Glide.with(itemView).load(url).error(R.drawable.ic_no_image).into(imgView)
             }
         }
     }
@@ -64,7 +66,7 @@ class MessagesListAdapter(
                 messageBody.text = item.messageBody
                 replyMessageBody.text = item.parentMessage?.messageBody
                 replyMessageUserName.text = item.parentMessage?.creatorName
-                messageTime.text = item.createdAt
+                messageTime.text = item.createdAt.toDate().formatTo("HH:mm")
                 if (item.read) read.visibility = View.VISIBLE
                 card.setOnLongClickListener {
                     optionsMenuClickListener.onOptionsMenuClicked(item, it)
@@ -80,11 +82,38 @@ class MessagesListAdapter(
         fun bind(item: Message) {
             binding.apply {
                 messageBody.text = item.messageBody
-                messageTime.text = item.createdAt
+                messageTime.text = item.createdAt.toDate().formatTo("HH:mm")
                 card.setOnLongClickListener {
                     optionsMenuClickListener.onOptionsMenuClicked(item, it)
                     return@setOnLongClickListener true
                 }
+
+
+                if (adapterPosition + 1 != currentList.size) {
+                    val pre = currentList[adapterPosition + 1]
+                    if (pre.creatorId != item.creatorId) {
+
+                    }
+                }
+                else {
+                    senderImgContainer.visibility = View.VISIBLE
+                }
+
+
+                if (adapterPosition - 1 > -1) {
+                    val pos = currentList[adapterPosition - 1]
+                    if (pos.creatorId != item.creatorId) {
+
+                    }
+                }
+                else {
+                    senderName.visibility = View.VISIBLE
+                    senderName.text = item.creatorName
+                }
+
+
+
+
             }
         }
     }
@@ -94,14 +123,14 @@ class MessagesListAdapter(
 
         fun bind(item: Message) {
             binding.apply {
-                messageTime.text = item.createdAt
+                messageTime.text = item.createdAt.toDate().formatTo("HH:mm")
                 card.setOnLongClickListener {
                     optionsMenuClickListener.onOptionsMenuClicked(item, it)
                     return@setOnLongClickListener true
                 }
                 val url = "$BASE_URL${item.imgUrl}"
                 val imgView = binding.image
-                Glide.with(itemView).load(url).error(R.drawable.ic_delete2).into(imgView)
+                Glide.with(itemView).load(url).error(R.drawable.ic_no_image).into(imgView)
             }
         }
     }
@@ -114,7 +143,7 @@ class MessagesListAdapter(
                 messageBody.text = item.messageBody
                 replyMessageBody.text = item.parentMessage?.messageBody
                 replyMessageUserName.text = item.parentMessage?.creatorName
-                messageTime.text = item.createdAt
+                messageTime.text = item.createdAt.toDate().formatTo("HH:mm")
                 card.setOnLongClickListener {
                     optionsMenuClickListener.onOptionsMenuClicked(item, it)
                     return@setOnLongClickListener true

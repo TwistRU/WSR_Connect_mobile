@@ -3,8 +3,8 @@ package ru.fefu.wsr_connect_mobile.tasks
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import ru.fefu.wsr_connect_mobile.App
-import ru.fefu.wsr_connect_mobile.BaseFragment
+import ru.fefu.wsr_connect_mobile.common.App
+import ru.fefu.wsr_connect_mobile.common.BaseFragment
 import ru.fefu.wsr_connect_mobile.R
 import ru.fefu.wsr_connect_mobile.databinding.FragmentEmptyBinding
 

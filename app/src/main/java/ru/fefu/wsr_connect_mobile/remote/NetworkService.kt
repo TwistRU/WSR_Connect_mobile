@@ -4,8 +4,8 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.fefu.wsr_connect_mobile.App
-import ru.fefu.wsr_connect_mobile.BASE_URL
+import ru.fefu.wsr_connect_mobile.common.App
+import ru.fefu.wsr_connect_mobile.common.BASE_URL
 import ru.fefu.wsr_connect_mobile.remote.interceptors.AuthInterceptor
 import java.util.concurrent.TimeUnit
 

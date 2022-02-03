@@ -8,8 +8,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.flow.onEach
-import ru.fefu.wsr_connect_mobile.App
-import ru.fefu.wsr_connect_mobile.BaseFragment
+import ru.fefu.wsr_connect_mobile.common.App
+import ru.fefu.wsr_connect_mobile.common.BaseFragment
 import ru.fefu.wsr_connect_mobile.R
 import ru.fefu.wsr_connect_mobile.databinding.FragmentInvitationsBinding
 import ru.fefu.wsr_connect_mobile.extensions.launchWhenStarted

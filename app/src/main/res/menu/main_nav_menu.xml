@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_graph_profile"
-        android:icon="@drawable/ic_profile"
+        android:icon="@drawable/ic_profile_nav"
         android:title="@string/profile" />
     <item
         android:id="@+id/nav_graph_messenger"

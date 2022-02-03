@@ -16,6 +16,15 @@
         <action
             android:id="@+id/action_detailCardFragment_to_companyUserFragment2"
             app:destination="@id/companyUserFragment2" />
+        <action
+            android:id="@+id/action_detailCardFragment_to_searchUserBoardFragment"
+            app:destination="@id/searchUserBoardFragment" />
+        <action
+            android:id="@+id/action_detailCardFragment_to_deleteUserCardFragment"
+            app:destination="@id/deleteUserCardFragment" />
+        <action
+            android:id="@+id/action_detailCardFragment_to_quitCardFragment"
+            app:destination="@id/quitCardFragment" />
     </fragment>
     <dialog
         android:id="@+id/deleteCardFragment"
@@ -26,4 +35,20 @@
         android:name="ru.fefu.wsr_connect_mobile.dialogs.CompanyUserFragment"
         android:label="fragment_company_user"
         tools:layout="@layout/fragment_company_user" />
+    <fragment
+        android:id="@+id/searchUserBoardFragment"
+        android:name="ru.fefu.wsr_connect_mobile.tasks.SearchUserBoardFragment"
+        android:label="SearchUserBoardFragment" >
+        <action
+            android:id="@+id/action_searchUserBoardFragment_to_companyUserFragment2"
+            app:destination="@id/companyUserFragment2" />
+    </fragment>
+    <dialog
+        android:id="@+id/deleteUserCardFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.DeleteUserCardFragment"
+        android:label="DeleteUserCardFragment" />
+    <dialog
+        android:id="@+id/quitCardFragment"
+        android:name="ru.fefu.wsr_connect_mobile.dialogs.QuitCardFragment"
+        android:label="QuitCardFragment" />
 </navigation>

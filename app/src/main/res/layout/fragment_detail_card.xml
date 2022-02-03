@@ -25,7 +25,22 @@
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/plug"
         android:paddingHorizontal="10dp"
-        android:src="@drawable/ic_delete"
+        android:src="@drawable/ic_trash"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        app:layout_constraintEnd_toEndOf="@id/toolbar"
+        app:layout_constraintTop_toTopOf="@id/toolbar"
+        app:tint="@color/blue_light" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/cancelEditCardBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/plug"
+        android:paddingHorizontal="10dp"
+        android:src="@drawable/ic_undo"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/toolbar"
         app:layout_constraintEnd_toEndOf="@id/toolbar"
         app:layout_constraintTop_toTopOf="@id/toolbar"
@@ -39,221 +54,321 @@
         android:contentDescription="@string/plug"
         android:paddingHorizontal="10dp"
         android:src="@drawable/ic_edit"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/toolbar"
         app:layout_constraintEnd_toStartOf="@id/deleteCardBtn"
         app:layout_constraintTop_toTopOf="@id/toolbar"
         app:tint="@color/blue_light" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/cardInfo"
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/saveEditCardBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/plug"
+        android:paddingHorizontal="10dp"
+        android:src="@drawable/ic_approve"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        app:layout_constraintEnd_toStartOf="@id/cancelEditCardBtn"
+        app:layout_constraintTop_toTopOf="@id/toolbar"
+        app:tint="@color/blue_light" />
+
+    <LinearLayout
+        android:id="@+id/cardEditorContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:paddingHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/cardInfo"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="6dp"
+                    app:cardElevation="5dp"
+                    app:cardUseCompatPadding="true">
+
+                    <TextView
+                        android:id="@+id/cardCreateDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:drawablePadding="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_date_16"
+                        app:drawableTint="@color/blue_input" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/removeDeadlineBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="@string/removeDeadline"
+                    android:textColor="@color/red_light"
+                    android:visibility="gone" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="6dp"
+                    app:cardElevation="5dp"
+                    app:cardUseCompatPadding="true">
+
+                    <TextView
+                        android:id="@+id/cardDeadline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:drawablePadding="5dp"
+                        android:text="@string/no_deadline"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_date_16"
+                        app:drawableTint="@color/red_light" />
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/creatorCard"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="5dp"
+                android:layout_marginStart="5dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/userImg"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="10dp"
+                        android:scaleType="centerCrop"
+                        app:civ_border_color="@color/blue_input"
+                        app:civ_border_width="1dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/userFirstAndLastName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/userEmailAndUsername"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cardDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:id="@+id/cardTitleContainer"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:cardCornerRadius="6dp"
-                app:cardElevation="2dp"
+                app:cardElevation="5dp"
                 app:cardUseCompatPadding="true">
 
-                <TextView
-                    android:id="@+id/cardCreateDate"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:drawablePadding="5dp"
-                    android:textSize="14sp"
-                    app:drawableStartCompat="@drawable/ic_card_date"
-                    app:drawableTint="@color/blue_input" />
-            </androidx.cardview.widget.CardView>
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/removeDeadlineBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:text="@string/removeDeadline"
-                android:textColor="@color/red_light"
-                android:visibility="gone" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="10dp"
+                        android:drawablePadding="5dp"
+                        android:text="@string/card_title"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_line"
+                        app:drawableTint="@color/blue_input" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cardTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="6dp"
-                app:cardElevation="2dp"
+                app:cardElevation="5dp"
                 app:cardUseCompatPadding="true">
 
-                <TextView
-                    android:id="@+id/cardDeadline"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/cardShortDescContainer"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:drawablePadding="5dp"
-                    android:text="@string/add_deadline"
-                    android:textSize="14sp"
-                    app:drawableStartCompat="@drawable/ic_card_date" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="10dp"
+                        android:drawablePadding="5dp"
+                        android:text="@string/short_desc"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_short_text"
+                        app:drawableTint="@color/blue_input" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cardShortDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
-        </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:id="@+id/cardLongDescContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="10dp"
+                        android:drawablePadding="5dp"
+                        android:text="@string/long_desc"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_long_text"
+                        app:drawableTint="@color/blue_input" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/cardLongDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/creatorCard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             app:cardCornerRadius="6dp"
-            app:cardElevation="2dp"
+            app:cardElevation="5dp"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/userImg"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="10dp"
-                    android:scaleType="centerCrop"
-                    app:civ_border_color="@color/blue_input"
-                    app:civ_border_width="1dp" />
+                android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/cardUserListContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:orientation="vertical">
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/userFirstAndLastName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:drawablePadding="5dp"
+                        android:text="@string/participants"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/ic_participants"
+                        app:drawableTint="@color/blue_input" />
 
                     <TextView
-                        android:id="@+id/userEmailAndUsername"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/addUserBtn"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp" />
+                        android:drawablePadding="5dp"
+                        android:text="@string/add"
+                        android:textAlignment="viewEnd"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        app:drawableEndCompat="@drawable/ic_add_18"
+                        app:drawableTint="@color/blue_input" />
                 </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <LinearLayout
-        android:id="@+id/cardDesc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="20dp"
-        app:layout_constraintTop_toBottomOf="@id/cardInfo">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="2dp"
-            app:cardUseCompatPadding="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:drawablePadding="5dp"
-                android:text="@string/short_desc"
-                android:textSize="14sp"
-                app:drawableStartCompat="@drawable/ic_short_text"
-                app:drawableTint="@color/blue_input" />
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/cardShortDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="10dp"
-                android:textSize="14sp" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="2dp"
-            app:cardUseCompatPadding="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:drawablePadding="5dp"
-                android:text="@string/long_desc"
-                android:textSize="14sp"
-                app:drawableStartCompat="@drawable/ic_long_text"
-                app:drawableTint="@color/blue_input" />
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/cardLongDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="10dp"
-                android:textSize="14sp" />
-        </androidx.cardview.widget.CardView>
     </LinearLayout>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="6dp"
-        app:cardElevation="2dp"
-        app:cardUseCompatPadding="true"
-        app:layout_constraintTop_toBottomOf="@id/cardDesc">
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:drawablePadding="5dp"
-                android:text="@string/participants"
-                android:textSize="14sp"
-                app:drawableStartCompat="@drawable/ic_participants"
-                app:drawableTint="@color/blue_input" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-    </androidx.cardview.widget.CardView>
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/loader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
         android:indeterminate="true"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

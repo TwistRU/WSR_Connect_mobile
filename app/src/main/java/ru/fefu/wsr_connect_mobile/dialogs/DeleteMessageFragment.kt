@@ -2,8 +2,10 @@ package ru.fefu.wsr_connect_mobile.dialogs
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -30,7 +32,12 @@ class DeleteMessageFragment : DialogFragment(R.layout.fragment_delete_alert) {
             .launchWhenStarted(lifecycleScope)
 
         viewModel.success
-            .onEach { if (it) findNavController().popBackStack() }
+            .onEach {
+                if (it) {
+                    setFragmentResult("resultDialog", bundleOf("successfulDialog" to true))
+                    findNavController().popBackStack()
+                }
+            }
             .launchWhenStarted(lifecycleScope)
 
         binding.apply {

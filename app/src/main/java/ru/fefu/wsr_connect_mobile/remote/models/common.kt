@@ -21,8 +21,11 @@ data class Board(
     @SerializedName("board_user_count")
     var boardUserCount: String,
 
-    @SerializedName("is_available")
-    var isAvailable: Boolean,
+    @SerializedName("available")
+    var available: Boolean,
+
+    @SerializedName("mine")
+    var mine: Boolean,
 
     @SerializedName("img_url")
     var imgUrl: String?,
@@ -49,11 +52,20 @@ data class Card(
 
     @SerializedName("card_creator_id")
     var cardCreatorId: Int,
+
+    @SerializedName("available")
+    var available: Boolean,
+
+    @SerializedName("mine")
+    var mine: Boolean,
 )
 
 data class Chat(
     @SerializedName("chat_id")
     var chatId: Int,
+
+    @SerializedName("group")
+    var group: Boolean,
 
     @SerializedName("chat_name")
     var chatName: String,
@@ -67,6 +79,9 @@ data class Chat(
     @SerializedName("pin")
     var pin: Boolean,
 
+    @SerializedName("mine")
+    var mine: Boolean,
+
     @SerializedName("img_url")
     var imgUrl: String?,
 )
@@ -77,6 +92,9 @@ data class Column(
 
     @SerializedName("column_title")
     var columnTitle: String,
+
+    @SerializedName("mine")
+    var mine: Boolean,
 
     @SerializedName("cards")
     var cards: List<Card>
@@ -114,6 +132,9 @@ data class Message(
 
     @SerializedName("img_url")
     var imgUrl: String?,
+
+    @SerializedName("creator_img_url")
+    var creatorImgUrl: String?,
 
     @SerializedName("message_body")
     var messageBody: String,

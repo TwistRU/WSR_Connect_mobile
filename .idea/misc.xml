@@ -5,26 +5,80 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.12916666666666668" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/gradient_board_image_shape.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/gradient_card_image_shape.xml" value="0.12708333333333333" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/gradient_user_image.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_add.xml" value="0.12996742671009773" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_add_16.xml" value="0.12996742671009773" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_add_18.xml" value="0.12430555555555556" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_add_image.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_arrow_back.xml" value="0.12430555555555556" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_board_date.xml" value="0.12708333333333333" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_card_creator.xml" value="0.12430555555555556" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_card_date.xml" value="0.13125" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_creator.xml" value="0.13125" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_date.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_delete.xml" value="0.12430555555555556" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_done.xml" value="0.12430555555555556" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_done_all.xml" value="0.12430555555555556" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_done_outline.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_dots.xml" value="0.12430555555555556" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_double_arrow.xml" value="0.12430555555555556" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_edit.xml" value="0.12430555555555556" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_group.xml" value="0.13125" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_group_alpha.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_horizontal_rule.xml" value="0.1125" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_image_not_supported.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_line.xml" value="0.1125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_lock.xml" value="0.12708333333333333" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_lock_16.xml" value="0.12708333333333333" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_lock_20.xml" value="0.12430555555555556" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_logout.xml" value="0.12708333333333333" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_long_text.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_messenger.xml" value="0.12430555555555556" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_no_image.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_no_image_board.xml" value="0.12430555555555556" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_participants.xml" value="0.11944444444444445" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_person_search.xml" value="0.12708333333333333" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_pin.xml" value="0.12996742671009773" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_profile.xml" value="0.12708333333333333" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_profile_nav.xml" value="0.12708333333333333" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_quite.xml" value="0.12708333333333333" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_send.xml" value="0.12430555555555556" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_short_text.xml" value="0.13125" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_tasks.xml" value="0.12430555555555556" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_undo.xml" value="0.12430555555555556" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_user.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_users.xml" value="0.12708333333333333" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_video_calling.xml" value="0.12430555555555556" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_video_calling_blue.xml" value="0.12430555555555556" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/drawable/ic_volume_off.xml" value="0.12996742671009773" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/aaa_fab.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/aaaa.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_board.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_board_users.xml" value="0.12105263157894737" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_board_users_list.xml" value="0.12105263157894737" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_change_avatar.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_chat_users.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_company.xml" value="0.12105263157894737" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_company_user.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_company_users.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_create_board.xml" value="0.11348684210526316" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_create_company.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_create_group_chat.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_delete_alert.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_delete_group_chat.xml" value="0.12105263157894737" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_detail_card.xml" value="0.22" />
-        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_in_chat.xml" value="0.12105263157894737" />
-        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_messenger.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_edit_board.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_edit_chat.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_edit_company.xml" value="0.33" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_group_chat_company.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_in_chat.xml" value="0.33" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_messenger.xml" value="0.25" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_nav_bottom.xml" value="0.12105263157894737" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_new_chat_search.xml" value="0.12105263157894737" />
-        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_profile.xml" value="0.12105263157894737" />
-        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_search_user.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_quit_alert.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_search_user.xml" value="0.25" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_send_invitation.xml" value="0.1" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_sign_in.xml" value="0.1" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_sign_up.xml" value="0.12105263157894737" />
@@ -32,21 +86,33 @@
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_tasks_boards_list.xml" value="0.12105263157894737" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_tasks_columns_list.xml" value="0.25" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_tasks_company_users_list.xml" value="0.129304286718201" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_chat.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_chat_search.xml" value="0.12105263157894737" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_image_message.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_image_message_other.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_new_chat.xml" value="0.1" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_reply_message.xml" value="0.12105263157894737" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_reply_message_other.xml" value="0.1" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_simple_message.xml" value="0.1" />
-        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_simple_message_other.xml" value="0.1" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_simple_message_other.xml" value="0.5" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_user_chats.xml" value="0.10450819672131148" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_user_search.xml" value="0.12105263157894737" />
-        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_tasks_board.xml" value="0.33" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_tasks_add_user.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_tasks_board.xml" value="0.3163972286374134" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_tasks_card.xml" value="0.18" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_tasks_column.xml" value="0.22" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_tasks_invitation.xml" value="0.1" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_tasks_user.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_tasks_user_add.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_tasks_user_add_multiple.xml" value="0.380517503805175" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_tasks_user_delete.xml" value="0.12105263157894737" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/menu/boards_list_menu.xml" value="0.1" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/menu/cards_list_menu.xml" value="0.1" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/menu/columns_list_menu.xml" value="0.12105263157894737" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/menu/detail_card_menu.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/menu/invitation_list_menu.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/menu/main_nav_menu.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/menu/messages_list_menu.xml" value="0.12105263157894737" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/background_start.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/empty_frame.xml" value="0.1319078947368421" />

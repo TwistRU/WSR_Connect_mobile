@@ -2,12 +2,32 @@ package ru.fefu.wsr_connect_mobile.remote.models
 
 import com.google.gson.annotations.SerializedName
 
-data class AcceptInvitationRequestModel(
-    @SerializedName("invite_id")
-    var inviteId: Int,
+data class RegistrationRequestModel(
+    @SerializedName("username")
+    var username: String,
+
+    @SerializedName("first_name")
+    var firstName: String,
+
+    @SerializedName("last_name")
+    var lastName: String,
+
+    @SerializedName("email")
+    var email: String,
+
+    @SerializedName("password")
+    var password: String,
 )
 
-data class ChangeUserInfoRequestModel(
+data class LoginRequestModel(
+    @SerializedName("username")
+    var username: String,
+
+    @SerializedName("password")
+    var password: String,
+)
+
+data class ChangeProfileInfoRequestModel(
     @SerializedName("first_name")
     var firstName: String?,
 
@@ -21,12 +41,41 @@ data class ChangeUserInfoRequestModel(
     var aboutMe: String?,
 )
 
-data class ChangeUserPasswordRequestModel(
+data class ChangePasswordRequestModel(
     @SerializedName("old_password")
     var oldPassword: String?,
 
     @SerializedName("new_password")
     var newPassword: String?,
+)
+
+data class SendCompanyInviteRequestModel(
+    @SerializedName("user_id")
+    var userId: Int,
+
+    @SerializedName("invite_text")
+    var inviteText: String,
+)
+
+data class AcceptInvitationRequestModel(
+    @SerializedName("invite_id")
+    var inviteId: Int,
+)
+
+data class CreateColumnRequestModel(
+    @SerializedName("board_id")
+    var boardId: Int,
+
+    @SerializedName("column_name")
+    var columnName: String,
+)
+
+data class EditColumnRequestModel(
+    @SerializedName("column_id")
+    var columnId: Int,
+
+    @SerializedName("column_title")
+    var columnTitle: String,
 )
 
 data class CreateCardRequestModel(
@@ -49,22 +98,6 @@ data class CreateCardRequestModel(
     var deadline: String?,
 )
 
-data class CreateColumnRequestModel(
-    @SerializedName("board_id")
-    var boardId: Int,
-
-    @SerializedName("column_name")
-    var columnName: String,
-)
-
-data class EditBoardRequestModel(
-    @SerializedName("board_id")
-    var boardId: Int,
-
-    @SerializedName("board_name")
-    var boardName: String,
-)
-
 data class EditCardRequestModel(
     @SerializedName("card_id")
     var cardId: Int,
@@ -79,23 +112,15 @@ data class EditCardRequestModel(
     var cardShortDesc: String,
 
     @SerializedName("card_long_desc")
-    var cardLongDesc: String?,
+    var cardLongDesc: String?
 )
 
-data class EditColumnRequestModel(
-    @SerializedName("column_id")
-    var columnId: Int,
+data class StatusChatRequestModel(
+    @SerializedName("chat_id")
+    var chatId: Int,
 
-    @SerializedName("column_title")
-    var columnTitle: String,
-)
-
-data class LoginRequestModel(
-    @SerializedName("username")
-    var username: String,
-
-    @SerializedName("password")
-    var password: String,
+    @SerializedName("status")
+    var status: Boolean,
 )
 
 data class MessageRequestModel(
@@ -112,54 +137,7 @@ data class MessageRequestModel(
     var messageBody: String,
 )
 
-data class MuteChatRequestModel(
-    @SerializedName("chat_id")
-    var chatId: Int,
-
-    @SerializedName("status")
-    var status: Boolean,
-)
-
-data class PinChatRequestModel(
-    @SerializedName("chat_id")
-    var chatId: Int,
-
-    @SerializedName("status")
-    var status: Boolean,
-)
-
-data class RegistrationRequestModel(
-    @SerializedName("username")
-    var username: String,
-
-    @SerializedName("first_name")
-    var firstName: String,
-
-    @SerializedName("last_name")
-    var lastName: String,
-
-    @SerializedName("email")
-    var email: String,
-
-    @SerializedName("password")
-    var password: String,
-)
-
-data class SendBoardInviteRequestModel(
-    @SerializedName("board_id")
-    var boardId: Int,
-
-    @SerializedName("user_nickname")
-    var userNickname: String,
-
-    @SerializedName("invite_text")
-    var inviteText: String,
-)
-
-data class SendCompanyInviteRequestModel(
-    @SerializedName("user_id")
-    var userId: Int,
-
-    @SerializedName("invite_text")
-    var inviteText: String,
+data class MultipleAddUsersRequestModel(
+    @SerializedName("users")
+    var users: List<Int>
 )

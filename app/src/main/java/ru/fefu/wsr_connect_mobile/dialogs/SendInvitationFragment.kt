@@ -43,12 +43,12 @@ class SendInvitationFragment : DialogFragment(R.layout.fragment_send_invitation)
         binding.apply {
             etUsername.setText(requireArguments().getString("username"))
             sendBtn.setOnClickListener {
-                    viewModel.sendCompanyInvite(
-                        etUsername.text.toString(),
-                        userId,
-                        etInviteText.text.toString()
-                    )
-                }
+                viewModel.sendCompanyInvite(
+                    etUsername.text.toString(),
+                    userId,
+                    etInviteText.text.toString()
+                )
+            }
             etInviteText.addTextChangedListener {
                 inviteTextInput.isErrorEnabled = false
             }

@@ -3,12 +3,7 @@ package ru.fefu.wsr_connect_mobile.extensions
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.view.View
-import com.bumptech.glide.Glide
-import ru.fefu.wsr_connect_mobile.BASE_URL
-import ru.fefu.wsr_connect_mobile.R
 import java.io.ByteArrayOutputStream
-import java.net.URL
 
 fun Intent.createBitmapFromResult(activity: Activity): Bitmap? {
     val intentBundle = this.extras

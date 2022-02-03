@@ -2,37 +2,31 @@ package ru.fefu.wsr_connect_mobile.remote.models
 
 import com.google.gson.annotations.SerializedName
 
-data class BoardsResponseModel(
-    @SerializedName("boards")
-    var boards: List<Board>,
+data class RegistrationResponseModel(
+    @SerializedName("token")
+    var token: String,
+
+    @SerializedName("my_id")
+    var myId: Int,
 )
 
-data class ChatsResponseModel(
-    @SerializedName("chats")
-    var chats: List<Chat>,
-)
+data class LoginResponseModel(
+    @SerializedName("token")
+    var token: String,
 
-data class ColumnsResponseModel(
-    @SerializedName("columns")
-    var columns: List<Column>,
-)
-
-data class UsersResponseModel(
-    @SerializedName("users")
-    var users: List<User>
+    @SerializedName("my_id")
+    var myId: Int,
 )
 
 data class CompanyInfoResponseModel(
     @SerializedName("company_name")
     var companyName: String,
 
+    @SerializedName("mine")
+    var mine: Boolean,
+
     @SerializedName("img_url")
     var imgUrl: String?
-)
-
-data class ImageResponseModel(
-    @SerializedName("url")
-    var url: String,
 )
 
 data class InvitationsResponseModel(
@@ -40,30 +34,19 @@ data class InvitationsResponseModel(
     var invitations: List<Invitation>,
 )
 
-data class LoginResponseModel(
-    @SerializedName("token")
-    var token: String,
+data class BoardsResponseModel(
+    @SerializedName("boards")
+    var boards: List<Board>,
 )
 
-data class MessagesResponseModel(
-    @SerializedName("messages")
-    var messages: List<Message>,
+data class ColumnsResponseModel(
+    @SerializedName("columns")
+    var columns: List<Column>,
 )
 
-data class ChatInfoResponseModel(
-    @SerializedName("chat_name")
-    var chatName: String,
-
-    @SerializedName("img_url")
-    var imgUrl: String?,
-
-    @SerializedName("users")
-    var users: List<User>
-)
-
-data class RegistrationResponseModel(
-    @SerializedName("token")
-    var token: String,
+data class ChatsResponseModel(
+    @SerializedName("chats")
+    var chats: List<Chat>,
 )
 
 data class DetailCard(
@@ -93,4 +76,33 @@ data class DetailCard(
 
     @SerializedName("users")
     var users: List<User>,
+)
+
+data class ChatInfoResponseModel(
+    @SerializedName("chat_name")
+    var chatName: String,
+
+    @SerializedName("mine")
+    var mine: Boolean,
+
+    @SerializedName("img_url")
+    var imgUrl: String?,
+
+    @SerializedName("users")
+    var users: List<User>
+)
+
+data class UsersResponseModel(
+    @SerializedName("users")
+    var users: List<User>
+)
+
+data class ImageResponseModel(
+    @SerializedName("url")
+    var url: String,
+)
+
+data class MessagesResponseModel(
+    @SerializedName("messages")
+    var messages: List<Message>,
 )

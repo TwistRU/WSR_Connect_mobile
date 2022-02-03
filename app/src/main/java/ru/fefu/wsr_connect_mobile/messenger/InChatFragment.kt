@@ -15,21 +15,27 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
+import io.socket.emitter.Emitter
 import kotlinx.coroutines.flow.onEach
-import ru.fefu.wsr_connect_mobile.BASE_URL
-import ru.fefu.wsr_connect_mobile.BaseFragment
 import ru.fefu.wsr_connect_mobile.R
-import ru.fefu.wsr_connect_mobile.databinding.FragmentInChatBinding
 import ru.fefu.wsr_connect_mobile.adapters.MessagesListAdapter
+import ru.fefu.wsr_connect_mobile.common.App
+import ru.fefu.wsr_connect_mobile.common.BASE_URL
+import ru.fefu.wsr_connect_mobile.common.BaseFragment
+import ru.fefu.wsr_connect_mobile.databinding.FragmentInChatBinding
 import ru.fefu.wsr_connect_mobile.extensions.createBitmapFromResult
 import ru.fefu.wsr_connect_mobile.extensions.launchWhenStarted
 import ru.fefu.wsr_connect_mobile.messenger.view_models.InChatViewModel
+import ru.fefu.wsr_connect_mobile.remote.SocketHandler
 import ru.fefu.wsr_connect_mobile.remote.models.Message
 
 
@@ -41,7 +47,8 @@ class InChatFragment : BaseFragment<FragmentInChatBinding>(R.layout.fragment_in_
         ViewModelProvider(this)[InChatViewModel::class.java]
     }
 
-    var chatId = -1
+    private var chatId = -1
+    private var myId = App.sharedPreferences.getInt("my_id", -1)
 
     private val messBuff = object {
         var replyMode = false
@@ -70,9 +77,19 @@ class InChatFragment : BaseFragment<FragmentInChatBinding>(R.layout.fragment_in_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        val mSocket = SocketHandler.getSocket()
+        mSocket.on("msg", onNewMessage)
 
         chatId = requireArguments().getInt("chat_id")
+        val group = requireArguments().getBoolean("group", false)
+        var mine = requireArguments().getBoolean("mine", false)
+
+        setFragmentResultListener("resultDialog") { requestKey, bundle ->
+            if (bundle.getBoolean("successfulDialog")) viewModel.getMessages(chatId)
+        }
+
+        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
         adapter = MessagesListAdapter(
             object : MessagesListAdapter.OptionsMenuClickListener {
                 override fun onOptionsMenuClicked(
@@ -113,16 +130,35 @@ class InChatFragment : BaseFragment<FragmentInChatBinding>(R.layout.fragment_in_
                     messBuff.reset()
                 }
             }
+
+            if (group) {
+                groupChatBtn.setOnClickListener {
+                    findNavController().navigate(
+                        R.id.action_inChatFragment_to_chatUsersFragment,
+                        bundleOf("chat_id" to chatId, "mine" to mine)
+                    )
+                }
+            }
         }
 
         viewModel.showLoading
             .onEach { binding.loader.isVisible = it }
             .launchWhenStarted(lifecycleScope)
 
-        viewModel.success
+        viewModel.successEdit
             .onEach {
                 if (it) {
+                    messBuff.reset()
                     viewModel.getMessages(chatId)
+                }
+            }
+            .launchWhenStarted(lifecycleScope)
+
+        viewModel.successSend
+            .onEach {
+                if (it) {
+                    messBuff.reset()
+//                    viewModel.getMessages(chatId)
                 }
             }
             .launchWhenStarted(lifecycleScope)
@@ -132,14 +168,17 @@ class InChatFragment : BaseFragment<FragmentInChatBinding>(R.layout.fragment_in_
                 binding.toolbar.title = it.chatName
                 val url = "$BASE_URL${it.imgUrl}"
                 val imgView = binding.chatImage
-                Glide.with(requireContext()).load(url).error(R.drawable.ic_delete2).into(imgView)
+                Glide.with(requireContext()).load(url).error(R.drawable.ic_no_image)
+                    .into(imgView)
+                mine = it.mine
+                if (group) binding.groupChatBtn.visibility = View.VISIBLE
             }
             .launchWhenStarted(lifecycleScope)
 
         viewModel.messages
             .onEach {
                 messBuff.reset()
-                adapter.submitList(it.messages)
+                adapter.submitList(it)
             }
             .launchWhenStarted(lifecycleScope)
 
@@ -189,10 +228,10 @@ class InChatFragment : BaseFragment<FragmentInChatBinding>(R.layout.fragment_in_
                     R.id.copyMessage -> {
                         val clipboard: ClipboardManager =
                             requireActivity().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-                        val clip = ClipData.newPlainText("text", message.messageBody);
-                        clipboard.setPrimaryClip(clip);
+                        val clip = ClipData.newPlainText("text", message.messageBody)
+                        clipboard.setPrimaryClip(clip)
                         Toast.makeText(requireContext(), "Text Copied ", Toast.LENGTH_SHORT)
-                            .show();
+                            .show()
                         return true
                     }
                     R.id.replyMessage -> {
@@ -261,4 +300,27 @@ class InChatFragment : BaseFragment<FragmentInChatBinding>(R.layout.fragment_in_
         super.onDestroyView()
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
     }
+
+    private val onNewMessage =
+        Emitter.Listener { args ->
+            if (myId != -1) {
+                if (activity != null) {
+                    requireActivity().runOnUiThread {
+                        for (i in args) {
+                            val mess = Gson().fromJson(i.toString(), Message::class.java)
+                            if (mess.chatId == chatId) {
+                                if (mess.creatorId == myId) {
+                                    mess.mine = true
+                                }
+
+                                adapter.submitList(adapter.currentList + mess)
+                                binding.recycler.smoothScrollToPosition(adapter.currentList.size)
+
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
 }

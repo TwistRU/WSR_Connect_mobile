@@ -8,11 +8,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.onEach
-import ru.fefu.wsr_connect_mobile.App
-import ru.fefu.wsr_connect_mobile.BaseFragment
+import ru.fefu.wsr_connect_mobile.common.App
+import ru.fefu.wsr_connect_mobile.common.BaseFragment
 import ru.fefu.wsr_connect_mobile.R
 import ru.fefu.wsr_connect_mobile.databinding.FragmentSignUpBinding
 import ru.fefu.wsr_connect_mobile.extensions.launchWhenStarted
+import ru.fefu.wsr_connect_mobile.remote.SocketHandler
 import ru.fefu.wsr_connect_mobile.start.view_models.SignUpViewModel
 
 
@@ -47,6 +48,9 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(R.layout.fragment_sig
                     val result = findNavController().popBackStack(R.id.nav_graph_auth, true)
                     if (result.not())
                         findNavController().navigate(R.id.navBottomFragment)
+                    SocketHandler.setSocket()
+                    SocketHandler.establishConnection()
+                    SocketHandler.mSocket.emit("authorization", App.sharedPreferences.getString("token", ""))
                 }
             }
             .launchWhenStarted(lifecycleScope)

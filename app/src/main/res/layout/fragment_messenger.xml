@@ -11,20 +11,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue_input"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/messenger"
+            app:titleCentered="true"
+            app:titleTextColor="@color/blue_light" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/searchExistingContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginVertical="20dp"
+            android:layout_marginHorizontal="10dp"
             app:cardCornerRadius="25dp"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/searchChatView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingVertical="10dp"
-                app:defaultQueryHint="@string/search_hint"
+                app:defaultQueryHint="@string/search_for_messages"
                 app:iconifiedByDefault="false"
                 app:queryBackground="@null" />
         </androidx.cardview.widget.CardView>
@@ -33,6 +44,14 @@
             android:id="@+id/recycler"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchExistingContainer" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerSearch"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/searchExistingContainer" />
 
@@ -64,14 +83,91 @@
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/createGroupChatBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="14dp"
+            android:contentDescription="@string/plug"
+            android:src="@drawable/ic_add_24"
+            android:visibility="invisible"
+            app:backgroundTint="@color/blue_mid"
+            app:layout_constraintBottom_toTopOf="@id/searchUsersBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/blue_input" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/searchUsersBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="14dp"
             android:contentDescription="@string/plug"
-            android:src="@drawable/ic_edit"
+            android:src="@drawable/ic_person_search"
+            android:visibility="invisible"
+            app:backgroundTint="@color/blue_mid"
+            app:layout_constraintBottom_toTopOf="@+id/fabBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/blue_input" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/createGroupChatText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="5dp"
+            android:backgroundTint="@color/blue_input"
+            android:clipChildren="true"
+            android:visibility="invisible"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/createGroupChatBtn"
+            app:layout_constraintEnd_toStartOf="@id/createGroupChatBtn"
+            app:layout_constraintTop_toTopOf="@id/createGroupChatBtn">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/create_group_chat"
+                android:textColor="@color/blue_light" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/searchUsersText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/blue_input"
+            android:clipChildren="true"
+            android:visibility="invisible"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="2dp"
+            app:layout_constraintBottom_toBottomOf="@id/searchUsersBtn"
+            app:layout_constraintEnd_toStartOf="@id/searchUsersBtn"
+            app:layout_constraintTop_toTopOf="@id/searchUsersBtn">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/search_for_users"
+                android:textColor="@color/blue_light" />
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="14dp"
+            android:layout_marginBottom="14dp"
+            android:contentDescription="@string/plug"
+            android:rotation="-90"
+            android:src="@drawable/ic_double_arrow"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/blue_light" />
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/loader"
@@ -80,8 +176,7 @@
             android:layout_marginBottom="2dp"
             android:indeterminate="true"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

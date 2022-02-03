@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import ru.fefu.wsr_connect_mobile.App
+import ru.fefu.wsr_connect_mobile.common.App
 import ru.fefu.wsr_connect_mobile.remote.ApiService
 import ru.fefu.wsr_connect_mobile.remote.Result
 import ru.fefu.wsr_connect_mobile.remote.models.User
@@ -44,6 +44,7 @@ class SignInViewModel : ViewModel() {
                         is Result.Success -> {
                             _result.emit(true)
                             App.sharedPreferences.edit().putString("token", it.result.token).apply()
+                            App.sharedPreferences.edit().putInt("my_id", it.result.myId).apply()
                         }
                         is Result.Error -> {}
                     }
@@ -51,9 +52,9 @@ class SignInViewModel : ViewModel() {
         }
     }
 
-    fun getUserInfo() {
+    fun getProfileInfo() {
         viewModelScope.launch {
-            apiService.getUserInfo()
+            apiService.getProfileInfo()
                 .onStart { _showLoading.value = true }
                 .onCompletion { _showLoading.value = false }
                 .collect {

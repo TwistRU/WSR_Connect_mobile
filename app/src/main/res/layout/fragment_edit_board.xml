@@ -11,10 +11,31 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/boardImg"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            app:civ_border_color="@color/blue_input"
+            app:civ_border_width="1dp"
+            android:src="@drawable/ic_add_24" />
+
+        <TextView
+            android:id="@+id/deleteImgBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/delete_img"
+            android:textColor="@color/blue_input"
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/boardNameInput"
@@ -35,7 +56,6 @@
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginTop="35dp"
             android:paddingVertical="12dp"
             android:text="@string/edit"

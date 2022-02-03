@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -34,12 +35,14 @@ class CreateBoardFragment : DialogFragment(R.layout.fragment_create_board) {
     }
 
     lateinit var binding: FragmentCreateBoardBinding
+    lateinit var imgView: ImageView
     private var boardImg: Bitmap? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentCreateBoardBinding.bind(view)
+        imgView = binding.boardImg
 
         viewModel.showLoading
             .onEach { binding.loader.isVisible = it }
@@ -62,6 +65,15 @@ class CreateBoardFragment : DialogFragment(R.layout.fragment_create_board) {
             viewModel.createBoard(boardImg, binding.etBoardName.text.toString())
         }
 
+        binding.deleteImgBtn.setOnClickListener {
+            Glide.with(requireContext())
+                .load(R.drawable.ic_add_image)
+                .error(R.drawable.ic_no_image)
+                .into(imgView)
+            boardImg = null
+            binding.deleteImgBtn.visibility = View.GONE
+        }
+
         binding.apply {
             etBoardName.addTextChangedListener {
                 boardNameInput.isErrorEnabled = false
@@ -69,6 +81,11 @@ class CreateBoardFragment : DialogFragment(R.layout.fragment_create_board) {
             boardImg.setOnClickListener {
                 loadFileFromDevice()
             }
+            val imgView = binding.boardImg
+            Glide.with(requireContext())
+                .load(R.drawable.ic_add_image)
+                .error(R.drawable.ic_add_image)
+                .into(imgView)
         }
     }
 
@@ -92,8 +109,8 @@ class CreateBoardFragment : DialogFragment(R.layout.fragment_create_board) {
         if (requestCode == CODE_IMG_GALLERY && resultCode == Activity.RESULT_OK && data != null) {
             val imageBitmap = data.createBitmapFromResult(requireActivity())
             boardImg = imageBitmap!!
-            val imgView = binding.boardImg
-            Glide.with(requireContext()).load(boardImg).error(R.drawable.ic_image_not_supported).into(imgView)
+            Glide.with(requireContext()).load(boardImg).error(R.drawable.ic_no_image).into(imgView)
+            binding.deleteImgBtn.visibility = View.VISIBLE
         }
     }
 

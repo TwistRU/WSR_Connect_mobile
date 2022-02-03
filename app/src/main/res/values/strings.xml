@@ -20,8 +20,11 @@
     <string name="logout">Logout</string>
     <string name="profile_avatar">Profile Avatar</string>
     <string name="change_avatar">Change Avatar</string>
-    <string name="search_hint">Search for messages and users</string>
-    <string name="new_search_hint">Search for users</string>
+    <string name="search_for_users">Search for users</string>
+    <string name="search_for_messages">Search for messages</string>
+    <string name="search_for_app_users">Search for app users</string>
+    <string name="search_for_company_users">Search for company users</string>
+    <string name="search_for_board_users">Search for board users</string>
     <string name="empty_frame">So lonely and sad&#8230;\n But lets light up\n this place a bit,\n start a new chat\n with your friend!</string>
     <string name="message">Message</string>
     <string name="welcome">Welcome</string>
@@ -46,6 +49,7 @@
     <string name="column_title">Column Title</string>
     <string name="delete">Delete</string>
     <string name="are_you_sure">Are you sure?</string>
+    <string name="quit_alert">Do you really want to quit?</string>
     <string name="invite">Invite</string>
     <string name="send">Send</string>
     <string name="text_of_invitation">Text of invitation</string>
@@ -65,5 +69,19 @@
     <string name="removeDeadline">Remove deadline</string>
     <string name="participants">Participants</string>
     <string name="add">Add</string>
-    <string name="company_users">Company Users</string>
+    <string name="company_users">Company users</string>
+    <string name="chat_name">Chat name</string>
+    <string name="delete_group_chat_alert">Do you want to delete the chat?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="addCounter">Add:\u0020</string>
+    <string name="no_deadline">No deadline</string>
+    <string name="create_group_chat">Create group chat</string>
+    <string name="add_board">Add board</string>
+    <string name="create_board">Create board</string>
+    <string name="create_column">Create column</string>
+    <string name="board_users">Board users</string>
+    <string name="delete_avatar">Delete Avatar</string>
+    <string name="delete_img">Delete Image</string>
+    <string name="no_messages">no messages yet</string>
 </resources>

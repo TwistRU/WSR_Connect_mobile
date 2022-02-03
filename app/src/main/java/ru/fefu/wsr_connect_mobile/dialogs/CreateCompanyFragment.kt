@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -18,7 +19,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.flow.onEach
-import ru.fefu.wsr_connect_mobile.App
+import ru.fefu.wsr_connect_mobile.common.App
 import ru.fefu.wsr_connect_mobile.R
 import ru.fefu.wsr_connect_mobile.databinding.FragmentCreateCompanyBinding
 import ru.fefu.wsr_connect_mobile.extensions.createBitmapFromResult
@@ -33,12 +34,14 @@ class CreateCompanyFragment : DialogFragment(R.layout.fragment_create_company) {
     }
 
     lateinit var binding: FragmentCreateCompanyBinding
+    lateinit var imgView: ImageView
     private var companyImg: Bitmap? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentCreateCompanyBinding.bind(view)
+        imgView = binding.companyImg
 
         viewModel.showLoading
             .onEach { binding.loader.isVisible = it }
@@ -49,23 +52,39 @@ class CreateCompanyFragment : DialogFragment(R.layout.fragment_create_company) {
             .launchWhenStarted(lifecycleScope)
 
         viewModel.success
-            .onEach { if (it) {
-                App.sharedPreferences.edit().putBoolean("have_company", true).apply()
-                findNavController().navigate(R.id.action_createCompanyFragment_to_companyFragment)
-            } }
+            .onEach {
+                if (it) {
+                    App.sharedPreferences.edit().putBoolean("have_company", true).apply()
+                    findNavController().navigate(R.id.action_createCompanyFragment_to_companyFragment)
+                }
+            }
             .launchWhenStarted(lifecycleScope)
 
-            binding.createCompanyBtn.setOnClickListener {
-                viewModel.createCompany(companyImg, binding.etCompanyName.text.toString())
-            }
+        binding.createCompanyBtn.setOnClickListener {
+            viewModel.createCompany(companyImg, binding.etCompanyName.text.toString())
+        }
 
-            binding.apply {
+        binding.deleteImgBtn.setOnClickListener {
+            Glide.with(requireContext())
+                .load(R.drawable.ic_add_image)
+                .error(R.drawable.ic_no_image)
+                .into(imgView)
+            companyImg= null
+            binding.deleteImgBtn.visibility = View.GONE
+        }
+
+        binding.apply {
             companyImg.setOnClickListener {
                 loadFileFromDevice()
             }
             etCompanyName.addTextChangedListener {
                 companyNameInput.isErrorEnabled = false
             }
+            val imgView = binding.companyImg
+            Glide.with(requireContext())
+                .load(R.drawable.ic_add_image)
+                .error(R.drawable.ic_add_image)
+                .into(imgView)
         }
     }
 
@@ -89,8 +108,9 @@ class CreateCompanyFragment : DialogFragment(R.layout.fragment_create_company) {
         if (requestCode == CODE_IMG_GALLERY && resultCode == Activity.RESULT_OK && data != null) {
             val imageBitmap = data.createBitmapFromResult(requireActivity())
             companyImg = imageBitmap!!
-            val imgView = binding.companyImg
-            Glide.with(requireContext()).load(companyImg).error(R.drawable.ic_delete2).into(imgView)
+            Glide.with(requireContext()).load(companyImg).error(R.drawable.ic_no_image)
+                .into(imgView)
+            binding.deleteImgBtn.visibility = View.VISIBLE
         }
     }
 

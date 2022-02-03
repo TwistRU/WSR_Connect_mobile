@@ -4,13 +4,31 @@
     android:id="@+id/item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="14dp"
-    android:layout_marginTop="12dp"
-    android:layout_marginBottom="12dp"
+    android:layout_marginHorizontal="12dp"
     android:clipChildren="true"
     app:cardCornerRadius="6dp"
-    app:cardElevation="2dp"
+    app:cardElevation="5dp"
     app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:id="@+id/boardLockContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/gradient_card_image_shape"
+        android:padding="5dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/boardLock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:alpha="0.8"
+            android:contentDescription="@string/plug"
+            android:src="@drawable/ic_lock_16"
+            app:tint="@color/blue_light" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,6 +63,9 @@
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:drawablePadding="5dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:textSize="14sp"
                 app:drawableStartCompat="@drawable/ic_card_creator" />
 
@@ -54,8 +75,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:drawablePadding="5dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:textSize="14sp"
-                app:drawableStartCompat="@drawable/ic_card_date"
+                app:drawableStartCompat="@drawable/ic_date_16"
                 app:drawableTint="@color/blue_input" />
 
             <TextView
@@ -64,8 +88,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:drawablePadding="5dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:textSize="14sp"
-                app:drawableStartCompat="@drawable/ic_card_date" />
+                app:drawableStartCompat="@drawable/ic_date_16"
+                app:drawableTint="@color/red_light" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

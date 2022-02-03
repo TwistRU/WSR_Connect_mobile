@@ -13,7 +13,7 @@ class SearchUserCompanyViewModel : ViewModel() {
     private val apiService = ApiService()
 
     private val _usersCompany = MutableSharedFlow<List<User>>(replay = 0)
-    private val _success = MutableStateFlow(false)
+    private val _success = MutableSharedFlow<Boolean>(replay = 0)
     private val _showLoading = MutableStateFlow(false)
 
     val usersCompany get() = _usersCompany
@@ -29,6 +29,22 @@ class SearchUserCompanyViewModel : ViewModel() {
                     when (it) {
                         is Result.Success -> {
                             _usersCompany.emit(it.result.users)
+                        }
+                        is Result.Error -> {}
+                    }
+                }
+        }
+    }
+
+    fun addUsersToBoard(users: MutableSet<Int>, boardId: Int) {
+        viewModelScope.launch {
+            apiService.addUsersToBoard(users.toList(), boardId)
+                .onStart { _showLoading.value = true }
+                .onCompletion { _showLoading.value = false }
+                .collect {
+                    when (it) {
+                        is Result.Success -> {
+                            _success.emit(true)
                         }
                         is Result.Error -> {}
                     }

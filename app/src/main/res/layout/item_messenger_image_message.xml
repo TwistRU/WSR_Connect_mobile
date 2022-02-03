@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="5dp"
-    android:layout_marginBottom="5dp"
+    android:layout_marginHorizontal="6dp"
     android:orientation="horizontal">
 
     <androidx.cardview.widget.CardView
@@ -14,6 +13,8 @@
         android:layout_weight="0.3"
         android:backgroundTint="@color/blue_mid"
         app:cardCornerRadius="8sp"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true"
         app:layout_constrainedHeight="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_max="wrap"
@@ -38,8 +39,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:contentDescription="@string/plug"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ava_example1" />
+                    android:scaleType="centerCrop" />
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
