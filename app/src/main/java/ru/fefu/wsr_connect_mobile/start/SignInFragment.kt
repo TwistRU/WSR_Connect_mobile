@@ -1,6 +1,7 @@
 package ru.fefu.wsr_connect_mobile.start
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -36,7 +37,10 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                     viewModel.getProfileInfo()
                     SocketHandler.setSocket()
                     SocketHandler.establishConnection()
-                    SocketHandler.mSocket.emit("authorization", App.sharedPreferences.getString("token", ""))
+                    SocketHandler.mSocket.emit(
+                        "authorization",
+                        App.sharedPreferences.getString("token", "")
+                    )
                 }
             }
             .launchWhenStarted(lifecycleScope)
@@ -45,8 +49,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             .onEach {
                 if (it.companyId != null) {
                     App.sharedPreferences.edit().putBoolean("have_company", true).apply()
-                }
-                else {
+                } else {
                     App.sharedPreferences.edit().putBoolean("have_company", false).apply()
                 }
                 val result = findNavController().popBackStack(R.id.nav_graph_auth, true)
@@ -76,6 +79,17 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
 
             etUsername.addTextChangedListener { usernameInput.isErrorEnabled = false }
             etPassword.addTextChangedListener { passwordInput.isErrorEnabled = false }
+
+            etPassword.setOnKeyListener { view, i, keyEvent ->
+                if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                    viewModel.signInClicked(
+                        etUsername.text.toString(),
+                        etPassword.text.toString(),
+                    )
+                    return@setOnKeyListener true
+                }
+                return@setOnKeyListener false
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import kotlinx.coroutines.flow.onEach
 import ru.fefu.wsr_connect_mobile.common.BASE_URL
 import ru.fefu.wsr_connect_mobile.R
+import ru.fefu.wsr_connect_mobile.common.App
 import ru.fefu.wsr_connect_mobile.databinding.FragmentCompanyUserBinding
 import ru.fefu.wsr_connect_mobile.extensions.launchWhenStarted
 import ru.fefu.wsr_connect_mobile.dialogs.view_models.CompanyUserViewModel
@@ -29,6 +30,8 @@ class CompanyUserFragment : DialogFragment(R.layout.fragment_company_user) {
         val binding = FragmentCompanyUserBinding.bind(view)
 
         val userId = requireArguments().getInt("user_id")
+        val myId = App.sharedPreferences.getInt("my_id", -1)
+        if (userId == myId) binding.messageBtn.visibility = View.GONE
 
         viewModel.showLoading
             .onEach { binding.loader.isVisible = it }
@@ -37,7 +40,6 @@ class CompanyUserFragment : DialogFragment(R.layout.fragment_company_user) {
         viewModel.user
             .onEach {
                 binding.apply {
-
                     val userInfo = "${it.email} @${it.username}"
                     userEmailAndUsername.text = userInfo
 

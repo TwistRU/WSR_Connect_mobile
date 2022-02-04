@@ -55,6 +55,8 @@ class SearchUserBoardFragment :
             recycler.adapter = adapter
             recycler.layoutManager = LinearLayoutManager(requireActivity())
 
+            toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+
             binding.searchUserView.queryHint = getString(R.string.search_for_board_users)
 
             searchUserView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,

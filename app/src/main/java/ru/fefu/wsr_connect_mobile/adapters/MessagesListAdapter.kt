@@ -23,6 +23,8 @@ class MessagesListAdapter(
         fun onOptionsMenuClicked(message: Message, view: View)
     }
 
+    var group: Boolean = false
+
 
     inner class SimpleMessageListHolder(item: View) : RecyclerView.ViewHolder(item) {
         private var binding = ItemMessengerSimpleMessageBinding.bind(item)
@@ -88,32 +90,29 @@ class MessagesListAdapter(
                     return@setOnLongClickListener true
                 }
 
+                if (group) {
+                    if (adapterPosition + 1 != currentList.size &&
+                        item.creatorId != currentList[adapterPosition + 1].creatorId
+                    ) {
+                        senderImgContainer.visibility = View.VISIBLE
+                        val urlUser = "$BASE_URL${item.creatorImgUrl}"
+                        val imgViewUser = binding.senderImg
+                        Glide.with(itemView).load(urlUser).error(R.drawable.ic_no_image)
+                            .into(imgViewUser)
+                    } else {
+                        senderImgContainer.visibility = View.INVISIBLE
+                    }
 
-                if (adapterPosition + 1 != currentList.size) {
-                    val pre = currentList[adapterPosition + 1]
-                    if (pre.creatorId != item.creatorId) {
-
+                    if (adapterPosition - 1 != -1 &&
+                        item.creatorId != currentList[adapterPosition - 1].creatorId
+                    ) {
+                        senderName.visibility = View.VISIBLE
+                        senderName.text = item.creatorName
+                        senderName.paint.isUnderlineText = true
+                    } else {
+                        senderName.visibility = View.GONE
                     }
                 }
-                else {
-                    senderImgContainer.visibility = View.VISIBLE
-                }
-
-
-                if (adapterPosition - 1 > -1) {
-                    val pos = currentList[adapterPosition - 1]
-                    if (pos.creatorId != item.creatorId) {
-
-                    }
-                }
-                else {
-                    senderName.visibility = View.VISIBLE
-                    senderName.text = item.creatorName
-                }
-
-
-
-
             }
         }
     }
@@ -131,6 +130,30 @@ class MessagesListAdapter(
                 val url = "$BASE_URL${item.imgUrl}"
                 val imgView = binding.image
                 Glide.with(itemView).load(url).error(R.drawable.ic_no_image).into(imgView)
+
+                if (group) {
+                    if (adapterPosition + 1 != currentList.size &&
+                        item.creatorId != currentList[adapterPosition + 1].creatorId
+                    ) {
+                        senderImgContainer.visibility = View.VISIBLE
+                        val urlUser = "$BASE_URL${item.creatorImgUrl}"
+                        val imgViewUser = binding.senderImg
+                        Glide.with(itemView).load(urlUser).error(R.drawable.ic_no_image)
+                            .into(imgViewUser)
+                    } else {
+                        senderImgContainer.visibility = View.INVISIBLE
+                    }
+
+                    if (adapterPosition - 1 != -1 &&
+                        item.creatorId != currentList[adapterPosition - 1].creatorId
+                    ) {
+                        senderName.visibility = View.VISIBLE
+                        senderName.text = item.creatorName
+                        senderName.paint.isUnderlineText = true
+                    } else {
+                        senderName.visibility = View.GONE
+                    }
+                }
             }
         }
     }
@@ -147,6 +170,30 @@ class MessagesListAdapter(
                 card.setOnLongClickListener {
                     optionsMenuClickListener.onOptionsMenuClicked(item, it)
                     return@setOnLongClickListener true
+                }
+
+                if (group) {
+                    if (adapterPosition + 1 != currentList.size &&
+                        item.creatorId != currentList[adapterPosition + 1].creatorId
+                    ) {
+                        senderImgContainer.visibility = View.VISIBLE
+                        val urlUser = "$BASE_URL${item.creatorImgUrl}"
+                        val imgViewUser = binding.senderImg
+                        Glide.with(itemView).load(urlUser).error(R.drawable.ic_no_image)
+                            .into(imgViewUser)
+                    } else {
+                        senderImgContainer.visibility = View.INVISIBLE
+                    }
+
+                    if (adapterPosition - 1 != -1 &&
+                        item.creatorId != currentList[adapterPosition - 1].creatorId
+                    ) {
+                        senderName.visibility = View.VISIBLE
+                        senderName.text = item.creatorName
+                        senderName.paint.isUnderlineText = true
+                    } else {
+                        senderName.visibility = View.GONE
+                    }
                 }
             }
         }

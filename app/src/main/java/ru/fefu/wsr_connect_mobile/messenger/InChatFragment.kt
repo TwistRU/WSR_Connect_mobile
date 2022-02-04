@@ -100,6 +100,7 @@ class InChatFragment : BaseFragment<FragmentInChatBinding>(R.layout.fragment_in_
                 }
             }
         )
+        adapter.group = group
 
         binding.apply {
             val linearLayout = LinearLayoutManager(requireActivity())

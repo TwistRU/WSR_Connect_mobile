@@ -88,8 +88,8 @@
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/fragment_tasks_company_users_list.xml" value="0.129304286718201" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_chat.xml" value="0.1" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_chat_search.xml" value="0.12105263157894737" />
-        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_image_message.xml" value="0.1" />
-        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_image_message_other.xml" value="0.12105263157894737" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_image_message.xml" value="0.5" />
+        <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_image_message_other.xml" value="0.25" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_new_chat.xml" value="0.1" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_reply_message.xml" value="0.12105263157894737" />
         <entry key="..\:/github/WSR_Connect_mobile/app/src/main/res/layout/item_messenger_reply_message_other.xml" value="0.1" />

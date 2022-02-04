@@ -43,8 +43,6 @@ class SearchChatListAdapter(
             binding.apply {
                 chatName.text = item.chatName
                 lastMessage.text = item.lastMessage?.messageBody
-                if (item.pin) pinned.visibility = View.VISIBLE
-                if (item.mute) muted.visibility = View.VISIBLE
 
                 val url = "$BASE_URL${item.imgUrl}"
                 val imgView = binding.chatImg

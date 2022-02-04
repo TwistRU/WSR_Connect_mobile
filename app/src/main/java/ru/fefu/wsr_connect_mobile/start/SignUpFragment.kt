@@ -1,6 +1,7 @@
 package ru.fefu.wsr_connect_mobile.start
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -50,7 +51,10 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(R.layout.fragment_sig
                         findNavController().navigate(R.id.navBottomFragment)
                     SocketHandler.setSocket()
                     SocketHandler.establishConnection()
-                    SocketHandler.mSocket.emit("authorization", App.sharedPreferences.getString("token", ""))
+                    SocketHandler.mSocket.emit(
+                        "authorization",
+                        App.sharedPreferences.getString("token", "")
+                    )
                 }
             }
             .launchWhenStarted(lifecycleScope)
@@ -117,6 +121,21 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(R.layout.fragment_sig
             etEmail.addTextChangedListener { emailInput.isErrorEnabled = false }
             etPassword.addTextChangedListener { passwordInput.isErrorEnabled = false }
             etPasswordConfirm.addTextChangedListener { passwordInput.isErrorEnabled = false }
+
+            etPasswordConfirm.setOnKeyListener { view, i, keyEvent ->
+                if (keyEvent.action == KeyEvent.ACTION_DOWN && i == KeyEvent.KEYCODE_ENTER) {
+                    viewModel.signUpClicked(
+                        etUsername.text.toString(),
+                        etFirstName.text.toString(),
+                        etLastName.text.toString(),
+                        etEmail.text.toString(),
+                        etPassword.text.toString(),
+                        etPasswordConfirm.text.toString()
+                    )
+                    return@setOnKeyListener true
+                }
+                return@setOnKeyListener false
+            }
         }
     }
 }

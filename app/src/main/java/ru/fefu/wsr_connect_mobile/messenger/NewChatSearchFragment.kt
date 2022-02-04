@@ -41,6 +41,8 @@ class NewChatSearchFragment :
             recycler.layoutManager = LinearLayoutManager(requireActivity())
             recycler.adapter = adapter
 
+            toolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+
             binding.searchUserView.queryHint = getString(R.string.search_for_company_users)
 
             searchUserView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,

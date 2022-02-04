@@ -84,4 +84,5 @@
     <string name="delete_avatar">Delete Avatar</string>
     <string name="delete_img">Delete Image</string>
     <string name="no_messages">no messages yet</string>
+    <string name="search">Search</string>
 </resources>
